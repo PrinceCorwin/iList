@@ -43,9 +43,9 @@ header {
   color: mediumblue;
 }
 .loader {
-  /* position: absolute;
+  position: absolute;
   top: calc(50% - 32px);
-  left: calc(50% - 32px); */
+  left: calc(50% - 32px);
   margin: auto;
   width: 64px;
   height: 64px;

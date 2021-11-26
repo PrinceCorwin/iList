@@ -48,9 +48,9 @@ const Dashboard = () => {
       <Text fontSize="lg" mb={3}>
         Welcome, {user.email}!
       </Text>
-      {/* <Text>{items.length}</Text> */}
       <ListApp
         items={items}
+        setItems={setItems}
         user={user}
         isLoading={isLoading}
         setIsLoading={setIsLoading}

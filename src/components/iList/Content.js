@@ -1,7 +1,7 @@
 import LineItem from './LineItem';
 import { List } from '@chakra-ui/react';
 
-const Content = ({ items }) => {
+const Content = ({ items, handleCheck, handleDelete }) => {
   // console.log(items.length);
   return (
     <>
@@ -11,8 +11,8 @@ const Content = ({ items }) => {
             <LineItem
               key={item.id}
               item={item}
-              // handleCheck={handleCheck}
-              // handleDelete={handleDelete}
+              handleCheck={handleCheck}
+              handleDelete={handleDelete}
             />
           ))}
         </List>
