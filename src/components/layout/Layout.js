@@ -1,22 +1,30 @@
 import React from 'react';
-import { Grid } from '@chakra-ui/react';
-
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Flex } from '@chakra-ui/react';
+import { useAuth, db } from '../../hooks/useAuth';
+import { useState, useEffect } from 'react';
 import Nav from './Nav';
+// import currentList from '../dashboard/Dashboard';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, currentList }) => {
   return (
-    <Grid
-      minH="100vh"
-      templateColumns="repeat(3, 1fr)"
-      templateRows="max-content"
-      gap={6}
-      p={3}
+    <Flex
+      // bg="red"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      h="100vh"
+      w="100%"
+      // p={3}
+      maxW="500px"
+      border="1px"
+      borderColor="teal.600"
+      m="auto"
     >
-      <Nav />
-      <ColorModeSwitcher position="absolute" top={3} right={3} />
+      {/* <Nav currentList={currentList ? currentList : ''} /> */}
+      <Nav currentList={currentList} />
+
       {children}
-    </Grid>
+    </Flex>
   );
 };
 

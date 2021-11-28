@@ -7,14 +7,19 @@ import ConfirmForm from './components/auth/ConfirmForm';
 import PrivateRoute from './components/route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import NotFound from './components/layout/NotFound';
-
+import { useState } from 'react';
 function App() {
+  const [currentList, setCurrentList] = useState('');
+
   return (
     <Router>
-      <Layout>
+      <Layout currentList={currentList}>
         <Switch>
           <PrivateRoute exact path="/">
-            <Dashboard />
+            <Dashboard
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
           </PrivateRoute>
           <Route path="/login">
             <LoginForm />
@@ -22,6 +27,7 @@ function App() {
           <Route path="/confirm">
             <ConfirmForm />
           </Route>
+          {/* if no other route is found by now, the <NotFound> component will render */}
           <Route>
             <NotFound />
           </Route>

@@ -1,0 +1,5 @@
+add hamburger menu for darkmode, myLists, logout
+
+add myLists page
+
+update UI with chakra

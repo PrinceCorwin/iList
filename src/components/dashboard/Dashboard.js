@@ -1,25 +1,121 @@
 import React from 'react';
-import { Heading, GridItem, Text } from '@chakra-ui/react';
-import ListApp from '../iList/ListApp';
+import { GridItem, InputGroup, Stack, Flex } from '@chakra-ui/react';
+import Loader from '../iList/Loader';
+import Header from '../iList/Header';
+import AddItem from '../iList/AddItem';
+import SearchItem from '../iList/SearchItem';
+import Content from '../iList/Content';
+import Footer from '../iList/Footer';
 import { useAuth, db } from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
 
-const Dashboard = () => {
+const Dashboard = ({ currentList, setCurrentList }) => {
   const { user } = useAuth();
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
+
+  // const [currentList, setCurrentList] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [newItem, setNewItem] = useState('');
+
+  const addItem = async item => {
+    const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
+    const newItemDate = new Date();
+    const dateStr = `${
+      newItemDate.getMonth() + 1
+    }/${newItemDate.getDate()}/${newItemDate.getFullYear()}`;
+
+    const myNewItem = {
+      id: id,
+      checked: false,
+      desc: item,
+      date: dateStr,
+    };
+    // console.log(myNewItem.id);
+
+    // console.log(myNewItem);
+    const listItems = [...items, myNewItem];
+    // console.log(listItems);
+    setItems(listItems);
+    const addedDoc = db
+      .collection('users')
+      .doc(user.email)
+      .collection('stuff')
+      .doc(`${myNewItem.id}`);
+    await addedDoc
+      .set({ desc: myNewItem.desc, checked: false, date: dateStr })
+      .then(() => {
+        console.log('Document successfully written!');
+      })
+      .catch(error => {
+        console.error('Error writing document: ', error);
+      });
+  };
+
+  const handleCheck = async id => {
+    const listItems = items.map(item =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setItems(listItems);
+    const myItem = items.filter(item => item.id === id);
+    const updatedDoc = db
+      .collection('users')
+      .doc(user.email)
+      .collection('stuff')
+      .doc(id);
+    await updatedDoc
+      .update({
+        checked: !myItem[0].checked,
+      })
+      .then(() => {
+        console.log('Document successfully updated!');
+      })
+      .catch(error => {
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      });
+  };
+  const handleDelete = async id => {
+    const listItems = items.filter(item => item.id !== id);
+    setItems(listItems);
+    const deletedDoc = db
+      .collection('users')
+      .doc(user.email)
+      .collection('stuff')
+      .doc(id);
+    await deletedDoc
+      .delete()
+      .then(() => {
+        console.log('Document successfully deleted!');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    // console.log('done');
+    if (!newItem) return;
+    addItem(newItem);
+    setNewItem('');
+  };
+
   const itemsCollection = db
     .collection('users')
     .doc(user.email)
     .collection('stuff');
+  // const currentList = db.collection('users').doc(user.email).currentList;
 
   useEffect(() => {
     const getItems = async () => {
       try {
         const data = await itemsCollection.get();
+
+        // const userList = await currentList.get();
+
+        // setCurrentList(userList);
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
@@ -34,28 +130,65 @@ const Dashboard = () => {
       }
     };
     getItems();
-  });
+  }, []);
+  const fetchCurrentList = db.collection('users').doc(user.email);
+  useEffect(() => {
+    const getCurrentList = async () => {
+      try {
+        const userList = await fetchCurrentList.get({ currentList });
+        setCurrentList(userList.data().currentList);
 
+        // setFetchError(null);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    getCurrentList();
+  }, []);
+  // console.log(items);
   return (
-    <GridItem
-      colStart={[1, null, null, 2, null, null]}
-      colSpan={[3, null, null, 1, null, null]}
-      p={6}
-    >
-      <Heading as="h1" mb={6}>
-        Dashboard
-      </Heading>
-      <Text fontSize="lg" mb={3}>
-        Welcome, {user.email}!
-      </Text>
-      <ListApp
-        items={items}
-        setItems={setItems}
-        user={user}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
-    </GridItem>
+    <>
+      <Stack mb={6} w="100%" p={3}>
+        <InputGroup>
+          <AddItem
+            newItem={newItem}
+            setNewItem={setNewItem}
+            handleSubmit={handleSubmit}
+          />
+        </InputGroup>
+        <InputGroup>
+          <SearchItem search={search} setSearch={setSearch} />
+        </InputGroup>
+      </Stack>
+      <Flex
+        w="100%"
+        flexDirection="column"
+        flexGrow="1"
+        justifyContent="flex-start"
+        align-items="center"
+        overflowY="auto"
+      >
+        {isLoading && <Loader />}
+
+        {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
+
+        {!fetchError && !isLoading && (
+          <Content
+            items={items.filter(item =>
+              item.desc.toLowerCase().includes(search.toLowerCase())
+            )}
+            handleDelete={handleDelete}
+            handleCheck={handleCheck}
+          />
+          // <Content
+          //   items={items}
+          //   handleDelete={handleDelete}
+          //   handleCheck={handleCheck}
+          // />
+        )}
+      </Flex>
+      <Footer length={items.length} />
+    </>
   );
 };
 
