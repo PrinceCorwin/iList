@@ -39,36 +39,40 @@ header {
   -moz-osx-font-smoothing: grayscale;
 } */
 
-main {
+/* main {
   padding: 1rem;
   border: 1px solid rgba(0, 128, 128, 0.5);
   border-radius: 5px;
   background-color: blue;
   max-height: 100%;
-  /* width: 100%; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* flex-grow: 1; */
-  /* justify-content: flex-start; */
-  /* align-items: center; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+  align-items: center;
   overflow-y: auto;
-}
+} */
 
-footer {
+/* footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 0.25em;
   background-color: teal;
   color: aliceblue;
-}
+} */
 /* Loading animation */
 .loadingParent {
+  display: flex;
+  width: 100%;
+  justify-content: center;
   color: mediumblue;
 }
 .loader {
   position: absolute;
   top: calc(50% - 32px);
+  /* top: 32px; */
   left: calc(50% - 32px);
   margin: auto;
   width: 64px;
@@ -89,21 +93,21 @@ footer {
   left: 0%;
   top: 0%;
   animation: rotate-one 1s linear infinite;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid turquoise;
 }
 
 .inner.two {
   right: 0%;
   top: 0%;
   animation: rotate-two 1s linear infinite;
-  border-right: 3px solid black;
+  border-right: 3px solid turquoise;
 }
 
 .inner.three {
   right: 0%;
   bottom: 0%;
   animation: rotate-three 1s linear infinite;
-  border-top: 3px solid black;
+  border-top: 3px solid turquoise;
 }
 
 @keyframes rotate-one {

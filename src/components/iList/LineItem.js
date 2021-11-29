@@ -1,32 +1,46 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import {
-  ListItem,
   Checkbox,
   Box,
   Spacer,
   Flex,
   IconButton,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
 const LineItem = ({ item, handleDelete, handleCheck }) => {
+  const bg = useColorModeValue('gray.200', 'gray.700');
+  const color = useColorModeValue('lightgray', 'gray');
+
   return (
-    <Flex align="center" variant="filled">
+    <Flex align="center">
       <Checkbox
+        variant="solid"
         size="lg"
         spacing="1rem"
         aria-label={item.desc}
-        colorScheme="teal"
+        colorScheme="orange"
         defaultChecked={item.checked}
         // the following onChange call must use anonymous function format so we can pass an argument without the handleCheck function executing immediately. onChange={handleCheck(item.id)} would fire off immediately without user interaction
         onChange={() => handleCheck(item.id)}
       >
-        <Box>
-          <Box>{item.desc}</Box>
+        <Box bg={bg} px={3} py={1}>
+          <Box
+            // textDecoration={item.checked ? "line-through" : null}
+            style={
+              item.checked
+                ? { textDecoration: 'line-through', color: color }
+                : null
+            }
+          >
+            {item.desc}
+          </Box>
           <Box fontSize="sm">Added {item.date}</Box>
         </Box>
       </Checkbox>
 
-      <Spacer />
+      <Spacer bg={bg} mr={3} />
+
       <IconButton
         aria-label={`Delete ${item.desc}`}
         variant="outline"

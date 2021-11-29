@@ -1,17 +1,19 @@
 import React from 'react';
-import { GridItem, Box, Flex, Text } from '@chakra-ui/react';
+import { Heading, Box, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 // import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-const Nav = ({ currentList }) => {
+const Nav = ({ bg, color, currentList }) => {
   const { user, logout } = useAuth();
 
   return (
     <Flex
-      // bg="red"
+      variant="mine"
+      color={color}
+      bg={bg}
       w="100%"
       pt={3}
       pl={6}
@@ -22,9 +24,9 @@ const Nav = ({ currentList }) => {
     >
       {user && (
         <>
-          <Text fontSize="md" mr={8}>
+          <Heading as="h1" mr={8} isTruncated>
             {currentList}
-          </Text>
+          </Heading>
           <Flex justifyContent="space-between" alignItems="center">
             <Link to="/myLists">
               <Text fontSize="md" mr={8}>

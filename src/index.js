@@ -1,8 +1,10 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import { ChakraProvider, theme } from '@chakra-ui/react';
-// import './components/iList/index.css';
+import { ChakraProvider } from '@chakra-ui/react';
+import { tealTheme } from './styles/theme';
+
+import './components/iList/index.css';
 
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
@@ -12,7 +14,7 @@ import { AuthProvider } from './hooks/useAuth';
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={tealTheme}>
       <AuthProvider>
         <App />
       </AuthProvider>

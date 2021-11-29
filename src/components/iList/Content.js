@@ -17,12 +17,15 @@ const Content = ({ items, handleCheck, handleDelete }) => {
           ))}
         </List>
       ) : (
-        // <ItemList
-        //   items={items}
-        //   // handleCheck={handleCheck}
-        //   // handleDelete={handleDelete}
-        // />
-        <p style={{ marginTop: '2rem' }}>Your list is empty</p>
+        <p
+          style={{
+            marginTop: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          Your list is empty
+        </p>
       )}
     </>
   );

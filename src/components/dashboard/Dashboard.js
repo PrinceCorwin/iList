@@ -9,7 +9,7 @@ import Footer from '../iList/Footer';
 import { useAuth, db } from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
 
-const Dashboard = ({ currentList, setCurrentList }) => {
+const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
   const { user } = useAuth();
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
@@ -148,7 +148,7 @@ const Dashboard = ({ currentList, setCurrentList }) => {
   // console.log(items);
   return (
     <>
-      <Stack mb={6} w="100%" p={3}>
+      <Stack mb={3} w="100%" p={3}>
         <InputGroup>
           <AddItem
             newItem={newItem}
@@ -187,7 +187,7 @@ const Dashboard = ({ currentList, setCurrentList }) => {
           // />
         )}
       </Flex>
-      <Footer length={items.length} />
+      <Footer bg={bg} color={color} length={items.length} />
     </>
   );
 };
