@@ -1,18 +1,6 @@
 import { FaPlus } from 'react-icons/fa';
 import { useRef } from 'react';
-import {
-  IconButton,
-  InputGroup,
-  Center,
-  Icon,
-  Input,
-  FormControl,
-  InputRightAddon,
-  InputRightElement,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from '@chakra-ui/react';
+import { IconButton, InputGroup, Input } from '@chakra-ui/react';
 
 const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
   const inputRef = useRef();
@@ -29,8 +17,6 @@ const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
           value={newItem}
           onChange={e => setNewItem(e.target.value)}
         />
-        {/* <InputRightElement
-          children={ */}
         <IconButton
           type="submit"
           aria-label="Add Item"
@@ -38,16 +24,6 @@ const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
           colorScheme="teal"
           icon={<FaPlus />}
         />
-        {/* }
-        /> */}
-
-        {/* <button
-          type="submit"
-          aria-label="Add Item"
-          onClick={() => inputRef.current.focus()}
-        >
-          <FaPlus />
-        </button> */}
       </InputGroup>
     </form>
   );

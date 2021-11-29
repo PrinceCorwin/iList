@@ -1,8 +1,7 @@
 import LineItem from './LineItem';
-import { List, Flex } from '@chakra-ui/react';
+import { List } from '@chakra-ui/react';
 
 const Content = ({ items, handleCheck, handleDelete }) => {
-  // console.log(items.length);
   return (
     <>
       {items.length ? (

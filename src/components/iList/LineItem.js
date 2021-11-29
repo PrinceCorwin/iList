@@ -26,10 +26,9 @@ const LineItem = ({ item, handleDelete, handleCheck }) => {
       >
         <Box bg={bg} px={3} py={1}>
           <Box
-            // textDecoration={item.checked ? "line-through" : null}
             style={
               item.checked
-                ? { textDecoration: 'line-through', color: color }
+                ? { textDecoration: 'line-through red', color: color }
                 : null
             }
           >

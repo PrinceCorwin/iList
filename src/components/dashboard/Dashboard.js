@@ -1,7 +1,6 @@
 import React from 'react';
-import { GridItem, InputGroup, Stack, Flex } from '@chakra-ui/react';
+import { InputGroup, Stack, Flex } from '@chakra-ui/react';
 import Loader from '../iList/Loader';
-import Header from '../iList/Header';
 import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
 import Content from '../iList/Content';
@@ -14,7 +13,6 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
 
-  // const [currentList, setCurrentList] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [newItem, setNewItem] = useState('');
@@ -32,11 +30,8 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
       desc: item,
       date: dateStr,
     };
-    // console.log(myNewItem.id);
 
-    // console.log(myNewItem);
     const listItems = [...items, myNewItem];
-    // console.log(listItems);
     setItems(listItems);
     const addedDoc = db
       .collection('users')
@@ -96,7 +91,6 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // console.log('done');
     if (!newItem) return;
     addItem(newItem);
     setNewItem('');
@@ -106,16 +100,11 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
     .collection('users')
     .doc(user.email)
     .collection('stuff');
-  // const currentList = db.collection('users').doc(user.email).currentList;
 
   useEffect(() => {
     const getItems = async () => {
       try {
         const data = await itemsCollection.get();
-
-        // const userList = await currentList.get();
-
-        // setCurrentList(userList);
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
@@ -137,15 +126,15 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
       try {
         const userList = await fetchCurrentList.get({ currentList });
         setCurrentList(userList.data().currentList);
-
-        // setFetchError(null);
+        setFetchError(null);
       } catch (err) {
+        setFetchError(err.message);
+
         console.log(err.message);
       }
     };
     getCurrentList();
   }, []);
-  // console.log(items);
   return (
     <>
       <Stack mb={3} w="100%" p={3}>
@@ -180,11 +169,6 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
             handleDelete={handleDelete}
             handleCheck={handleCheck}
           />
-          // <Content
-          //   items={items}
-          //   handleDelete={handleDelete}
-          //   handleCheck={handleCheck}
-          // />
         )}
       </Flex>
       <Footer bg={bg} color={color} length={items.length} />

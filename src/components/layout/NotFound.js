@@ -1,17 +1,13 @@
 import React from 'react';
-import { Heading, GridItem } from '@chakra-ui/react';
+import { Heading, Flex } from '@chakra-ui/react';
 
 const NotFound = () => {
   return (
-    <GridItem
-      colStart={[1, null, null, 2, null, null]}
-      colSpan={[3, null, null, 1, null, null]}
-      p={6}
-    >
+    <Flex grow="1" justify="center" direction="column">
       <Heading as="h1" mb={6}>
         404: Page not found
       </Heading>
-    </GridItem>
+    </Flex>
   );
 };
 

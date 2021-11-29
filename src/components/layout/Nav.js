@@ -3,7 +3,6 @@ import { Heading, Box, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
-// import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
 const Nav = ({ bg, color, currentList }) => {
@@ -11,7 +10,6 @@ const Nav = ({ bg, color, currentList }) => {
 
   return (
     <Flex
-      variant="mine"
       color={color}
       bg={bg}
       w="100%"

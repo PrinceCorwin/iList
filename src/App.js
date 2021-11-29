@@ -8,15 +8,12 @@ import PrivateRoute from './components/route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import NotFound from './components/layout/NotFound';
 import { useState } from 'react';
-import { useColorMode, useColorModeValue, IconButton } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
 function App() {
   const [currentList, setCurrentList] = useState('');
-  // const { colorMode } = useColorMode();
-  // const bg = colorMode === 'light' ? 'teal.500' : 'teal.200';
 
   const bg = useColorModeValue('teal.500', 'teal.200');
   const color = useColorModeValue('white', 'gray.800');
-  console.log(color);
   return (
     <Router>
       <Layout bg={bg} color={color} currentList={currentList}>
