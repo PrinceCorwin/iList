@@ -2,9 +2,19 @@ import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import Nav from './Nav';
 
-const Layout = ({ bg, color, children, currentList }) => {
+const Layout = ({
+  isLoading,
+  newList,
+  setNewList,
+  setAppTheme,
+  themeObj,
+  children,
+  currentList,
+}) => {
   return (
     <Flex
+      overflow="hidden"
+      position="relative"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
@@ -15,7 +25,14 @@ const Layout = ({ bg, color, children, currentList }) => {
       borderColor="teal.600"
       m="auto"
     >
-      <Nav bg={bg} color={color} currentList={currentList} />
+      <Nav
+        isLoading={isLoading}
+        newList={newList}
+        setNewList={setNewList}
+        setAppTheme={setAppTheme}
+        themeObj={themeObj}
+        currentList={currentList}
+      />
 
       {children}
     </Flex>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, Stack, Flex } from '@chakra-ui/react';
+
 import Loader from '../iList/Loader';
 import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
@@ -7,18 +8,55 @@ import Content from '../iList/Content';
 import Footer from '../iList/Footer';
 import { useAuth, db } from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
+import 'firebase/firestore';
 
-const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
+const Dashboard = ({
+  setAppTheme,
+  loaderLoading,
+  setLoaderLoading,
+  setIsLoading,
+  isLoading,
+  fetchError,
+  setFetchError,
+  themeObj,
+  currentList,
+  setCurrentList,
+}) => {
+  console.log(currentList);
   const { user } = useAuth();
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
 
-  const [fetchError, setFetchError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [loaderLoading, setLoaderLoading] = useState(true);
   const [newItem, setNewItem] = useState('');
+
+  const fetchCurrentList = db.collection('users').doc(user.email);
+
+  useEffect(() => {
+    // console.log('UE2');
+    // console.log(currentList);
+    const getCurrentTheme = async () => {
+      try {
+        const userList = await fetchCurrentList.get();
+        console.log(userList.data().currenttheme);
+        setAppTheme(userList.data().currenttheme);
+        // setIsLoading(false);
+
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+
+        console.log(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getCurrentTheme();
+  }, []);
 
   const addItem = async item => {
     const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
+    console.log(id);
     const newItemDate = new Date();
     const dateStr = `${
       newItemDate.getMonth() + 1
@@ -36,7 +74,7 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
     const addedDoc = db
       .collection('users')
       .doc(user.email)
-      .collection('stuff')
+      .collection(currentList)
       .doc(`${myNewItem.id}`);
     await addedDoc
       .set({ desc: myNewItem.desc, checked: false, date: dateStr })
@@ -54,11 +92,14 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
     );
     setItems(listItems);
     const myItem = items.filter(item => item.id === id);
+    console.log(myItem);
+
     const updatedDoc = db
       .collection('users')
       .doc(user.email)
-      .collection('stuff')
-      .doc(id);
+      .collection(currentList)
+      .doc(`${id}`);
+    console.log('here');
     await updatedDoc
       .update({
         checked: !myItem[0].checked,
@@ -77,8 +118,8 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
     const deletedDoc = db
       .collection('users')
       .doc(user.email)
-      .collection('stuff')
-      .doc(id);
+      .collection(currentList)
+      .doc(`${id}`);
     await deletedDoc
       .delete()
       .then(() => {
@@ -96,12 +137,38 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
     setNewItem('');
   };
 
+  // const fetchCurrentList = db.collection('users').doc(user.email);
+
+  useEffect(() => {
+    // console.log('UE2');
+    // console.log(currentList);
+    const getCurrentList = async () => {
+      try {
+        const userList = await fetchCurrentList.get();
+        setCurrentList(userList.data().currentlist);
+        setIsLoading(false);
+
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+
+        console.log(err.message);
+      } finally {
+        setLoaderLoading(true);
+        // setIsLoading(false);
+      }
+    };
+    getCurrentList();
+  }, []);
+
   const itemsCollection = db
     .collection('users')
     .doc(user.email)
-    .collection('stuff');
+    .collection(currentList);
 
   useEffect(() => {
+    // console.log('UE1');
+
     const getItems = async () => {
       try {
         const data = await itemsCollection.get();
@@ -115,38 +182,29 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
       } catch (err) {
         setFetchError(err.message);
       } finally {
-        setIsLoading(false);
+        setLoaderLoading(false);
       }
     };
     getItems();
-  }, []);
-  const fetchCurrentList = db.collection('users').doc(user.email);
-  useEffect(() => {
-    const getCurrentList = async () => {
-      try {
-        const userList = await fetchCurrentList.get({ currentList });
-        setCurrentList(userList.data().currentList);
-        setFetchError(null);
-      } catch (err) {
-        setFetchError(err.message);
+  }, [currentList]);
 
-        console.log(err.message);
-      }
-    };
-    getCurrentList();
-  }, []);
   return (
     <>
       <Stack mb={3} w="100%" p={3}>
         <InputGroup>
           <AddItem
+            themeObj={themeObj}
             newItem={newItem}
             setNewItem={setNewItem}
             handleSubmit={handleSubmit}
           />
         </InputGroup>
         <InputGroup>
-          <SearchItem search={search} setSearch={setSearch} />
+          <SearchItem
+            themeObj={themeObj}
+            search={search}
+            setSearch={setSearch}
+          />
         </InputGroup>
       </Stack>
       <Flex
@@ -157,12 +215,13 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
         align-items="center"
         overflowY="auto"
       >
-        {isLoading && <Loader />}
+        {(isLoading || loaderLoading) && <Loader />}
 
         {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
 
-        {!fetchError && !isLoading && (
+        {!fetchError && !loaderLoading && !isLoading && (
           <Content
+            themeObj={themeObj}
             items={items.filter(item =>
               item.desc.toLowerCase().includes(search.toLowerCase())
             )}
@@ -171,7 +230,7 @@ const Dashboard = ({ bg, color, currentList, setCurrentList }) => {
           />
         )}
       </Flex>
-      <Footer bg={bg} color={color} length={items.length} />
+      <Footer bg={themeObj.bg} color={themeObj.color} length={items.length} />
     </>
   );
 };

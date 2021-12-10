@@ -7,7 +7,7 @@ import {
   InputRightAddon,
 } from '@chakra-ui/react';
 
-const SearchItem = ({ search, setSearch }) => {
+const SearchItem = ({ themeObj, search, setSearch }) => {
   return (
     <FormControl label="Search" onSubmit={e => e.preventDefault()}>
       <InputGroup size="sm">
@@ -21,8 +21,9 @@ const SearchItem = ({ search, setSearch }) => {
         />
 
         <InputRightAddon
+          bg={themeObj.bgIcon}
           size="sm"
-          children={<Icon color="teal" as={FaSearch} />}
+          children={<Icon color={themeObj.colorIcon} as={FaSearch} />}
         />
       </InputGroup>
     </FormControl>

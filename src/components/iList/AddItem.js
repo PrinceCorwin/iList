@@ -2,12 +2,13 @@ import { FaPlus } from 'react-icons/fa';
 import { useRef } from 'react';
 import { IconButton, InputGroup, Input } from '@chakra-ui/react';
 
-const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
+const AddItem = ({ themeObj, newItem, setNewItem, handleSubmit }) => {
   const inputRef = useRef();
   return (
     <form label="Add Item" onSubmit={handleSubmit} style={{ width: '100%' }}>
       <InputGroup>
         <Input
+          variant="outline"
           autoFocus
           ref={inputRef}
           type="text"
@@ -18,10 +19,16 @@ const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
           onChange={e => setNewItem(e.target.value)}
         />
         <IconButton
+          ml={2}
           type="submit"
           aria-label="Add Item"
           onClick={() => inputRef.current.focus()}
-          colorScheme="teal"
+          color={themeObj.colorIcon}
+          _hover={{
+            background: `${themeObj.checkScheme}`,
+          }} // color="red"
+          // bg="red.800"
+          bg={themeObj.bgIcon}
           icon={<FaPlus />}
         />
       </InputGroup>

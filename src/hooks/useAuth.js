@@ -14,8 +14,13 @@ firebase.initializeApp({
 });
 
 const AuthContext = createContext();
+// export const db = firebase;
 
 export const db = firebase.firestore();
+// export const itemsCollection = db
+//   .collection('users')
+//   .doc(user.email)
+//   .collection('stuff');
 
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.

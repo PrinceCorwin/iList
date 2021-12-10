@@ -1,41 +1,49 @@
-import React from 'react';
-import { Heading, Box, Flex, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import Menu from '../Nav/Menu';
+import { Heading, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 import { useAuth } from '../../hooks/useAuth';
 
-const Nav = ({ bg, color, currentList }) => {
-  const { user, logout } = useAuth();
-
+const Nav = ({ isLoading, setNewList, setAppTheme, themeObj, currentList }) => {
+  const { user } = useAuth();
+  console.log(currentList);
   return (
     <Flex
-      color={color}
-      bg={bg}
+      // position="relative"
+      // overflow="visible"
+      color={themeObj.color}
+      // h={10}
+      bg={themeObj.bg}
       w="100%"
-      pt={3}
+      pt={1}
       pl={6}
       pr={6}
-      pb={3}
+      pb={1}
       justifyContent="space-between"
       alignItems="center"
     >
       {user && (
         <>
-          <Heading as="h1" mr={8} isTruncated>
-            {currentList}
-          </Heading>
+          <Menu
+            // menuOpen={menuOpen}
+            // setMenuOpen={setMenuOpen}
+            setAppTheme={setAppTheme}
+            setNewList={setNewList}
+          ></Menu>
+          {!isLoading && (
+            <Heading px={3} as="h1" mr={8} isTruncated>
+              {currentList}
+            </Heading>
+          )}
           <Flex justifyContent="space-between" alignItems="center">
-            <Link to="/myLists">
+            <Link to="/mylists">
               <Text fontSize="md" mr={8}>
                 My Lists
               </Text>
             </Link>
-            <Box as="button" onClick={logout}>
-              <Text fontSize="md" mr={8}>
-                Logout
-              </Text>
-            </Box>
+
             <ColorModeSwitcher />
           </Flex>
         </>
