@@ -7,7 +7,8 @@ const Footer = ({ bg, color, length }) => {
       color={color}
       width="100%"
       justifyContent="space-between"
-      p={3}
+      py={1}
+      px={3}
     >
       <p>
         {length} List {length === 1 ? 'item' : 'items'}

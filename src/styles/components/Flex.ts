@@ -1,3 +1,5 @@
+// currently not using this. Maybe in the future
+
 import { mode, whiten, darken } from '@chakra-ui/theme-tools';
 
 export const Flex = {

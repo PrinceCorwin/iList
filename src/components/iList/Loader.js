@@ -1,7 +1,5 @@
 const Loader = () => {
   return (
-    // <div className='loading'>
-
     <div className="loadingParent">
       Loading Items
       <div className="loader">

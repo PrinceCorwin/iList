@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import {
   Heading,
-  GridItem,
+  Flex,
   Alert,
   AlertIcon,
   FormLabel,
@@ -30,11 +30,7 @@ const LoginForm = () => {
   };
 
   return (
-    <GridItem
-      colStart={[1, null, null, 2, null, null]}
-      colSpan={[3, null, null, 1, null, null]}
-      p={6}
-    >
+    <Flex grow="1" justify="center" direction="column">
       <Heading as="h1" mb={6}>
         Login
       </Heading>
@@ -64,7 +60,7 @@ const LoginForm = () => {
           </Button>
         </FormControl>
       </form>
-    </GridItem>
+    </Flex>
   );
 };
 

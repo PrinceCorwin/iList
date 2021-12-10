@@ -1,17 +1,7 @@
 import { FaTrashAlt } from 'react-icons/fa';
-import {
-  Checkbox,
-  Box,
-  Spacer,
-  Flex,
-  IconButton,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Checkbox, Box, Spacer, Flex, IconButton } from '@chakra-ui/react';
 
-const LineItem = ({ item, handleDelete, handleCheck }) => {
-  const bg = useColorModeValue('gray.200', 'gray.700');
-  const color = useColorModeValue('lightgray', 'gray');
-
+const LineItem = ({ themeObj, item, handleDelete, handleCheck }) => {
   return (
     <Flex align="center">
       <Checkbox
@@ -19,32 +9,41 @@ const LineItem = ({ item, handleDelete, handleCheck }) => {
         size="lg"
         spacing="1rem"
         aria-label={item.desc}
-        colorScheme="orange"
+        colorScheme={themeObj.checkScheme}
         defaultChecked={item.checked}
         // the following onChange call must use anonymous function format so we can pass an argument without the handleCheck function executing immediately. onChange={handleCheck(item.id)} would fire off immediately without user interaction
         onChange={() => handleCheck(item.id)}
       >
-        <Box bg={bg} px={3} py={1}>
+        <Box borderLeftRadius="lg" bg={themeObj.bgItem} px={3} py={1}>
           <Box
-            // textDecoration={item.checked ? "line-through" : null}
             style={
               item.checked
-                ? { textDecoration: 'line-through', color: color }
-                : null
+                ? {
+                    textDecoration: `line-through  ${themeObj.strike}`,
+                    color: `${themeObj.strikeText}`,
+                  }
+                : {
+                    color: `${themeObj.colorItem}`,
+                  }
             }
           >
             {item.desc}
           </Box>
-          <Box fontSize="sm">Added {item.date}</Box>
+          <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
+            Added {item.date}
+          </Box>
         </Box>
       </Checkbox>
 
-      <Spacer bg={bg} mr={3} />
+      <Spacer borderRightRadius="lg" bg={themeObj.bgItem} mr={3} />
 
       <IconButton
         aria-label={`Delete ${item.desc}`}
         variant="outline"
-        colorScheme="teal"
+        // background="black"
+        borderColor={themeObj.deleteOutline}
+        color={themeObj.deleteIcon}
+        // colorScheme={themeObj.checkScheme}
         icon={<FaTrashAlt />}
         onClick={() => handleDelete(item.id)}
       />
