@@ -62,7 +62,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
     },
   };
   // const [menuOpen, setMenuOpen] = useState(false);
-  const checkDoc = db.collection('users').doc(user.email);
+  const checkDoc = db.collection('users').doc(user.uid);
 
   const applyTheme = async theme => {
     setAppTheme(theme);

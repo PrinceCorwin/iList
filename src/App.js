@@ -32,30 +32,6 @@ function App() {
   const colorItemDark = iListTheme.colors[appTheme].colorItemDark;
   const colorItemLight = iListTheme.colors[appTheme].colorItemLight;
 
-  // const fetchCurrentList = db.collection('users').doc(user.email);
-
-  // useEffect(() => {
-  //   // console.log('UE2');
-  //   // console.log(currentList);
-  //   const getCurrentTheme = async () => {
-  //     try {
-  //       const userList = await fetchCurrentList.get();
-  //       console.log(userList.data().currenttheme);
-  //       setAppTheme(userList.data().currenttheme);
-  //       // setIsLoading(false);
-
-  //       setFetchError(null);
-  //     } catch (err) {
-  //       setFetchError(err.message);
-
-  //       console.log(err.message);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-  //   getCurrentTheme();
-  // }, []);
-
   const themeObj = {
     bg: useColorModeValue(`${appTheme}.bgLight`, `${appTheme}.bgDark`),
 

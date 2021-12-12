@@ -28,7 +28,8 @@ const ConfirmForm = ({ currentList }) => {
   const onSubmit = async data => {
     try {
       await signInWithEmailLink(data.email, location.search);
-      checkIfInitialized(data.email);
+
+      // checkIfInitialized(data.email);
       // initializeUserDb(data.email);
 
       history.push('/');
@@ -39,41 +40,42 @@ const ConfirmForm = ({ currentList }) => {
       });
     }
   };
-  const checkIfInitialized = email => {
-    const docRef = db.collection('users').doc(email);
+  // const checkIfInitialized = email => {
+  //   const docRef = db.collection('users').doc(email);
 
-    docRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          console.log('Document data:', doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-          initializeUserDb(email);
-        }
-      })
-      .catch(error => {
-        console.log('Error getting document:', error);
-      });
-  };
+  //   docRef
+  //     .get()
+  //     .then(doc => {
+  //       if (doc.exists) {
+  //         console.log('Document data:', doc.data());
+  //       } else {
+  //         // doc.data() will be undefined in this case
+  //         console.log('No such document!');
+  //         initializeUserDb(email);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('Error getting document:', error);
+  //     });
+  // };
 
-  const initializeUserDb = async email => {
-    const firstEntry = db.collection('users').doc(email);
+  // const initializeUserDb = async email => {
+  //   const firstEntry = db.collection('users').doc(email);
 
-    await firstEntry
-      .set({
-        currentlist: currentList,
-        mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
-        currenttheme: 'default',
-      })
-      .then(() => {
-        console.log('currentlist successfully written!');
-      })
-      .catch(error => {
-        console.error('Error writing document: ', error);
-      });
-  };
+  //   await firstEntry
+  //     .set({
+  //       currentlist: currentList,
+  //       mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
+  //       currenttheme: 'default',
+  //       email: email,
+  //     })
+  //     .then(() => {
+  //       console.log('currentlist successfully written!');
+  //     })
+  //     .catch(error => {
+  //       console.error('Error writing document: ', error);
+  //     });
+  // };
 
   return (
     <Flex grow="1" justify="center" direction="column">
