@@ -1,5 +1,5 @@
 fix bug when user refreshes browser while in MyLists or NewList, the theme reverts to default (minimal) because useEffect runs on Dashboard and not in App. If I move it to App, the app is broken the first time someone opens app because user data is attempted to be fetched before a user exists...
 
-add ability to edit list names and item descriptions
+add ability to edit item descriptions
 
-
+disable list delete icon onClick when only one list remains. Add note that user must have at least one list

@@ -22,7 +22,7 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   const inputRef = useRef();
   const [isUnique, setIsUnique] = useState(true);
 
-  const checkDoc = db.collection('users').doc(user.email);
+  const checkDoc = db.collection('users').doc(user.uid);
 
   const checkDuplicate = async newList => {
     await checkDoc

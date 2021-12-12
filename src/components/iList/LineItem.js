@@ -1,7 +1,13 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import { Checkbox, Box, Spacer, Flex, IconButton } from '@chakra-ui/react';
-
-const LineItem = ({ themeObj, item, handleDelete, handleCheck }) => {
+import { useState } from 'react';
+const LineItem = ({
+  themeObj,
+  item,
+  handleDelete,
+  handleCheck,
+  setEditItem,
+}) => {
   return (
     <Flex align="center">
       <Checkbox
@@ -13,27 +19,30 @@ const LineItem = ({ themeObj, item, handleDelete, handleCheck }) => {
         defaultChecked={item.checked}
         // the following onChange call must use anonymous function format so we can pass an argument without the handleCheck function executing immediately. onChange={handleCheck(item.id)} would fire off immediately without user interaction
         onChange={() => handleCheck(item.id)}
-      >
-        <Box borderLeftRadius="lg" bg={themeObj.bgItem} px={3} py={1}>
-          <Box
-            style={
-              item.checked
-                ? {
-                    textDecoration: `line-through  ${themeObj.strike}`,
-                    color: `${themeObj.strikeText}`,
-                  }
-                : {
-                    color: `${themeObj.colorItem}`,
-                  }
-            }
-          >
-            {item.desc}
-          </Box>
-          <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
-            Added {item.date}
-          </Box>
+      ></Checkbox>
+      <Box borderLeftRadius="lg" bg={themeObj.bgItem} ml={2} px={3} py={1}>
+        <Box
+          cursor="pointer"
+          onClick={() => {
+            setEditItem(item);
+          }}
+          style={
+            item.checked
+              ? {
+                  textDecoration: `line-through  ${themeObj.strike}`,
+                  color: `${themeObj.strikeText}`,
+                }
+              : {
+                  color: `${themeObj.colorItem}`,
+                }
+          }
+        >
+          {item.desc}
         </Box>
-      </Checkbox>
+        <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
+          Added {item.date}
+        </Box>
+      </Box>
 
       <Spacer borderRightRadius="lg" bg={themeObj.bgItem} mr={3} />
 

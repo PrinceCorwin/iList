@@ -27,7 +27,7 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   const { user } = useAuth();
   const [editList, setEditList] = useState(false);
   const [lists, setLists] = useState([]);
-  const checkDoc = db.collection('users').doc(user.email);
+  const checkDoc = db.collection('users').doc(user.uid);
 
   const getMyLists = async () => {
     try {
