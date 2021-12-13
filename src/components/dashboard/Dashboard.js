@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { InputGroup, Stack, Flex } from '@chakra-ui/react';
 import firebase from 'firebase/app';
-
+import EditItem from '../iList/EditItem';
 import Loader from '../iList/Loader';
 import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
@@ -31,7 +31,7 @@ const Dashboard = ({
   // const [loaderLoading, setLoaderLoading] = useState(true);
   const [newItem, setNewItem] = useState('');
 
-  const fetchCurrentList = db.collection('users').doc(user.uid);
+  const checkDoc = db.collection('users').doc(user.uid);
 
   const itemsCollection = db
     .collection('users')
@@ -43,7 +43,7 @@ const Dashboard = ({
     checkIfInitialized();
     const getUserPrefs = async () => {
       try {
-        const userList = await fetchCurrentList.get();
+        const userList = await checkDoc.get();
         setCurrentList(userList.data().currentlist);
         setAppTheme(userList.data().currenttheme);
 
@@ -191,6 +191,7 @@ const Dashboard = ({
       .set({
         currentlist: currentList,
         mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
+        // myLists: firstEntry.myLists.arrayUnion('My List'),
         currenttheme: 'default',
         email: user.email,
       })
@@ -204,50 +205,66 @@ const Dashboard = ({
 
   return (
     <>
-      {!editItem && (
-        <Stack mb={3} w="100%" p={3}>
-          <InputGroup>
-            <AddItem
-              themeObj={themeObj}
-              newItem={newItem}
-              setNewItem={setNewItem}
-              handleSubmit={handleSubmit}
-            />
-          </InputGroup>
-          <InputGroup>
-            <SearchItem
-              themeObj={themeObj}
-              search={search}
-              setSearch={setSearch}
-            />
-          </InputGroup>
-        </Stack>
+      {editItem && (
+        <EditItem
+          items={items}
+          setItems={setItems}
+          currentList={currentList}
+          user={user}
+          editItem={editItem}
+          setEditItem={setEditItem}
+          themeObj={themeObj}
+        />
       )}
-      {editItem && <div>{editItem.desc}</div>}
-      <Flex
-        w="100%"
-        flexDirection="column"
-        flexGrow="1"
-        justifyContent="flex-start"
-        align-items="center"
-        overflowY="auto"
-      >
-        {(isLoading || loaderLoading) && <Loader />}
 
-        {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
+      {!editItem && (
+        <>
+          <Stack mb={3} w="100%" p={3}>
+            <InputGroup>
+              <AddItem
+                themeObj={themeObj}
+                newItem={newItem}
+                setNewItem={setNewItem}
+                handleSubmit={handleSubmit}
+              />
+            </InputGroup>
+            <InputGroup>
+              <SearchItem
+                themeObj={themeObj}
+                search={search}
+                setSearch={setSearch}
+              />
+            </InputGroup>
+          </Stack>
+          <Flex
+            w="100%"
+            flexDirection="column"
+            flexGrow="1"
+            justifyContent="flex-start"
+            align-items="center"
+            overflowY="auto"
+          >
+            {(isLoading || loaderLoading) && <Loader />}
 
-        {!fetchError && !loaderLoading && !isLoading && (
-          <Content
-            setEditItem={setEditItem}
-            themeObj={themeObj}
-            items={items.filter(item =>
-              item.desc.toLowerCase().includes(search.toLowerCase())
+            {fetchError && (
+              <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>
             )}
-            handleDelete={handleDelete}
-            handleCheck={handleCheck}
-          />
-        )}
-      </Flex>
+
+            {!fetchError && !loaderLoading && !isLoading && (
+              <Content
+                setEditItem={setEditItem}
+                themeObj={themeObj}
+                items={items.filter(item =>
+                  item.desc.toLowerCase().includes(search.toLowerCase())
+                )}
+                handleDelete={handleDelete}
+                handleCheck={handleCheck}
+              />
+            )}
+          </Flex>
+        </>
+      )}
+
       <Footer bg={themeObj.bg} color={themeObj.color} length={items.length} />
     </>
   );

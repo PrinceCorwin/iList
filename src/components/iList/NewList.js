@@ -71,8 +71,10 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
 
   const updateMyListsArray = async newList => {
     try {
+      console.log(checkDoc.mylists);
       await checkDoc.update({
         mylists: firebase.firestore.FieldValue.arrayUnion(newList),
+        // myLists: checkDoc.mylists.arrayUnion('My List'),
       });
     } catch (err) {
       console.log(err.message);
