@@ -9,7 +9,7 @@ import {
   Input,
   FormControl,
   FormHelperText,
-  Icon,
+  Box,
   Heading,
   Flex,
   Alert,
@@ -44,7 +44,6 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   useEffect(() => {
     // setIsLoading(false);
     getMyLists();
-    console.log('here');
   }, []);
 
   const handleDelete = async deletedList => {
@@ -205,6 +204,7 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
         <VStack spacing={2} w="100%" mt={6}>
           {lists.map(item => (
             <EachList
+              lists={lists}
               inputRef={inputRef}
               editList={editList}
               setEditList={setEditList}
@@ -221,6 +221,9 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
             //     {item}
             //   </Box>
           ))}
+          {lists.length < 2 && (
+            <Box color="red">Final List May Only Be Edited, Not Deleted</Box>
+          )}
         </VStack>
       )}
       {editList && (
@@ -270,7 +273,6 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
                 onClick={() => {
                   setNewName2('');
                   setEditList(false);
-                  history.push('/mylists');
                 }}
                 aria-label="cancel"
                 color="white"

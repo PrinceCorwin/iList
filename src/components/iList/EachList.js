@@ -6,7 +6,7 @@ import {
   Tooltip,
   Flex,
   Heading,
-  Icon,
+  Box,
   IconButton,
 } from '@chakra-ui/react';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -16,6 +16,7 @@ const EachList = ({
   updateCurrentList,
   handleEdit,
   handleDelete,
+  lists,
   inputRef,
   setEditList,
   currentList,
@@ -70,7 +71,7 @@ const EachList = ({
           color={themeObj.deleteIcon}
           // colorScheme={themeObj.checkScheme}
           icon={<FaRegTrashAlt />}
-          onClick={() => handleDelete(item)}
+          onClick={() => (lists.length > 1 ? handleDelete(item) : null)}
         />
       </Tooltip>
     </Flex>
