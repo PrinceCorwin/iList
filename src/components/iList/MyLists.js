@@ -44,7 +44,6 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   useEffect(() => {
     // setIsLoading(false);
     getMyLists();
-    console.log('here');
   }, []);
 
   const handleDelete = async deletedList => {

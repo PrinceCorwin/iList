@@ -22,8 +22,8 @@ const EditItem = ({
   const checkDoc = db.collection('users').doc(user.uid);
 
   const [newDesc, setNewDesc] = useState('');
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault();
     try {
       console.log(editItem);
       console.log(newDesc);
@@ -31,7 +31,7 @@ const EditItem = ({
       console.log(editItem.id);
       await checkDoc
         .collection(currentList)
-        .doc(editItem.id)
+        .doc(`${editItem.id}`)
         .update({ desc: newDesc });
 
       const editedList = items.map(item =>
@@ -67,11 +67,10 @@ const EditItem = ({
         color={themeObj.colorItem}
       >
         {newDesc.length ? newDesc : editItem.desc}
-        {/* {newDesc} */}
       </Center>
       <form
         label="New Item Description"
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         style={{ width: '100%' }}
       >
         <FormControl>
@@ -91,12 +90,9 @@ const EditItem = ({
           <Button
             variant="solid"
             mt={4}
-            type="button"
+            type="submit"
             aria-label="Rename List"
             color="white"
-            onClick={() => {
-              handleSubmit();
-            }}
             _hover={{
               background: `${themeObj.checkScheme}`,
             }}

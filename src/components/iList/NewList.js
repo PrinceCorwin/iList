@@ -35,7 +35,6 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
           setAlertText(newList);
           setIsUnique(false);
         } else {
-          console.log('nope');
           updateCurrentList(newList);
           updateMyListsArray(newList);
           setIsUnique(true);
@@ -71,7 +70,6 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
 
   const updateMyListsArray = async newList => {
     try {
-      console.log(checkDoc.mylists);
       await checkDoc.update({
         mylists: firebase.firestore.FieldValue.arrayUnion(newList),
         // myLists: checkDoc.mylists.arrayUnion('My List'),
@@ -85,13 +83,10 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('maybe');
     if (!newList) return;
-    console.log('got here');
     checkDuplicate(newList);
 
     setNewList('');
-    console.log(newList);
   };
 
   return (

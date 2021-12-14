@@ -28,7 +28,6 @@ const Dashboard = ({
   const [search, setSearch] = useState('');
   const [editItem, setEditItem] = useState(null);
 
-  // const [loaderLoading, setLoaderLoading] = useState(true);
   const [newItem, setNewItem] = useState('');
 
   const checkDoc = db.collection('users').doc(user.uid);
@@ -38,8 +37,8 @@ const Dashboard = ({
     .doc(user.uid)
     .collection(currentList);
 
+  // initialize new user
   useEffect(() => {
-    // setIsLoading(true);
     checkIfInitialized();
     const getUserPrefs = async () => {
       try {
@@ -47,7 +46,6 @@ const Dashboard = ({
         setCurrentList(userList.data().currentlist);
         setAppTheme(userList.data().currenttheme);
 
-        // setIsLoading(false);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
@@ -61,17 +59,54 @@ const Dashboard = ({
     getUserPrefs();
   }, []);
 
-  useEffect(() => {
-    // console.log('UE1');
+  const checkIfInitialized = () => {
+    const docRef = db.collection('users').doc(user.uid);
 
+    docRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          console.log('Document data:', doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+          initializeUserDb();
+        }
+      })
+      .catch(error => {
+        console.log('Error getting document:', error);
+      });
+  };
+
+  const initializeUserDb = async () => {
+    const firstEntry = db.collection('users').doc(user.uid);
+
+    await firstEntry
+      .set({
+        currentlist: currentList,
+        mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
+        currenttheme: 'default',
+        email: user.email,
+      })
+      .then(() => {
+        console.log('currentlist successfully written!');
+      })
+      .catch(error => {
+        console.error('Error writing document: ', error);
+      });
+  };
+
+  useEffect(() => {
     const getItems = async () => {
       try {
-        const data = await itemsCollection.get();
+        const data = await itemsCollection.orderBy('id').get();
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
-          id: doc.id,
+          // id: doc.id,
         }));
+        console.log(listItems);
+
         setItems(listItems);
         setFetchError(null);
       } catch (err) {
@@ -97,7 +132,6 @@ const Dashboard = ({
       desc: item,
       date: dateStr,
     };
-
     const listItems = [...items, myNewItem];
     setItems(listItems);
     const addedDoc = db
@@ -106,7 +140,8 @@ const Dashboard = ({
       .collection(currentList)
       .doc(`${myNewItem.id}`);
     await addedDoc
-      .set({ desc: myNewItem.desc, checked: false, date: dateStr })
+      // .set({ desc: myNewItem.desc, checked: false, date: dateStr })
+      .set({ ...myNewItem })
       .then(() => {
         console.log('Document successfully written!');
       })
@@ -129,6 +164,7 @@ const Dashboard = ({
       .collection(currentList)
       .doc(`${id}`);
     console.log('here');
+
     await updatedDoc
       .update({
         checked: !myItem[0].checked,
@@ -164,43 +200,6 @@ const Dashboard = ({
     if (!newItem) return;
     addItem(newItem);
     setNewItem('');
-  };
-  const checkIfInitialized = () => {
-    const docRef = db.collection('users').doc(user.uid);
-
-    docRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          console.log('Document data:', doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-          initializeUserDb();
-        }
-      })
-      .catch(error => {
-        console.log('Error getting document:', error);
-      });
-  };
-
-  const initializeUserDb = async () => {
-    const firstEntry = db.collection('users').doc(user.uid);
-
-    await firstEntry
-      .set({
-        currentlist: currentList,
-        mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
-        // myLists: firstEntry.myLists.arrayUnion('My List'),
-        currenttheme: 'default',
-        email: user.email,
-      })
-      .then(() => {
-        console.log('currentlist successfully written!');
-      })
-      .catch(error => {
-        console.error('Error writing document: ', error);
-      });
   };
 
   return (
