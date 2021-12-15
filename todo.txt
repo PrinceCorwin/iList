@@ -1,5 +1,8 @@
 fix bug when user refreshes browser while in MyLists or NewList, the theme reverts to default (minimal) because useEffect runs on Dashboard and not in App. If I move it to App, the app is broken the first time someone opens app because user data is attempted to be fetched before a user exists...
+POSSIBLE ANSWER... MOVE USEEFFECT TO APP WITH CONDITIONAL IF(USER) TO FETCH DATA. ADD USER AS DEPENDANCY? TEMP FIX: I ADDED GETUSERPREFS TO TO MYLISTS AND NEWLIST
 
-add ability to edit item descriptions
+useEffect in dashboard seems a little out of sync. getUserPrefs may run before checkIfInitialized finishes. Refactor?
 
-disable list delete icon onClick when only one list remains. Add note that user must have at least one list
+Add home link to mylists and newlist
+
+Step through all pages with quokka and refactor to prevent flashes. Make use of isLoading and <Loader> on all necessary pages pages

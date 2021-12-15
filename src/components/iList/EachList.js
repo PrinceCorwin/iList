@@ -16,12 +16,13 @@ const EachList = ({
   updateCurrentList,
   handleEdit,
   handleDelete,
+  setFinalListError,
   lists,
   inputRef,
   setEditList,
   currentList,
   setCurrentList,
-  item,
+  list,
   themeObj,
 }) => {
   return (
@@ -40,16 +41,19 @@ const EachList = ({
         px={3}
         // bg={themeObj.bgItem}
         // color={themeObj.colorItem}
-        onClick={() => updateCurrentList(item)}
+        onClick={() => {
+          setFinalListError(false);
+          updateCurrentList(list);
+        }}
       >
         <Heading px={3} size="md" isTruncated>
-          {item}
+          {list}
         </Heading>
       </Button>
       <Tooltip label="Rename" fontSize="sm">
         <IconButton
           size="sm"
-          aria-label={`Rename ${item.desc}`}
+          aria-label={`Rename ${list}`}
           ml={3}
           variant="outline"
           // background="black"
@@ -57,21 +61,24 @@ const EachList = ({
           color={themeObj.deleteIcon}
           // colorScheme={themeObj.checkScheme}
           icon={<AiOutlineEdit />}
-          onClick={() => setEditList(item)}
+          onClick={() => {
+            setFinalListError(false);
+            setEditList(list);
+          }}
         />
       </Tooltip>
       <Tooltip label="Delete" fontSize="sm">
         <IconButton
           ml={3}
           size="sm"
-          aria-label={`Delete ${item.desc}`}
+          aria-label={`Delete ${list}`}
           variant="outline"
           // background="black"
           borderColor={themeObj.deleteOutline}
           color={themeObj.deleteIcon}
           // colorScheme={themeObj.checkScheme}
           icon={<FaRegTrashAlt />}
-          onClick={() => (lists.length > 1 ? handleDelete(item) : null)}
+          onClick={() => handleDelete(list)}
         />
       </Tooltip>
     </Flex>

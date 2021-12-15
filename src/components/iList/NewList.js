@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import firebase from 'firebase/app';
-
+import Footer from './Footer';
 import {
   Input,
   Button,
@@ -14,7 +14,13 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useAuth, db } from '../../hooks/useAuth';
 
-const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
+const NewList = ({
+  setIsLoading,
+  currentList,
+  setAppTheme,
+  setCurrentList,
+  themeObj,
+}) => {
   const history = useHistory();
   const { user } = useAuth();
   const [alertText, setAlertText] = useState('');
@@ -47,6 +53,24 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   };
 
   useEffect(() => {
+    // temp fix. try moving this function from dashboard useEffect to App level useEffect. Use conditional if(user)?
+    const getUserPrefs = async () => {
+      try {
+        const userList = await checkDoc.get();
+        setAppTheme(userList.data().currenttheme);
+
+        // setFetchError(null);
+      } catch (err) {
+        // setFetchError(err.message);
+
+        console.log(err.message);
+      } finally {
+        // setLoaderLoading(false);
+        setIsLoading(false);
+      }
+    };
+    // setIsLoading(false);
+    getUserPrefs();
     setIsLoading(false);
   }, []);
 
@@ -90,75 +114,74 @@ const NewList = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
   };
 
   return (
-    <Flex grow="1" justify="center" direction="column">
-      {!isUnique && (
-        <Alert status="error" variant="subtle" mt={6} mb={6}>
-          <AlertIcon />
-          You already have a list named {alertText}
-        </Alert>
-      )}
-
-      {/* display alert if list already exists */}
-
-      <Heading size="md" py={3}>
-        Name Your List
-      </Heading>
-      <form label="New List" onSubmit={handleSubmit} style={{ width: '100%' }}>
-        <FormControl>
-          <Input
-            variant="outline"
-            autoFocus
-            ref={inputRef}
-            type="text"
-            id="newList"
-            placeholder="New List Name"
-            required
-            value={newList}
-            onChange={e => setNewList(e.target.value)}
-          />
-          <FormHelperText>
-            Name must not be the same as another active list
-          </FormHelperText>
-          <Button
-            variant="solid"
-            mt={4}
-            //   ml={2}
-            type="submit"
-            aria-label="Add Item"
-            color="white"
-            //   color={themeObj.colorIcon}
-            _hover={{
-              background: `${themeObj.checkScheme}`,
-            }} // color="red"
-            // bg="red.800"
-            bg="black"
-            //   bg={themeObj.bgIcon}
-          >
-            Add
-          </Button>
-          <Button
-            variant="solid"
-            mt={4}
-            //   ml={2}
-            type="button"
-            onClick={() => {
-              setNewList('');
-              history.push('/');
-            }}
-            aria-label="cancel"
-            color="white"
-            //   color={themeObj.colorIcon}
-            _hover={{
-              background: `${themeObj.checkScheme}`,
-            }} // color="red"
-            // bg="red.800"
-            bg="red"
-            //   bg={themeObj.bgIcon}
-          >
-            Cancel
-          </Button>
-        </FormControl>
-      </form>
+    <Flex grow="1" justify="center" direction="column" width="400px">
+      <Flex direction="column" h="250px">
+        <Heading size="md" py={3}>
+          Name Your New List
+        </Heading>
+        <form
+          label="New List"
+          onSubmit={handleSubmit}
+          style={{ width: '100%' }}
+        >
+          <FormControl>
+            <Input
+              bg={themeObj.bgItem}
+              color={themeObj.colorItem}
+              variant="outline"
+              autoFocus
+              ref={inputRef}
+              type="text"
+              id="newList"
+              placeholder="New List Name"
+              required
+              value={newList}
+              onChange={e => setNewList(e.target.value)}
+            />
+            <FormHelperText>
+              New list name can not match another existing list
+            </FormHelperText>
+            <Flex mt={4} w="50%" justify="space-between">
+              <Button
+                variant="solid"
+                //   ml={2}
+                type="submit"
+                aria-label="Add Item"
+                color={themeObj.colorIcon}
+                _hover={{
+                  background: `${themeObj.deleteIcon}`,
+                }}
+                bg={themeObj.bgIcon}
+              >
+                Add
+              </Button>
+              <Button
+                variant="outline"
+                //   ml={2}
+                type="button"
+                onClick={() => {
+                  setNewList('');
+                  history.push('/');
+                }}
+                aria-label="cancel"
+                color={themeObj.colorIcon}
+                _hover={{
+                  background: `${themeObj.deleteIcon}`,
+                }}
+                bg="red"
+              >
+                Cancel
+              </Button>
+            </Flex>
+          </FormControl>
+        </form>
+        {!isUnique && (
+          <Alert status="error" variant="subtle" mt={6} mb={6}>
+            <AlertIcon />
+            You already have a list named {alertText}
+          </Alert>
+        )}
+      </Flex>
     </Flex>
   );
 };

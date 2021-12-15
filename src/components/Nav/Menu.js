@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../../hooks/useAuth';
-import { Box, Center, VStack } from '@chakra-ui/react';
+import { Box, Center, theme, VStack } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
+import { FaBlackTie } from 'react-icons/fa';
 
-const Menu = ({ setNewList, setAppTheme }) => {
+const Menu = ({ setNewList, setAppTheme, themeObj }) => {
   const { logout } = useAuth();
   const { user } = useAuth();
-
+  const [menuOpen, setMenuOpen] = useState(false);
   // const handleClick = () => setMenuOpen(true);
   var styles = {
     bmBurgerButton: {
@@ -36,13 +37,14 @@ const Menu = ({ setNewList, setAppTheme }) => {
       // overflow: 'visible',
       paddingRight: '0',
       position: 'absolute',
-      top: '0',
+      top: '5px',
       left: '0',
-      height: '100%',
+      height: '98%',
     },
     bmMenu: {
+      border: `1px solid ${themeObj.colorItem}`,
       // overflow: 'visible',
-      background: '#373a47',
+      background: themeObj.bgItem,
       padding: '2.5em 1.25em 0',
       fontSize: '1.15em',
     },
@@ -50,7 +52,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
       fill: '#373a47',
     },
     bmItemList: {
-      color: '#b8b7ad',
+      color: themeObj.colorItem,
       padding: '0.8em',
     },
     bmItem: {
@@ -58,7 +60,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
     },
     bmOverlay: {
       maxWidth: '400px',
-      background: 'rgba(0, 0, 0, 0.0)',
+      background: 'rgba(0, 0, 0, 1.0)',
     },
   };
   // const [menuOpen, setMenuOpen] = useState(false);
@@ -81,7 +83,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
   };
 
   return (
-    <MenuType noOverlay isOpen={false} width={'200px'} styles={styles}>
+    <MenuType noOverlay isOpen={menuOpen} width={'200px'} styles={styles}>
       <Box _hover={{ fontWeight: 'semibold' }}>
         <Link to="/">Home</Link>
       </Box>
@@ -91,8 +93,9 @@ const Menu = ({ setNewList, setAppTheme }) => {
       <Box _hover={{ fontWeight: 'semibold' }}>
         <Link to="/mylists">My Lists</Link>
       </Box>
-      <Box mt={2}>Themes</Box>
-      <VStack spacing={1}>
+
+      <VStack mt={2} spacing={1}>
+        <Center w="100%">Themes</Center>
         <Box
           _hover={{ fontWeight: 'semibold' }}
           as="button"
@@ -101,7 +104,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
             applyTheme('default');
           }}
         >
-          <Center w="100%" color="#F7FAFC" bg="#6082B6">
+          <Center w="100%" color="#F7FAFC" bg="#303F9F">
             Default
           </Center>
         </Box>
@@ -173,7 +176,7 @@ const Menu = ({ setNewList, setAppTheme }) => {
             applyTheme('harvest');
           }}
         >
-          <Center w="100%" color="#F7FAFC" bg="#DAA520">
+          <Center w="100%" color="#212121" bg="#FFC107">
             Harvest
           </Center>
         </Box>
@@ -185,7 +188,12 @@ const Menu = ({ setNewList, setAppTheme }) => {
             applyTheme('minimal');
           }}
         >
-          <Center w="100%" color="#1A202C" bg="#F7FAFC">
+          <Center
+            w="100%"
+            // border="1px solid #1A202C"
+            color="#1A202C"
+            bg="white"
+          >
             Minimalist
           </Center>
         </Box>

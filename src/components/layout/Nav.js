@@ -29,6 +29,7 @@ const Nav = ({ isLoading, setNewList, setAppTheme, themeObj, currentList }) => {
           <Menu
             // menuOpen={menuOpen}
             // setMenuOpen={setMenuOpen}
+            themeObj={themeObj}
             setAppTheme={setAppTheme}
             setNewList={setNewList}
           ></Menu>

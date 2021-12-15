@@ -18,9 +18,16 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useAuth, db } from '../../hooks/useAuth';
 // import NewList from './NewList';
-const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
+const MyLists = ({
+  setIsLoading,
+  currentList,
+  setAppTheme,
+  setCurrentList,
+  themeObj,
+}) => {
   const inputRef = useRef();
-  const [alertText2, setAlertText2] = useState('');
+  const [finalListError, setFinalListError] = useState(false);
+  const [alertText2, setAlertText2] = useState(null);
   const [isUnique2, setIsUnique2] = useState(true);
   const [newName2, setNewName2] = useState('');
   const history = useHistory();
@@ -42,11 +49,33 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
     }
   };
   useEffect(() => {
+    // temp fix. try moving this function from dashboard useEffect to App level useEffect. Use conditional if(user)?
+    const getUserPrefs = async () => {
+      try {
+        const userList = await checkDoc.get();
+        setAppTheme(userList.data().currenttheme);
+
+        // setFetchError(null);
+      } catch (err) {
+        // setFetchError(err.message);
+
+        console.log(err.message);
+      } finally {
+        // setLoaderLoading(false);
+        setIsLoading(false);
+      }
+    };
     // setIsLoading(false);
+    getUserPrefs();
+
     getMyLists();
   }, []);
 
   const handleDelete = async deletedList => {
+    if (lists.length < 2) {
+      setFinalListError(true);
+      return;
+    }
     try {
       // update user preference array on database
       await checkDoc.update({
@@ -112,37 +141,27 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
         .get()
         .then(collection => {
           if (collection.docs.length) {
-            // console.log(collection);
-            // console.log('exists');
-            setAlertText2(newName2);
-            // setIsUnique2(false);
             uniqueName = false;
+            setAlertText2(`You already have a list named ${newName2}`);
           } else {
-            // console.log('nope');
-            // updateMyListsArray(newName, oldName);
             uniqueName = true;
-
-            // setIsUnique2(true);
           }
         });
-      // console.log(uniqueName);
       if (uniqueName) {
         await checkDoc.update({
           mylists: firebase.firestore.FieldValue.arrayUnion(newName2),
         });
-        // console.log('still going');
         await checkDoc.update({
           mylists: firebase.firestore.FieldValue.arrayRemove(editList),
         });
-        // console.log('about to update');
+        console.log('about to update');
         updateLists(newName2, editList);
+        setAlertText2(null);
+        setNewName2('');
+        setEditList(false);
       }
     } catch (err) {
-    } finally {
-      // updateLists();
-      // getMyLists();
-      setEditList(false);
-      setNewName2('');
+      setAlertText2(err.message);
     }
   };
 
@@ -202,92 +221,106 @@ const MyLists = ({ setIsLoading, currentList, setCurrentList, themeObj }) => {
       )}
       {!editList && (
         <VStack spacing={2} w="100%" mt={6}>
-          {lists.map(item => (
+          {lists.map(list => (
             <EachList
+              setFinalListError={setFinalListError}
               lists={lists}
               inputRef={inputRef}
               editList={editList}
               setEditList={setEditList}
               updateCurrentList={updateCurrentList}
               handleDelete={handleDelete}
-              key={lists.indexOf(item)}
+              key={lists.indexOf(list)}
               setIsLoading={setIsLoading}
               currentList={currentList}
               setCurrentList={setCurrentList}
               themeObj={themeObj}
-              item={item}
+              list={list}
             />
             //   <Box as="button" borderWidth="1px" px={3} py={1} w="100%">
-            //     {item}
+            //     {list}
             //   </Box>
           ))}
-          {lists.length < 2 && (
-            <Box color="red">Final List May Only Be Edited, Not Deleted</Box>
-          )}
         </VStack>
       )}
+      {finalListError && (
+        <Alert status="error" variant="subtle" mt={6} mb={6}>
+          <AlertIcon />
+          Final List May Only Be Edited, Not Deleted
+        </Alert>
+      )}
       {editList && (
-        <Flex w="100%" grow="1">
-          <form
-            label="Rename List"
-            onSubmit={handleSubmit}
-            style={{ width: '100%' }}
-          >
-            <FormControl>
-              <Input
-                variant="outline"
-                autoFocus
-                // ref={inputRef}
-                type="text"
-                id="newName"
-                placeholder="Rename List"
-                required
-                value={newName2}
-                onChange={e => setNewName2(e.target.value)}
-              />
-              <FormHelperText>
-                Name must not be the same as another active list
-              </FormHelperText>
-              <Button
-                variant="solid"
-                mt={4}
-                //   ml={2}
-                type="submit"
-                aria-label="Rename List"
-                color="white"
-                //   color={themeObj.colorIcon}
-                _hover={{
-                  background: `${themeObj.checkScheme}`,
-                }} // color="red"
-                // bg="red.800"
-                bg="black"
-                //   bg={themeObj.bgIcon}
-              >
-                Rename
-              </Button>
-              <Button
-                variant="solid"
-                mt={4}
-                //   ml={2}
-                type="button"
-                onClick={() => {
-                  setNewName2('');
-                  setEditList(false);
-                }}
-                aria-label="cancel"
-                color="white"
-                //   color={themeObj.colorIcon}
-                _hover={{
-                  background: `${themeObj.checkScheme}`,
-                }} // color="red"
-                // bg="red.800"
-                bg="red"
-                //   bg={themeObj.bgIcon}
-              >
-                Cancel
-              </Button>
-            </FormControl>
-          </form>
+        <Flex grow="1" justify="center" direction="column">
+          <Flex direction="column" h="250px">
+            <Heading size="md" py={3}>
+              Rename Your List
+            </Heading>
+            <form
+              label="Rename List"
+              onSubmit={handleSubmit}
+              style={{ width: '100%' }}
+            >
+              <FormControl>
+                <Input
+                  variant="outline"
+                  autoFocus
+                  // ref={inputRef}
+                  type="text"
+                  id="newName"
+                  placeholder={`Rename ${editList}`}
+                  required
+                  value={newName2}
+                  onChange={e => setNewName2(e.target.value)}
+                  bg={themeObj.bgItem}
+                />
+                <FormHelperText>
+                  New name can not match another existing list
+                </FormHelperText>
+                <Flex mt={4} w="50%" justify="space-between">
+                  <Button
+                    variant="solid"
+                    //   ml={2}
+                    type="submit"
+                    aria-label="Rename List"
+                    color={themeObj.colorIcon}
+                    _hover={{
+                      background: `${themeObj.deleteIcon}`,
+                    }}
+                    bg={themeObj.bgIcon}
+                  >
+                    Rename
+                  </Button>
+                  <Button
+                    variant="solid"
+                    //   ml={2}
+                    type="button"
+                    onClick={() => {
+                      setAlertText2(null);
+                      setNewName2('');
+                      setEditList(false);
+                    }}
+                    aria-label="cancel"
+                    color="white"
+                    //   color={themeObj.colorIcon}
+                    _hover={{
+                      background: `${themeObj.deleteIcon}`,
+                    }} // color="red"
+                    // bg="red.800"
+                    bg="red"
+                    //   bg={themeObj.bgIcon}
+                  >
+                    Cancel
+                  </Button>
+                </Flex>
+              </FormControl>
+              {alertText2 && (
+                <Alert status="error" variant="subtle" mt={6} mb={6}>
+                  <AlertIcon />
+                  {alertText2}
+                </Alert>
+              )}
+            </form>
+          </Flex>
         </Flex>
       )}
     </Flex>

@@ -81,42 +81,45 @@ const EditItem = ({
             // ref={inputRef}
             type="text"
             id="newDesc"
+            color="{themeObj.colorItem}"
+            bg={themeObj.bgItem}
             placeholder="New Item Description"
             required
             value={newDesc}
             onChange={e => setNewDesc(e.target.value)}
           />
-
-          <Button
-            variant="solid"
-            mt={4}
-            type="submit"
-            aria-label="Rename List"
-            color="white"
-            _hover={{
-              background: `${themeObj.checkScheme}`,
-            }}
-            bg="black"
-          >
-            Update
-          </Button>
-          <Button
-            variant="solid"
-            mt={4}
-            type="button"
-            onClick={() => {
-              setEditItem(null);
-              setNewDesc(`${editItem.desc}`);
-            }}
-            aria-label="cancel"
-            color="white"
-            _hover={{
-              background: `${themeObj.checkScheme}`,
-            }}
-            bg="red"
-          >
-            Cancel
-          </Button>
+          <Flex mt={4} w="50%" justify="space-between">
+            <Button
+              variant="solid"
+              mt={4}
+              type="submit"
+              aria-label="Rename List"
+              color={themeObj.colorIcon}
+              _hover={{
+                background: `${themeObj.deleteIcon}`,
+              }}
+              bg={themeObj.bgIcon}
+            >
+              Update
+            </Button>
+            <Button
+              variant="solid"
+              mt={4}
+              type="button"
+              onClick={() => {
+                setEditItem(null);
+                setNewDesc(`${editItem.desc}`);
+              }}
+              aria-label="cancel"
+              color={themeObj.colorIcon}
+              _hover={{
+                background: `${themeObj.deleteIcon}`,
+              }}
+              bg="red"
+            >
+              Cancel
+            </Button>
+          </Flex>
         </FormControl>
       </form>
     </Flex>

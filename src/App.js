@@ -20,7 +20,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [loaderLoading, setLoaderLoading] = useState(true);
   const [currentList, setCurrentList] = useState('My List');
-  const [appTheme, setAppTheme] = useState('minimal');
+  const [appTheme, setAppTheme] = useState('default');
 
   // create global theme object
   const checkSchemeDark = iListTheme.colors[appTheme].checkSchemeDark;
@@ -31,9 +31,13 @@ function App() {
   const strikeTextLight = iListTheme.colors[appTheme].strikeTextLight;
   const colorItemDark = iListTheme.colors[appTheme].colorItemDark;
   const colorItemLight = iListTheme.colors[appTheme].colorItemLight;
-
+  const bgDark = iListTheme.colors[appTheme].bgDark;
+  const bgLight = iListTheme.colors[appTheme].bgLight;
+  const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
+  const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
   const themeObj = {
-    bg: useColorModeValue(`${appTheme}.bgLight`, `${appTheme}.bgDark`),
+    // bg: useColorModeValue(`${appTheme}.bgLight`, `${appTheme}.bgDark`),
+    bg: useColorModeValue(bgLight, bgDark),
 
     color: useColorModeValue(`${appTheme}.colorLight`, `${appTheme}.colorDark`),
 
@@ -55,10 +59,7 @@ function App() {
 
     added: useColorModeValue(`${appTheme}.addedLight`, `${appTheme}.addedDark`),
 
-    bgItem: useColorModeValue(
-      `${appTheme}.bgItemLight`,
-      `${appTheme}.bgItemDark`
-    ),
+    bgItem: useColorModeValue(bgItemLight, bgItemDark),
 
     checkScheme: useColorModeValue(checkSchemeLight, checkSchemeDark),
 
@@ -100,6 +101,7 @@ function App() {
 
           <PrivateRoute path="/newlist">
             <NewList
+              setAppTheme={setAppTheme}
               setIsLoading={setIsLoading}
               themeObj={themeObj}
               currentList={currentList}
@@ -108,6 +110,7 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/mylists">
             <MyLists
+              setAppTheme={setAppTheme}
               setIsLoading={setIsLoading}
               themeObj={themeObj}
               currentList={currentList}
