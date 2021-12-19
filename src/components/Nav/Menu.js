@@ -140,7 +140,7 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
             applyTheme('ocean');
           }}
         >
-          <Center w="100%" color="#00008B" bg="rgb(0, 220, 255)">
+          <Center w="100%" color="#FFFFFF" bg="#2196F3">
             Ocean
           </Center>
         </Box>
@@ -152,7 +152,7 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
             applyTheme('purple');
           }}
         >
-          <Center w="100%" color="#F7FAFC" bg="#BF40BF">
+          <Center w="100%" color="#F7FAFC" bg="#9C27B0">
             Purple
           </Center>
         </Box>
