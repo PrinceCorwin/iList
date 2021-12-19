@@ -34,7 +34,7 @@
 [<img align="left" target="_blank" alt="git" height="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/firebase-logo.png?raw=true" />](https://firebase.google.com/ 'Firebase')
 [<img align="left" target="_blank" alt="Python" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" />](https://www.python.org/ 'python')
 [<img align="left" target="_blank" alt="PHP" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/php/php.png" />](https://www.php.net/ 'php')
-[<img align="left" target="_blank" alt="SQL" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/logo-mysql-26353.png?raw=true" />](https://dev.mysql.com/doc/ 'mySQL')
+[<img align="left" target="_blank" alt="SQL" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/mysql-logo.png" />](https://dev.mysql.com/doc/ 'mySQL')
 [<img align="left" target="_blank" alt="git" height="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/git-logo-minimal.png?raw=true" />](https://git-scm.com/doc 'git')
 
 <br />
