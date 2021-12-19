@@ -22,8 +22,8 @@
 
 ### 💻 Technologies Used:
 
-[<img align="left" target="_blank" alt="HTML" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />](https://developer.mozilla.org/en-US/docs/Web/HTML 'HTML')
-[<img align="left" target="_blank" alt="CSS" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" />](https://developer.mozilla.org/en-US/docs/Web/CSS 'CSS')
+[<img align="left" target="_blank" alt="HTML" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/HTML.png" />](https://developer.mozilla.org/en-US/docs/Web/HTML 'HTML')
+[<img align="left" target="_blank" alt="CSS" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/css.png" />](https://developer.mozilla.org/en-US/docs/Web/CSS 'CSS')
 [<img align="left" style="border-radius:50%" target="_blank" alt="Chakra UI" width="26px" src="https://opencollective.com/chakra-ui/organization/0/avatar.svg?avatarHeight=130" />](https://chakra-ui.com/ 'Chakra UI')
 [<img align="left" target="_blank" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />](https://developer.mozilla.org/en-US/docs/Web/JavaScript 'Javascript')
 [<img align="left" target="_blank" alt="React" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"/>](https://reactjs.org/ 'React')
