@@ -10,6 +10,7 @@
 
 ### App Features:
 
+- 🏗️ Built with [React](https://reactjs.org/ 'React')
 - 💪 Lightweight, stable, and purpose driven. Users create, view, and edit their lists in an easy-to-use intuitive UI (powered by [Chakra UI](https://firebase.google.com/docs/auth/web/email-link-auth 'Chakra UI'))
 - 🖼️ Customizable and personal with modern themes
 - 🔥 User data stored in [Firebase](https://firebase.google.com/ 'Firebase') / [Firestore](https://firebase.google.com/products/firestore 'Firebase')
