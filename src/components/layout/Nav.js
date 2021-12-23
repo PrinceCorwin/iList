@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Menu from '../Nav/Menu';
 import { Heading, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { useAuth } from '../../hooks/useAuth';
 
 const Nav = ({ isLoading, setAppTheme, themeObj, currentList }) => {
+  // const [menuOpen, setMenuOpen] = useState(false);
+
   const { user } = useAuth();
   return (
     <Flex
@@ -22,7 +24,12 @@ const Nav = ({ isLoading, setAppTheme, themeObj, currentList }) => {
     >
       {user && (
         <>
-          <Menu themeObj={themeObj} setAppTheme={setAppTheme}></Menu>
+          <Menu
+            // menuOpen={menuOpen}
+            // setMenuOpen={setMenuOpen}
+            themeObj={themeObj}
+            setAppTheme={setAppTheme}
+          ></Menu>
           {!isLoading && (
             <Heading px={3} as="h1" mr={1} isTruncated>
               {currentList}

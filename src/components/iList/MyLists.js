@@ -138,12 +138,17 @@ const MyLists = ({
           }
         });
       if (uniqueName) {
+        // add new list to user mylists array on firebase
         await checkDoc.update({
           mylists: firebase.firestore.FieldValue.arrayUnion(newName2),
         });
+        // remove old list name from firebase
         await checkDoc.update({
           mylists: firebase.firestore.FieldValue.arrayRemove(editList),
         });
+        if (currentList === editList) {
+          setCurrentList(newName2);
+        }
         updateLists(newName2, editList);
         setAlertText2(null);
         setNewName2('');
