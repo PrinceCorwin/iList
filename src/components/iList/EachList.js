@@ -1,27 +1,14 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 
-import {
-  Button,
-  Tooltip,
-  Flex,
-  Heading,
-  Box,
-  IconButton,
-} from '@chakra-ui/react';
+import { Button, Tooltip, Flex, Heading, IconButton } from '@chakra-ui/react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { AiOutlineEdit } from 'react-icons/ai';
 
 const EachList = ({
   updateCurrentList,
-  handleEdit,
   handleDelete,
   setFinalListError,
-  lists,
-  inputRef,
   setEditList,
-  currentList,
-  setCurrentList,
   list,
   themeObj,
 }) => {
@@ -32,15 +19,10 @@ const EachList = ({
         size="md"
         variant="outline"
         colorScheme={themeObj.checkScheme}
-        // _hover={{ bg: 'none' }}
-        // cursor="pointer"
         align="center"
         borderLeftRadius="lg"
         w="100%"
-        // h="100%"
         px={3}
-        // bg={themeObj.bgItem}
-        // color={themeObj.colorItem}
         onClick={() => {
           setFinalListError(false);
           updateCurrentList(list);
@@ -56,10 +38,8 @@ const EachList = ({
           aria-label={`Rename ${list}`}
           ml={3}
           variant="outline"
-          // background="black"
           borderColor={themeObj.deleteOutline}
           color={themeObj.deleteIcon}
-          // colorScheme={themeObj.checkScheme}
           icon={<AiOutlineEdit />}
           onClick={() => {
             setFinalListError(false);
@@ -73,10 +53,8 @@ const EachList = ({
           size="sm"
           aria-label={`Delete ${list}`}
           variant="outline"
-          // background="black"
           borderColor={themeObj.deleteOutline}
           color={themeObj.deleteIcon}
-          // colorScheme={themeObj.checkScheme}
           icon={<FaRegTrashAlt />}
           onClick={() => handleDelete(list)}
         />

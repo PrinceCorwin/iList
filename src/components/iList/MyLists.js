@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import EachList from './EachList';
 
@@ -9,7 +9,6 @@ import {
   Input,
   FormControl,
   FormHelperText,
-  Box,
   Heading,
   Flex,
   Alert,
@@ -17,7 +16,6 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { useAuth, db } from '../../hooks/useAuth';
-// import NewList from './NewList';
 const MyLists = ({
   setIsLoading,
   currentList,
@@ -25,10 +23,8 @@ const MyLists = ({
   setCurrentList,
   themeObj,
 }) => {
-  const inputRef = useRef();
   const [finalListError, setFinalListError] = useState(false);
   const [alertText2, setAlertText2] = useState(null);
-  const [isUnique2, setIsUnique2] = useState(true);
   const [newName2, setNewName2] = useState('');
   const history = useHistory();
   const { user } = useAuth();
@@ -40,8 +36,6 @@ const MyLists = ({
     try {
       const userLists = await (await checkDoc.get()).data().mylists;
       setLists(userLists);
-
-      // console.log(userLists);
     } catch (err) {
       console.log(err);
     } finally {
@@ -107,7 +101,6 @@ const MyLists = ({
       console.log(err.message);
     } finally {
       setLists([...lists].filter(item => item !== deletedList));
-      console.log(deletedList);
     }
   };
 
@@ -115,7 +108,6 @@ const MyLists = ({
     try {
       await checkDoc.update({ currentlist: newList });
       setCurrentList(newList);
-      console.log(editList);
       history.push('/');
 
       //   setLoaderLoading(true);
@@ -125,14 +117,12 @@ const MyLists = ({
       //   setFetchError(err.message);
       console.log(err.message);
     } finally {
-      console.log(currentList);
     }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
     if (!newName2) return;
-    // console.log('check duplicate');
     let uniqueName = true;
     try {
       // check duplicate
@@ -154,7 +144,6 @@ const MyLists = ({
         await checkDoc.update({
           mylists: firebase.firestore.FieldValue.arrayRemove(editList),
         });
-        console.log('about to update');
         updateLists(newName2, editList);
         setAlertText2(null);
         setNewName2('');
@@ -167,9 +156,7 @@ const MyLists = ({
 
   const updateLists = async (added, removed) => {
     const origLists = lists;
-    // console.log('got here');
     const updatedLists = [...origLists.filter(item => item !== removed), added];
-    // console.log(updatedLists);
     setLists(updatedLists);
     try {
       await checkDoc
@@ -178,8 +165,6 @@ const MyLists = ({
         .then(function (collection) {
           if (collection.docs.length) {
             let data = collection.docs;
-
-            console.log(data);
             // add new list with new name with old list's data and delete old list
             data.forEach(doc => {
               // add new list
@@ -223,22 +208,13 @@ const MyLists = ({
           {lists.map(list => (
             <EachList
               setFinalListError={setFinalListError}
-              lists={lists}
-              inputRef={inputRef}
-              editList={editList}
               setEditList={setEditList}
               updateCurrentList={updateCurrentList}
-              handleDelete={handleDelete}
               key={lists.indexOf(list)}
-              setIsLoading={setIsLoading}
-              currentList={currentList}
-              setCurrentList={setCurrentList}
+              handleDelete={handleDelete}
               themeObj={themeObj}
               list={list}
             />
-            //   <Box as="button" borderWidth="1px" px={3} py={1} w="100%">
-            //     {list}
-            //   </Box>
           ))}
         </VStack>
       )}
@@ -278,7 +254,6 @@ const MyLists = ({
                 <Flex mt={4} w="50%" justify="space-between">
                   <Button
                     variant="solid"
-                    //   ml={2}
                     type="submit"
                     aria-label="Rename List"
                     color={themeObj.colorIcon}
@@ -291,7 +266,6 @@ const MyLists = ({
                   </Button>
                   <Button
                     variant="solid"
-                    //   ml={2}
                     type="button"
                     onClick={() => {
                       setAlertText2(null);
@@ -300,13 +274,10 @@ const MyLists = ({
                     }}
                     aria-label="cancel"
                     color="white"
-                    //   color={themeObj.colorIcon}
                     _hover={{
                       background: `${themeObj.deleteIcon}`,
-                    }} // color="red"
-                    // bg="red.800"
+                    }}
                     bg="red"
-                    //   bg={themeObj.bgIcon}
                   >
                     Cancel
                   </Button>

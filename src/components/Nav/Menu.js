@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../../hooks/useAuth';
-import { Box, Center, theme, VStack } from '@chakra-ui/react';
+import { Box, Center, VStack } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
-import { FaBlackTie } from 'react-icons/fa';
 
-const Menu = ({ setNewList, setAppTheme, themeObj }) => {
+const Menu = ({ setAppTheme, themeObj }) => {
   const { logout } = useAuth();
   const { user } = useAuth();
-  const [menuOpen, setMenuOpen] = useState(false);
-  // const handleClick = () => setMenuOpen(true);
   var styles = {
     bmBurgerButton: {
       position: 'relative',
       width: '25px',
       height: '20px',
-      //   left: '36px',
-      //   top: '36px',
     },
     bmBurgerBars: {
       background: '#373a47',
@@ -63,7 +58,6 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
       background: 'rgba(0, 0, 0, 1.0)',
     },
   };
-  // const [menuOpen, setMenuOpen] = useState(false);
   const checkDoc = db.collection('users').doc(user.uid);
 
   const applyTheme = async theme => {
@@ -83,7 +77,7 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
   };
 
   return (
-    <MenuType noOverlay isOpen={menuOpen} width={'200px'} styles={styles}>
+    <MenuType noOverlay width={'200px'} styles={styles}>
       <Box _hover={{ fontWeight: 'semibold' }}>
         <Link to="/">Home</Link>
       </Box>

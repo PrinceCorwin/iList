@@ -25,10 +25,6 @@ const EditItem = ({
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      console.log(editItem);
-      console.log(newDesc);
-      console.log(currentList);
-      console.log(editItem.id);
       await checkDoc
         .collection(currentList)
         .doc(`${editItem.id}`)
@@ -38,7 +34,6 @@ const EditItem = ({
         item.id === editItem.id ? { ...item, desc: newDesc } : item
       );
       setItems(editedList);
-      console.log(editedList);
       setNewDesc(`${editItem.desc}`);
 
       setEditItem(null);

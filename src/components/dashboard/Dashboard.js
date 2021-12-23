@@ -22,7 +22,6 @@ const Dashboard = ({
   currentList,
   setCurrentList,
 }) => {
-  console.log(currentList);
   const { user } = useAuth();
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
@@ -66,7 +65,6 @@ const Dashboard = ({
       .get()
       .then(doc => {
         if (doc.exists) {
-          console.log('Document data:', doc.data());
         } else {
           // doc.data() will be undefined in this case
           console.log('No such document!');
@@ -103,9 +101,7 @@ const Dashboard = ({
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
-          // id: doc.id,
         }));
-        console.log(listItems);
 
         setItems(listItems);
         setFetchError(null);
@@ -120,7 +116,6 @@ const Dashboard = ({
 
   const addItem = async item => {
     const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
-    console.log(id);
     const newItemDate = new Date();
     const dateStr = `${
       newItemDate.getMonth() + 1
@@ -140,7 +135,6 @@ const Dashboard = ({
       .collection(currentList)
       .doc(`${myNewItem.id}`);
     await addedDoc
-      // .set({ desc: myNewItem.desc, checked: false, date: dateStr })
       .set({ ...myNewItem })
       .then(() => {
         console.log('Document successfully written!');
