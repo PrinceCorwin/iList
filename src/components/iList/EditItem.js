@@ -75,7 +75,6 @@ const EditItem = ({
       >
         <FormControl>
           <Input
-            required
             variant="outline"
             autoFocus
             // ref={inputRef}

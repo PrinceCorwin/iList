@@ -99,7 +99,7 @@ const MyLists = ({
             console.log(data);
             // delete old list
             data.map(doc => {
-              checkDoc.collection(deletedList).doc(doc.id).delete();
+              return checkDoc.collection(deletedList).doc(doc.id).delete();
             });
           }
         });
@@ -181,9 +181,8 @@ const MyLists = ({
 
             console.log(data);
             // add new list with new name with old list's data and delete old list
-            data.map(doc => {
+            data.forEach(doc => {
               // add new list
-              console.log(doc.data());
               checkDoc.collection(added).doc(doc.id).set(doc.data());
               // delete old list
               checkDoc.collection(removed).doc(doc.id).delete();
