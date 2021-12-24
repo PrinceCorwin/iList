@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../../hooks/useAuth';
-import { Box, Center, theme, VStack } from '@chakra-ui/react';
+import { Box, Center, VStack } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
-import { FaBlackTie } from 'react-icons/fa';
 
-const Menu = ({ setNewList, setAppTheme, themeObj }) => {
+const Menu = ({ setAppTheme, themeObj }) => {
   const { logout } = useAuth();
   const { user } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  // const handleClick = () => setMenuOpen(true);
+
   var styles = {
     bmBurgerButton: {
       position: 'relative',
       width: '25px',
       height: '20px',
-      //   left: '36px',
-      //   top: '36px',
     },
     bmBurgerBars: {
       background: '#373a47',
@@ -45,7 +42,6 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
       border: `1px solid ${themeObj.colorItem}`,
       // overflow: 'visible',
       background: themeObj.bgItem,
-      padding: '2.5em 1.25em 0',
       fontSize: '1.15em',
     },
     bmMorphShape: {
@@ -53,7 +49,7 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
     },
     bmItemList: {
       color: themeObj.colorItem,
-      padding: '0.8em',
+      padding: '1.5rem .8rem',
     },
     bmItem: {
       display: 'block',
@@ -63,8 +59,18 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
       background: 'rgba(0, 0, 0, 1.0)',
     },
   };
-  // const [menuOpen, setMenuOpen] = useState(false);
   const checkDoc = db.collection('users').doc(user.uid);
+
+  const deleteAccount = async () => {
+    setMenuOpen(false);
+  };
+
+  const handleOnOpen = () => {
+    setMenuOpen(true);
+  };
+  const handleOnClose = () => {
+    setMenuOpen(false);
+  };
 
   const applyTheme = async theme => {
     setAppTheme(theme);
@@ -78,19 +84,25 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
       //   setFetchError(err.message);
       console.log(err.message);
     } finally {
-      console.log(theme);
     }
   };
 
   return (
-    <MenuType noOverlay isOpen={menuOpen} width={'200px'} styles={styles}>
-      <Box _hover={{ fontWeight: 'semibold' }}>
+    <MenuType
+      onClose={handleOnClose}
+      isOpen={menuOpen}
+      onOpen={handleOnOpen}
+      noOverlay
+      width={'200px'}
+      styles={styles}
+    >
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
         <Link to="/">Home</Link>
       </Box>
-      <Box cursor="pointer" _hover={{ fontWeight: 'semibold' }}>
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
         <Link to="/newlist">New List</Link>
       </Box>
-      <Box _hover={{ fontWeight: 'semibold' }}>
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
         <Link to="/mylists">My Lists</Link>
       </Box>
 
@@ -198,18 +210,26 @@ const Menu = ({ setNewList, setAppTheme, themeObj }) => {
           </Center>
         </Box>
       </VStack>
-      {/* <VStack spacing={0} bg="gray">
-        <Center>Custom</Center>
-        <Center>(coming soon)</Center>
-      </VStack> */}
-
       <Box
-        _hover={{ fontWeight: 'semibold' }}
         mt={4}
+        _hover={{ fontWeight: 'semibold' }}
         as="button"
-        onClick={logout}
+        onClick={handleOnClose}
       >
+        <Link to="/about">About</Link>
+      </Box>
+      <Box _hover={{ fontWeight: 'semibold' }} as="button" onClick={logout}>
         Logout
+      </Box>
+      <Box
+        py={4}
+        color="red"
+        fontSize="sm"
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        onClick={handleOnClose}
+      >
+        <Link to="/deleteAccount">Delete Account</Link>
       </Box>
     </MenuType>
   );

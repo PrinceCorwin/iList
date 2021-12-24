@@ -8,7 +8,6 @@ const Loader = () => {
         <div className="inner three"></div>
       </div>
     </div>
-    // </div>
   );
 };
 

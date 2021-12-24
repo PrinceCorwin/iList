@@ -4,8 +4,6 @@ import Nav from './Nav';
 
 const Layout = ({
   isLoading,
-  newList,
-  setNewList,
   setAppTheme,
   themeObj,
   children,
@@ -27,8 +25,6 @@ const Layout = ({
     >
       <Nav
         isLoading={isLoading}
-        newList={newList}
-        setNewList={setNewList}
         setAppTheme={setAppTheme}
         themeObj={themeObj}
         currentList={currentList}

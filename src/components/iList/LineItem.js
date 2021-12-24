@@ -1,6 +1,5 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import { Checkbox, Box, Spacer, Flex, IconButton } from '@chakra-ui/react';
-import { useState } from 'react';
 const LineItem = ({
   themeObj,
   item,
@@ -17,7 +16,6 @@ const LineItem = ({
         aria-label={item.desc}
         colorScheme={themeObj.checkScheme}
         defaultChecked={item.checked}
-        // the following onChange call must use anonymous function format so we can pass an argument without the handleCheck function executing immediately. onChange={handleCheck(item.id)} would fire off immediately without user interaction
         onChange={() => handleCheck(item.id)}
       ></Checkbox>
       <Box borderLeftRadius="lg" bg={themeObj.bgItem} ml={2} px={3} py={1}>

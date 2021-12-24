@@ -26,8 +26,7 @@ const AddItem = ({ themeObj, newItem, setNewItem, handleSubmit }) => {
           color={themeObj.colorIcon}
           _hover={{
             background: `${themeObj.checkScheme}`,
-          }} // color="red"
-          // bg="red.800"
+          }}
           bg={themeObj.bgIcon}
           icon={<FaPlus />}
         />

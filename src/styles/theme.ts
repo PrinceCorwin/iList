@@ -1,5 +1,3 @@
-// currently not using this. Maybe in the future
-
 import { extendTheme } from '@chakra-ui/react';
 
 export const iListTheme = extendTheme({

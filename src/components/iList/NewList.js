@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import firebase from 'firebase/app';
-import Footer from './Footer';
 import {
   Input,
   Button,
@@ -88,7 +87,6 @@ const NewList = ({
       //   setFetchError(err.message);
       console.log(err.message);
     } finally {
-      console.log(currentList);
     }
   };
 
@@ -96,7 +94,6 @@ const NewList = ({
     try {
       await checkDoc.update({
         mylists: firebase.firestore.FieldValue.arrayUnion(newList),
-        // myLists: checkDoc.mylists.arrayUnion('My List'),
       });
     } catch (err) {
       console.log(err.message);
@@ -109,7 +106,6 @@ const NewList = ({
     e.preventDefault();
     if (!newList) return;
     checkDuplicate(newList);
-
     setNewList('');
   };
 
@@ -144,7 +140,6 @@ const NewList = ({
             <Flex mt={4} w="50%" justify="space-between">
               <Button
                 variant="solid"
-                //   ml={2}
                 type="submit"
                 aria-label="Add Item"
                 color={themeObj.colorIcon}
@@ -157,7 +152,6 @@ const NewList = ({
               </Button>
               <Button
                 variant="outline"
-                //   ml={2}
                 type="button"
                 onClick={() => {
                   setNewList('');

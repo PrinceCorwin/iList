@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginForm from './components/auth/LoginForm';
@@ -7,15 +7,13 @@ import PrivateRoute from './components/route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import NewList from './components/iList/NewList';
 import MyLists from './components/iList/MyLists';
-
+import About from './components/iList/About';
+import DeleteAccount from './components/iList/DeleteAccount';
 import NotFound from './components/layout/NotFound';
-// import { useState } from 'react';
 import { useColorModeValue } from '@chakra-ui/react';
 import { iListTheme } from './styles/theme';
-import { useAuth, db } from './hooks/useAuth';
 
 function App() {
-  const { user } = useAuth();
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loaderLoading, setLoaderLoading] = useState(true);
@@ -36,7 +34,6 @@ function App() {
   const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
   const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
   const themeObj = {
-    // bg: useColorModeValue(`${appTheme}.bgLight`, `${appTheme}.bgDark`),
     bg: useColorModeValue(bgLight, bgDark),
 
     color: useColorModeValue(`${appTheme}.colorLight`, `${appTheme}.colorDark`),
@@ -115,14 +112,32 @@ function App() {
               themeObj={themeObj}
               currentList={currentList}
               setCurrentList={setCurrentList}
-            />{' '}
+            />
+          </PrivateRoute>
+          <PrivateRoute path="/about">
+            <About
+              setAppTheme={setAppTheme}
+              setIsLoading={setIsLoading}
+              themeObj={themeObj}
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
+          </PrivateRoute>
+          <PrivateRoute path="/deleteAccount">
+            <DeleteAccount
+              setAppTheme={setAppTheme}
+              setIsLoading={setIsLoading}
+              themeObj={themeObj}
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
           </PrivateRoute>
 
           <Route path="/login">
             <LoginForm />
           </Route>
           <Route path="/confirm">
-            <ConfirmForm currentList={currentList} />
+            <ConfirmForm />
           </Route>
           {/* if no other route is found by now, the <NotFound> component will render */}
           <Route>
