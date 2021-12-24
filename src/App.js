@@ -7,7 +7,8 @@ import PrivateRoute from './components/route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import NewList from './components/iList/NewList';
 import MyLists from './components/iList/MyLists';
-
+import About from './components/iList/About';
+import DeleteAccount from './components/iList/DeleteAccount';
 import NotFound from './components/layout/NotFound';
 import { useColorModeValue } from '@chakra-ui/react';
 import { iListTheme } from './styles/theme';
@@ -111,7 +112,25 @@ function App() {
               themeObj={themeObj}
               currentList={currentList}
               setCurrentList={setCurrentList}
-            />{' '}
+            />
+          </PrivateRoute>
+          <PrivateRoute path="/about">
+            <About
+              setAppTheme={setAppTheme}
+              setIsLoading={setIsLoading}
+              themeObj={themeObj}
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
+          </PrivateRoute>
+          <PrivateRoute path="/deleteAccount">
+            <DeleteAccount
+              setAppTheme={setAppTheme}
+              setIsLoading={setIsLoading}
+              themeObj={themeObj}
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
           </PrivateRoute>
 
           <Route path="/login">

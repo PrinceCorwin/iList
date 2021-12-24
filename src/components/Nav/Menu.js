@@ -210,8 +210,13 @@ const Menu = ({ setAppTheme, themeObj }) => {
           </Center>
         </Box>
       </VStack>
-      <Box mt={4} _hover={{ fontWeight: 'semibold' }} as="button">
-        About
+      <Box
+        mt={4}
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        onClick={handleOnClose}
+      >
+        <Link to="/about">About</Link>
       </Box>
       <Box _hover={{ fontWeight: 'semibold' }} as="button" onClick={logout}>
         Logout
@@ -222,9 +227,9 @@ const Menu = ({ setAppTheme, themeObj }) => {
         fontSize="sm"
         _hover={{ fontWeight: 'semibold' }}
         as="button"
-        onClick={deleteAccount}
+        onClick={handleOnClose}
       >
-        Delete Account
+        <Link to="/deleteAccount">Delete Account</Link>
       </Box>
     </MenuType>
   );
