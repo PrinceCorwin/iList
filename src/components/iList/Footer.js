@@ -13,7 +13,7 @@ const Footer = ({ bg, color, length }) => {
       <p>
         {length} List {length === 1 ? 'item' : 'items'}
       </p>
-      <p>iList &copy; 2021 </p>
+      <p>iLIST &copy; 2021 </p>
     </Flex>
   );
 };

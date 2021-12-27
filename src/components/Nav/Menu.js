@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../../hooks/useAuth';
-import { Box, Center, VStack } from '@chakra-ui/react';
+import { Box, Icon, Center, VStack, Link as Jump } from '@chakra-ui/react';
+import { FaGithub } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 
-const Menu = ({ setAppTheme, themeObj }) => {
+const Menu = ({ user, setShowHow, setShowAbout, setAppTheme, themeObj }) => {
   const { logout } = useAuth();
-  const { user } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   var styles = {
@@ -61,10 +61,6 @@ const Menu = ({ setAppTheme, themeObj }) => {
   };
   const checkDoc = db.collection('users').doc(user.uid);
 
-  const deleteAccount = async () => {
-    setMenuOpen(false);
-  };
-
   const handleOnOpen = () => {
     setMenuOpen(true);
   };
@@ -106,7 +102,7 @@ const Menu = ({ setAppTheme, themeObj }) => {
         <Link to="/mylists">My Lists</Link>
       </Box>
 
-      <VStack mt={2} spacing={1}>
+      <VStack py={2} spacing={1}>
         <Center w="100%">Themes</Center>
         <Box
           _hover={{ fontWeight: 'semibold' }}
@@ -211,25 +207,60 @@ const Menu = ({ setAppTheme, themeObj }) => {
         </Box>
       </VStack>
       <Box
-        mt={4}
+        py={2}
         _hover={{ fontWeight: 'semibold' }}
         as="button"
-        onClick={handleOnClose}
+        onClick={() => {
+          setShowAbout(true);
+          setShowHow(false);
+          handleOnClose();
+        }}
       >
-        <Link to="/about">About</Link>
+        <Link to="/">About</Link>
       </Box>
-      <Box _hover={{ fontWeight: 'semibold' }} as="button" onClick={logout}>
+      <Box
+        py={2}
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        onClick={() => {
+          setShowHow(true);
+
+          setShowAbout(false);
+          handleOnClose();
+        }}
+      >
+        <Link to="/">How It Works</Link>
+      </Box>
+      <Box
+        py={2}
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        onClick={() => {
+          handleOnClose();
+        }}
+      >
+        <Jump href="https://github.com/PrinceCorwin/iList" isExternal>
+          View Code {` `}
+          <Icon as={FaGithub} />
+        </Jump>
+      </Box>
+      <Box
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        py={2}
+        onClick={logout}
+      >
         Logout
       </Box>
       <Box
-        py={4}
+        py={2}
         color="red"
         fontSize="sm"
         _hover={{ fontWeight: 'semibold' }}
         as="button"
         onClick={handleOnClose}
       >
-        <Link to="/deleteAccount">Delete Account</Link>
+        <Link to="/delete_account">Delete Account</Link>
       </Box>
     </MenuType>
   );

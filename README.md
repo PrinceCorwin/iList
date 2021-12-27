@@ -1,11 +1,11 @@
-![picture alt](iList\src\images\list-on-desk.jpg 'Title is optional')
+![List on Desk](https://github.com/PrinceCorwin/iList/blob/main/src/images/list-on-desk.jpg?raw=true 'Banner Image')
 
-# 📝 **_iList_** - Personal List App<a name="TOP"></a>
+# 📝 **CheckBox** - Personal List App<a name="TOP"></a>
 
 ## Make a list, check it once!
 
 <p> We all make lists. Groceries, To-Do, Workout Routine, and a slew of others.</p>
-<p>iList allows users to create their own personal lists in an elegant, modern UI without the bloat commonly found in other note-taking apps.</p>
+<p>CheckBox allows users to create their own personal lists in an elegant, modern UI without the bloat commonly found in other note-taking apps.</p>
 <p>Safe, Simple, Secure</p>
 
 ---
@@ -13,8 +13,8 @@
 ### App Features:
 
 - 🏗️ Built with [React](https://reactjs.org/ 'React')
-- 💪 Lightweight, stable, and purpose driven. Users create, view, and edit their lists in an easy-to-use intuitive UI (powered by [Chakra UI](https://firebase.google.com/docs/auth/web/email-link-auth 'Chakra UI'))
-- 🎁 Intuitive and user friendly UI
+- 💪 Lightweight, stable, and purpose driven.
+- 🎁 Users create, view, and edit their lists in an easy-to-use intuitive UI (powered by [Chakra UI](https://firebase.google.com/docs/auth/web/email-link-auth 'Chakra UI'))
 - 🖼️ Customizable and personal with modern themes and _Dark Mode_
 - 🔥 User data / preferences stored in [Firebase](https://firebase.google.com/ 'Firebase') / [Firestore](https://firebase.google.com/products/firestore 'Firebase')
 - 🔐 Users access their own personal list data securely across all of their devices

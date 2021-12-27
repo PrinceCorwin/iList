@@ -1,6 +1,9 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
+import iListLogo from '../../images/checkbox2.png';
 import {
+  Text,
+  Image,
+  Center,
   Heading,
   Flex,
   Alert,
@@ -12,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useAuth } from '../../hooks/useAuth';
+import { iListTheme } from '../../styles/theme';
 
 const LoginForm = () => {
   const { handleSubmit, register, errors, setError, formState } = useForm();
@@ -31,6 +35,15 @@ const LoginForm = () => {
 
   return (
     <Flex grow="1" justify="center" direction="column">
+      <Flex mb={6} direction="column" justify="center" align="center">
+        <Flex justify="center" alignItems="flex-end" p={3}>
+          <Image mr={3} htmlWidth="40px" src={iListLogo} alt="iList logo" />
+          <Heading lineHeight="100%" as="h2" size="lg">
+            iLIST - Personal List App
+          </Heading>
+        </Flex>
+        <Text>Make a List, Check it Once</Text>
+      </Flex>
       <Heading as="h1" mb={6}>
         Login
       </Heading>
@@ -49,7 +62,7 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
-          <Input name="email" placeholder="Email" ref={register()} />
+          <Input autoFocus name="email" placeholder="Email" ref={register()} />
           <Button
             mt={4}
             colorScheme="teal"

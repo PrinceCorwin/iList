@@ -1,8 +1,11 @@
-import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import Nav from './Nav';
 
 const Layout = ({
+  user,
+  setIsLoading,
+  setShowHow,
+  setShowAbout,
   isLoading,
   setAppTheme,
   themeObj,
@@ -24,6 +27,10 @@ const Layout = ({
       m="auto"
     >
       <Nav
+        user={user}
+        setIsLoading={setIsLoading}
+        setShowHow={setShowHow}
+        setShowAbout={setShowAbout}
         isLoading={isLoading}
         setAppTheme={setAppTheme}
         themeObj={themeObj}
