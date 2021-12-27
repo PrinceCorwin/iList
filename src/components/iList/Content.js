@@ -10,7 +10,7 @@ const Content = ({
   return (
     <>
       {items.length ? (
-        <List spacing="2" mb={3} p={3}>
+        <List spacing="3" mb={3} p={3}>
           {items.map(item => (
             <LineItem
               setEditItem={setEditItem}

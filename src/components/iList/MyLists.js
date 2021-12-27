@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import EachList from './EachList';
 
@@ -15,11 +15,11 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import { useAuth, db } from '../../hooks/useAuth';
+import { db } from '../../hooks/useAuth';
 const MyLists = ({
+  user,
   setIsLoading,
   currentList,
-  setAppTheme,
   setCurrentList,
   themeObj,
 }) => {
@@ -27,7 +27,6 @@ const MyLists = ({
   const [alertText2, setAlertText2] = useState(null);
   const [newName2, setNewName2] = useState('');
   const history = useHistory();
-  const { user } = useAuth();
   const [editList, setEditList] = useState(false);
   const [lists, setLists] = useState([]);
   const checkDoc = db.collection('users').doc(user.uid);
@@ -43,25 +42,6 @@ const MyLists = ({
     }
   };
   useEffect(() => {
-    // temp fix. try moving this function from dashboard useEffect to App level useEffect. Use conditional if(user)?
-    const getUserPrefs = async () => {
-      try {
-        const userList = await checkDoc.get();
-        setAppTheme(userList.data().currenttheme);
-
-        // setFetchError(null);
-      } catch (err) {
-        // setFetchError(err.message);
-
-        console.log(err.message);
-      } finally {
-        // setLoaderLoading(false);
-        setIsLoading(false);
-      }
-    };
-    // setIsLoading(false);
-    getUserPrefs();
-
     getMyLists();
   }, []);
 

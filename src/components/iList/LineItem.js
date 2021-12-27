@@ -1,5 +1,11 @@
 import { FaTrashAlt } from 'react-icons/fa';
-import { Checkbox, Box, Spacer, Flex, IconButton } from '@chakra-ui/react';
+import {
+  Checkbox,
+  Box,
+  Flex,
+  IconButton,
+  useColorModeValue,
+} from '@chakra-ui/react';
 const LineItem = ({
   themeObj,
   item,
@@ -7,6 +13,7 @@ const LineItem = ({
   handleCheck,
   setEditItem,
 }) => {
+  // const shadow = `-4px 6px 6px ${useColorModeValue('gray', '#A0AEC0')}`;
   return (
     <Flex align="center">
       <Checkbox
@@ -18,7 +25,18 @@ const LineItem = ({
         defaultChecked={item.checked}
         onChange={() => handleCheck(item.id)}
       ></Checkbox>
-      <Box borderLeftRadius="lg" bg={themeObj.bgItem} ml={2} px={3} py={1}>
+      <Box
+        // borderLeft="1px solid #CBD5E0"
+        // borderBottom="1px solid #CBD5E0"
+        // boxShadow={shadow}
+        borderRadius="lg"
+        bg={themeObj.bgItem}
+        ml={2}
+        mr={2}
+        px={3}
+        py={1}
+        w="100%"
+      >
         <Box
           cursor="pointer"
           onClick={() => {
@@ -42,7 +60,8 @@ const LineItem = ({
         </Box>
       </Box>
 
-      <Spacer borderRightRadius="lg" bg={themeObj.bgItem} mr={3} />
+      {/* as far as I can tell, the following spacer isn't needed. leaving here in case bug manifests */}
+      {/* <Spacer borderRightRadius="lg" bg={themeObj.bgItem} mr={3} /> */}
 
       <IconButton
         aria-label={`Delete ${item.desc}`}

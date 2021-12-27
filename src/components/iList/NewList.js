@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import firebase from 'firebase/app';
 import {
   Input,
@@ -11,20 +11,13 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import { useAuth, db } from '../../hooks/useAuth';
+import { db } from '../../hooks/useAuth';
 
-const NewList = ({
-  setIsLoading,
-  currentList,
-  setAppTheme,
-  setCurrentList,
-  themeObj,
-}) => {
+const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
   const history = useHistory();
-  const { user } = useAuth();
   const [alertText, setAlertText] = useState('');
   const [newList, setNewList] = useState('');
-  const inputRef = useRef();
+  // const inputRef = useRef();
   const [isUnique, setIsUnique] = useState(true);
 
   const checkDoc = db.collection('users').doc(user.uid);
@@ -50,28 +43,6 @@ const NewList = ({
         console.log('Error getting document:', error);
       });
   };
-
-  useEffect(() => {
-    // temp fix. try moving this function from dashboard useEffect to App level useEffect. Use conditional if(user)?
-    const getUserPrefs = async () => {
-      try {
-        const userList = await checkDoc.get();
-        setAppTheme(userList.data().currenttheme);
-
-        // setFetchError(null);
-      } catch (err) {
-        // setFetchError(err.message);
-
-        console.log(err.message);
-      } finally {
-        // setLoaderLoading(false);
-        setIsLoading(false);
-      }
-    };
-    // setIsLoading(false);
-    getUserPrefs();
-    setIsLoading(false);
-  }, []);
 
   const updateCurrentList = async newList => {
     try {
@@ -126,7 +97,7 @@ const NewList = ({
               color={themeObj.colorItem}
               variant="outline"
               autoFocus
-              ref={inputRef}
+              // ref={inputRef}
               type="text"
               id="newList"
               placeholder="New List Name"

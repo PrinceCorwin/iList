@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { InputGroup, Stack, Flex } from '@chakra-ui/react';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
@@ -6,11 +6,18 @@ import Loader from '../iList/Loader';
 import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
 import Content from '../iList/Content';
+import About from '../iList/About';
+import HowItWorks from '../iList/HowItWorks';
 import Footer from '../iList/Footer';
-import { useAuth, db } from '../../hooks/useAuth';
+import { db } from '../../hooks/useAuth';
 import 'firebase/firestore';
 
 const Dashboard = ({
+  user,
+  showHow,
+  setShowHow,
+  showAbout,
+  setShowAbout,
   setAppTheme,
   loaderLoading,
   setLoaderLoading,
@@ -22,7 +29,6 @@ const Dashboard = ({
   currentList,
   setCurrentList,
 }) => {
-  const { user } = useAuth();
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
   const [editItem, setEditItem] = useState(null);
@@ -210,7 +216,11 @@ const Dashboard = ({
         />
       )}
 
-      {!editItem && (
+      {showAbout && <About setShowAbout={setShowAbout} themeObj={themeObj} />}
+
+      {showHow && <HowItWorks setShowHow={setShowHow} themeObj={themeObj} />}
+
+      {!editItem && !showAbout && !showHow && (
         <>
           <Stack mb={3} w="100%" p={3}>
             <InputGroup>

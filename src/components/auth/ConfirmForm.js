@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -51,7 +50,7 @@ const ConfirmForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
-          <Input name="email" placeholder="Email" ref={register()} />
+          <Input autoFocus name="email" placeholder="Email" ref={register()} />
           <Button
             mt={4}
             colorScheme="teal"
