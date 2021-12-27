@@ -22,25 +22,24 @@ function App() {
   const [loaderLoading, setLoaderLoading] = useState(true);
   const [currentList, setCurrentList] = useState('My List');
   const [appTheme, setAppTheme] = useState('default');
-
-  // these variables give the actual color value instead of the color name. Required for certain instances like colorscheme when the name won't work
-  const checkSchemeDark = iListTheme.colors[appTheme].checkSchemeDark;
-  const checkSchemeLight = iListTheme.colors[appTheme].checkSchemeLight;
-  const strikeLineDark = iListTheme.colors[appTheme].strikeLineDark;
-  const strikeLineLight = iListTheme.colors[appTheme].strikeLineLight;
-  const strikeTextDark = iListTheme.colors[appTheme].strikeTextDark;
-  const strikeTextLight = iListTheme.colors[appTheme].strikeTextLight;
-  const colorItemDark = iListTheme.colors[appTheme].colorItemDark;
-  const colorItemLight = iListTheme.colors[appTheme].colorItemLight;
-  const bgDark = iListTheme.colors[appTheme].bgDark;
-  const bgLight = iListTheme.colors[appTheme].bgLight;
-  const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
-  const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
-
+  const [lists, setLists] = useState([]);
   const { user } = useAuth();
 
   const checkDoc = user ? db.collection('users').doc(user.uid) : null;
 
+  useEffect(() => {
+    const getMyLists = async () => {
+      try {
+        const userLists = await (await checkDoc.get()).data().mylists;
+        setLists(userLists);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    user && getMyLists();
+  }, [currentList]);
   useEffect(() => {
     const getUserPrefs = async () => {
       console.log('ran again');
@@ -63,6 +62,20 @@ function App() {
 
     // getMyLists();
   }, [user]);
+
+  // these variables give the actual color value instead of the color name. Required for certain instances like colorscheme when the name won't work
+  const checkSchemeDark = iListTheme.colors[appTheme].checkSchemeDark;
+  const checkSchemeLight = iListTheme.colors[appTheme].checkSchemeLight;
+  const strikeLineDark = iListTheme.colors[appTheme].strikeLineDark;
+  const strikeLineLight = iListTheme.colors[appTheme].strikeLineLight;
+  const strikeTextDark = iListTheme.colors[appTheme].strikeTextDark;
+  const strikeTextLight = iListTheme.colors[appTheme].strikeTextLight;
+  const colorItemDark = iListTheme.colors[appTheme].colorItemDark;
+  const colorItemLight = iListTheme.colors[appTheme].colorItemLight;
+  const bgDark = iListTheme.colors[appTheme].bgDark;
+  const bgLight = iListTheme.colors[appTheme].bgLight;
+  const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
+  const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
 
   // create global theme object
   const themeObj = {
@@ -149,6 +162,8 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/mylists">
             <MyLists
+              lists={lists}
+              setLists={setLists}
               user={user}
               setIsLoading={setIsLoading}
               themeObj={themeObj}
@@ -159,6 +174,8 @@ function App() {
 
           <PrivateRoute path="/delete_account">
             <DeleteAccount
+              lists={lists}
+              setLists={setLists}
               user={user}
               setAppTheme={setAppTheme}
               setIsLoading={setIsLoading}

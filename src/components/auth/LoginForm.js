@@ -42,7 +42,10 @@ const LoginForm = () => {
             iLIST - Personal List App
           </Heading>
         </Flex>
-        <Text>Make a List, Check it Once</Text>
+        <Text p={2}>Make a List, Check it Once</Text>
+        <Text>
+          Login to create your custom lists available across all devices
+        </Text>
       </Flex>
       <Heading as="h1" mb={6}>
         Login
