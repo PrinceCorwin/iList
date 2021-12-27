@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import firebase from 'firebase/app';
 import EachList from './EachList';
 
@@ -17,6 +17,8 @@ import {
 import { useHistory } from 'react-router-dom';
 import { db } from '../../hooks/useAuth';
 const MyLists = ({
+  lists,
+  setLists,
   user,
   setIsLoading,
   currentList,
@@ -28,22 +30,7 @@ const MyLists = ({
   const [newName2, setNewName2] = useState('');
   const history = useHistory();
   const [editList, setEditList] = useState(false);
-  const [lists, setLists] = useState([]);
   const checkDoc = db.collection('users').doc(user.uid);
-
-  const getMyLists = async () => {
-    try {
-      const userLists = await (await checkDoc.get()).data().mylists;
-      setLists(userLists);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    getMyLists();
-  }, []);
 
   const handleDelete = async deletedList => {
     if (lists.length < 2) {

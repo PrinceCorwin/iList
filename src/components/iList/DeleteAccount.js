@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useAuth, db } from '../../hooks/useAuth';
 import {
   Text,
   Center,
@@ -13,8 +12,48 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 
-const DeleteAccount = ({ user }) => {
-  const handleDelete = () => {};
+const DeleteAccount = ({ user, lists, setLists }) => {
+  const { logout } = useAuth();
+  const checkDoc = db.collection('users').doc(user.uid);
+
+  const handleDelete = async () => {
+    let listCount = lists.length - 1;
+    lists.forEach(list => {
+      deleteList(list, listCount);
+      listCount--;
+    });
+    // logout();
+  };
+
+  const deleteList = async (deletedList, listCount) => {
+    try {
+      // delete list from database
+      await checkDoc
+        .collection(deletedList)
+        .get()
+        .then(function (collection) {
+          if (collection.docs.length) {
+            let data = collection.docs;
+
+            console.log(data);
+            // delete old list
+            data.forEach(doc => {
+              checkDoc.collection(deletedList).doc(doc.id).delete();
+            });
+            console.log('deleted: ' + deletedList);
+          }
+        });
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setLists([...lists].filter(item => item !== deletedList));
+
+      if (listCount === 0) {
+        await checkDoc.delete();
+        logout();
+      }
+    }
+  };
   return (
     <Flex p={6} justify="center" align="center" direction="column" flexGrow={1}>
       <Heading size="lg" py={3}>

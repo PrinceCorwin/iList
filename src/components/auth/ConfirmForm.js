@@ -38,6 +38,9 @@ const ConfirmForm = () => {
 
   return (
     <Flex grow="1" justify="center" direction="column">
+      <Heading size="md" mb={6}>
+        Welcome to iLIST
+      </Heading>
       <Heading as="h1" mb={6}>
         Confirm Email
       </Heading>
