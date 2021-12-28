@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { db } from '../../hooks/useAuth';
+import { useState } from 'react';
+import { db } from '../auth/useAuth';
 
 import {
   Button,
@@ -72,7 +72,6 @@ const EditItem = ({
           <Input
             variant="outline"
             autoFocus
-            // ref={inputRef}
             type="text"
             id="newDesc"
             color="{themeObj.colorItem}"

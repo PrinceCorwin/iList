@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import firebase from 'firebase/app';
 import {
   Input,
@@ -11,13 +11,12 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import { db } from '../../hooks/useAuth';
+import { db } from '../components/auth/useAuth';
 
 const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
   const history = useHistory();
   const [alertText, setAlertText] = useState('');
   const [newList, setNewList] = useState('');
-  // const inputRef = useRef();
   const [isUnique, setIsUnique] = useState(true);
 
   const checkDoc = db.collection('users').doc(user.uid);
@@ -97,7 +96,6 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
               color={themeObj.colorItem}
               variant="outline"
               autoFocus
-              // ref={inputRef}
               type="text"
               id="newList"
               placeholder="New List Name"

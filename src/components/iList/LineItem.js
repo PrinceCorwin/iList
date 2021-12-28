@@ -13,6 +13,7 @@ const LineItem = ({
   handleCheck,
   setEditItem,
 }) => {
+  // may use this in the future
   // const shadow = `-4px 6px 6px ${useColorModeValue('gray', '#A0AEC0')}`;
   return (
     <Flex align="center">
@@ -59,17 +60,11 @@ const LineItem = ({
           Added {item.date}
         </Box>
       </Box>
-
-      {/* as far as I can tell, the following spacer isn't needed. leaving here in case bug manifests */}
-      {/* <Spacer borderRightRadius="lg" bg={themeObj.bgItem} mr={3} /> */}
-
       <IconButton
         aria-label={`Delete ${item.desc}`}
         variant="outline"
-        // background="black"
         borderColor={themeObj.deleteOutline}
         color={themeObj.deleteIcon}
-        // colorScheme={themeObj.checkScheme}
         icon={<FaTrashAlt />}
         onClick={() => handleDelete(item.id)}
       />

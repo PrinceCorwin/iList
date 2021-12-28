@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import firebase from 'firebase/app';
-import EachList from './EachList';
+import EachList from '../components/iList/EachList';
 
 import {
   Button,
@@ -15,7 +15,7 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import { db } from '../../hooks/useAuth';
+import { db } from '../components/auth/useAuth';
 const MyLists = ({
   lists,
   setLists,
@@ -211,7 +211,6 @@ const MyLists = ({
                 <Input
                   variant="outline"
                   autoFocus
-                  // ref={inputRef}
                   type="text"
                   id="newName"
                   placeholder={`Rename ${editList}`}

@@ -3,7 +3,6 @@ import iListLogo from '../../images/checkbox2.png';
 import {
   Text,
   Image,
-  Center,
   Heading,
   Flex,
   Alert,
@@ -14,8 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-import { useAuth } from '../../hooks/useAuth';
-import { iListTheme } from '../../styles/theme';
+import { useAuth } from './useAuth';
 
 const LoginForm = () => {
   const { handleSubmit, register, errors, setError, formState } = useForm();
