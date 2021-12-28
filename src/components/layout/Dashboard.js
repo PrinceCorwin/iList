@@ -9,7 +9,7 @@ import Content from '../iList/Content';
 import About from '../iList/About';
 import HowItWorks from '../iList/HowItWorks';
 import Footer from '../iList/Footer';
-import { db } from '../../hooks/useAuth';
+import { db } from '../auth/useAuth';
 import 'firebase/firestore';
 
 const Dashboard = ({
@@ -177,6 +177,7 @@ const Dashboard = ({
         console.error('Error updating document: ', error);
       });
   };
+
   const handleDelete = async id => {
     const listItems = items.filter(item => item.id !== id);
     setItems(listItems);

@@ -1,4 +1,4 @@
-import Menu from '../Nav/Menu';
+import Menu from './Menu';
 import { Heading, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';

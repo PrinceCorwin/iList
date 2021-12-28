@@ -48,9 +48,6 @@ const About = ({ setShowAbout, themeObj }) => {
         </VStack>
         <Center w="150px">
           <Image
-            // bg="red"
-            // w="200px"
-            // objectFit="fit"
             src="https://github.com/PrinceCorwin/iList/blob/main/src/images/stacked-lists.png?raw=true"
             alt="Stacked Lists"
           />

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from './useAuth';
 
 const ConfirmForm = () => {
   const { handleSubmit, register, errors, setError, formState } = useForm();

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button, Tooltip, Flex, Heading, IconButton } from '@chakra-ui/react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { AiOutlineEdit } from 'react-icons/ai';

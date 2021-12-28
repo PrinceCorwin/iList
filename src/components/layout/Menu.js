@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
-import { useAuth, db } from '../../hooks/useAuth';
+import { useAuth, db } from '../auth/useAuth';
 import { Box, Icon, Center, VStack, Link as Jump } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 

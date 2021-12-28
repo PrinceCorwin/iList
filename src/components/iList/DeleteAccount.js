@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAuth, db } from '../../hooks/useAuth';
+import { useAuth, db } from '../auth/useAuth';
 import {
   Text,
-  Center,
   Button,
   Heading,
   Alert,
@@ -22,7 +21,6 @@ const DeleteAccount = ({ user, lists, setLists }) => {
       deleteList(list, listCount);
       listCount--;
     });
-    // logout();
   };
 
   const deleteList = async (deletedList, listCount) => {
@@ -34,13 +32,10 @@ const DeleteAccount = ({ user, lists, setLists }) => {
         .then(function (collection) {
           if (collection.docs.length) {
             let data = collection.docs;
-
             console.log(data);
-            // delete old list
             data.forEach(doc => {
               checkDoc.collection(deletedList).doc(doc.id).delete();
             });
-            console.log('deleted: ' + deletedList);
           }
         });
     } catch (err) {
@@ -67,7 +62,7 @@ const DeleteAccount = ({ user, lists, setLists }) => {
         status="error"
       >
         <AlertIcon mb={3} />
-        <AlertTitle>'ARE YOU SURE?'</AlertTitle>
+        <AlertTitle>ARE YOU SURE?</AlertTitle>
         <AlertDescription>
           <Text color="red" textAlign="center">
             All of your data will be deleted!

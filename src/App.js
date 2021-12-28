@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginForm from './components/auth/LoginForm';
 import ConfirmForm from './components/auth/ConfirmForm';
-import PrivateRoute from './components/route/PrivateRoute';
-import Dashboard from './components/dashboard/Dashboard';
-import NewList from './components/iList/NewList';
-import MyLists from './components/iList/MyLists';
+import PrivateRoute from './components/layout/PrivateRoute';
+import Dashboard from './components/layout/Dashboard';
+import NewList from './pages/NewList';
+import MyLists from './pages/MyLists';
 import DeleteAccount from './components/iList/DeleteAccount';
-import NotFound from './components/layout/NotFound';
+import NotFound from './pages/NotFound';
 import { useColorModeValue } from '@chakra-ui/react';
 import { iListTheme } from './styles/theme';
-import { db, useAuth } from './hooks/useAuth';
+import { db, useAuth } from './components/auth/useAuth';
 
 function App() {
   const [fetchError, setFetchError] = useState(null);
@@ -40,9 +40,9 @@ function App() {
     };
     user && getMyLists();
   }, [currentList]);
+
   useEffect(() => {
     const getUserPrefs = async () => {
-      console.log('ran again');
       try {
         const userList = await checkDoc.get();
         setAppTheme(userList.data().currenttheme);
