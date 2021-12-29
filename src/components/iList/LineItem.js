@@ -1,10 +1,12 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import {
+  Text,
   Checkbox,
   Box,
   Flex,
   IconButton,
   useColorModeValue,
+  color,
 } from '@chakra-ui/react';
 const LineItem = ({
   themeObj,
@@ -54,7 +56,15 @@ const LineItem = ({
                 }
           }
         >
-          {item.desc}
+          <Text
+            _hover={
+              item.checked
+                ? { color: `${themeObj.colorItem}` }
+                : { color: 'red' }
+            }
+          >
+            {item.desc}
+          </Text>
         </Box>
         <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
           Added {item.date}

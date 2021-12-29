@@ -62,9 +62,13 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
 
   const updateMyListsArray = async newList => {
     try {
-      await checkDoc.update({
-        mylists: firebase.firestore.FieldValue.arrayUnion(newList),
-      });
+      await checkDoc
+        .update({
+          mylists: firebase.firestore.FieldValue.arrayUnion(newList),
+        })
+        .then(() => {
+          console.log('List successfully added to listname array on database!');
+        });
     } catch (err) {
       console.log(err.message);
     } finally {

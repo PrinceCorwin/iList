@@ -16,7 +16,6 @@ import { db, useAuth } from './components/auth/useAuth';
 function App() {
   const [fetchError, setFetchError] = useState(null);
   const [showAbout, setShowAbout] = useState(false);
-  const [showHow, setShowHow] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
   const [loaderLoading, setLoaderLoading] = useState(true);
@@ -76,12 +75,12 @@ function App() {
   const bgLight = iListTheme.colors[appTheme].bgLight;
   const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
   const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
-
+  const themeColors = iListTheme.colors[appTheme];
   // create global theme object
   const themeObj = {
-    bg: useColorModeValue(bgLight, bgDark),
+    bg: useColorModeValue(themeColors.bgLight, themeColors.bgDark),
 
-    color: useColorModeValue(`${appTheme}.colorLight`, `${appTheme}.colorDark`),
+    color: useColorModeValue(themeColors.colorLight, themeColors.colorDark),
 
     bgIcon: useColorModeValue(
       `${appTheme}.bgIconLight`,
@@ -122,9 +121,9 @@ function App() {
       <Layout
         user={user}
         setIsLoading={setIsLoading}
-        setShowHow={setShowHow}
         setShowAbout={setShowAbout}
         isLoading={isLoading}
+        appTheme={appTheme}
         setAppTheme={setAppTheme}
         themeObj={themeObj}
         currentList={currentList}
@@ -133,8 +132,6 @@ function App() {
           <PrivateRoute exact path="/">
             <Dashboard
               user={user}
-              showHow={showHow}
-              setShowHow={setShowHow}
               setShowAbout={setShowAbout}
               showAbout={showAbout}
               setAppTheme={setAppTheme}

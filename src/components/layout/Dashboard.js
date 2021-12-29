@@ -7,15 +7,12 @@ import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
 import Content from '../iList/Content';
 import About from '../iList/About';
-import HowItWorks from '../iList/HowItWorks';
 import Footer from '../iList/Footer';
 import { db } from '../auth/useAuth';
 import 'firebase/firestore';
 
 const Dashboard = ({
   user,
-  showHow,
-  setShowHow,
   showAbout,
   setShowAbout,
   setAppTheme,
@@ -219,9 +216,7 @@ const Dashboard = ({
 
       {showAbout && <About setShowAbout={setShowAbout} themeObj={themeObj} />}
 
-      {showHow && <HowItWorks setShowHow={setShowHow} themeObj={themeObj} />}
-
-      {!editItem && !showAbout && !showHow && (
+      {!editItem && !showAbout && (
         <>
           <Stack mb={3} w="100%" p={3}>
             <InputGroup>

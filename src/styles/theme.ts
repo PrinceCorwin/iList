@@ -28,7 +28,7 @@ export const iListTheme = extendTheme({
       deleteOutlineDark: '#F7FAFC',
       deleteOutlineLight: '#6082B6',
     },
-    minimal: {
+    minimalist: {
       bgDark: '#F7FAFC',
       bgLight: '#F7FAFC',
       colorDark: '#1A202C',
@@ -87,7 +87,7 @@ export const iListTheme = extendTheme({
       colorLight: '#F7FAFC',
       bgIconDark: '#FF69B4',
       bgIconLight: '#FFC0CB',
-      colorIconDark: 'red',
+      colorIconDark: '#F7FAFC',
       colorIconLight: 'black',
       strikeLineDark: '#F7FAFC',
       strikeLineLight: 'red',

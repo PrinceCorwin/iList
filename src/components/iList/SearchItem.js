@@ -15,7 +15,7 @@ const SearchItem = ({ themeObj, search, setSearch }) => {
           type="text"
           id="search"
           role="searchbox"
-          placeholder="Search Items"
+          placeholder="Search / Filter Items"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />

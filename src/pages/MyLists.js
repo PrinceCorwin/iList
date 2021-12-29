@@ -30,6 +30,7 @@ const MyLists = ({
   const [newName2, setNewName2] = useState('');
   const history = useHistory();
   const [editList, setEditList] = useState(false);
+
   const checkDoc = db.collection('users').doc(user.uid);
 
   const handleDelete = async deletedList => {
@@ -39,15 +40,21 @@ const MyLists = ({
     }
     try {
       // update user preference array on database
-      await checkDoc.update({
-        mylists: firebase.firestore.FieldValue.arrayRemove(deletedList),
-      });
+      await checkDoc
+        .update({
+          mylists: firebase.firestore.FieldValue.arrayRemove(deletedList),
+        })
+        .then(() => {
+          console.log('List deleted from listname array on database!');
+        });
       // set a new currentList if deleted list is the currentList
       if (currentList === deletedList) {
         const tempLists = lists.filter(item => item !== deletedList);
         setCurrentList(tempLists[0]);
         // update user pref currentlist
-        await checkDoc.update({ currentlist: deletedList });
+        await checkDoc.update({ currentlist: tempLists[0] }).then(() => {
+          console.log('Current list successfully updated on database!');
+        });
       }
       // delete list from database
       await checkDoc
@@ -56,13 +63,16 @@ const MyLists = ({
         .then(function (collection) {
           if (collection.docs.length) {
             let data = collection.docs;
+            // console.log(data);
 
-            console.log(data);
             // delete old list
             data.map(doc => {
               return checkDoc.collection(deletedList).doc(doc.id).delete();
             });
           }
+        })
+        .then(() => {
+          console.log('List successfully deleted from database!');
         });
     } catch (err) {
       console.log(err.message);
@@ -72,8 +82,11 @@ const MyLists = ({
   };
 
   const updateCurrentList = async newList => {
+    console.log(newList);
     try {
-      await checkDoc.update({ currentlist: newList });
+      await checkDoc.update({ currentlist: newList }).then(() => {
+        console.log('Current list successfully updated on database!');
+      });
       setCurrentList(newList);
       history.push('/');
 
@@ -106,13 +119,23 @@ const MyLists = ({
         });
       if (uniqueName) {
         // add new list to user mylists array on firebase
-        await checkDoc.update({
-          mylists: firebase.firestore.FieldValue.arrayUnion(newName2),
-        });
+        await checkDoc
+          .update({
+            mylists: firebase.firestore.FieldValue.arrayUnion(newName2),
+          })
+          .then(() => {
+            console.log('New list name added to listname array on database!');
+          });
         // remove old list name from firebase
-        await checkDoc.update({
-          mylists: firebase.firestore.FieldValue.arrayRemove(editList),
-        });
+        await checkDoc
+          .update({
+            mylists: firebase.firestore.FieldValue.arrayRemove(editList),
+          })
+          .then(() => {
+            console.log(
+              'Old list name removed from listname array on database!'
+            );
+          });
         if (currentList === editList) {
           setCurrentList(newName2);
         }
@@ -145,6 +168,9 @@ const MyLists = ({
               checkDoc.collection(removed).doc(doc.id).delete();
             });
           }
+        })
+        .then(() => {
+          console.log('List name successfully updated on database!');
         });
     } catch (err) {
       console.log(err);
@@ -227,11 +253,7 @@ const MyLists = ({
                     variant="solid"
                     type="submit"
                     aria-label="Rename List"
-                    color={themeObj.colorIcon}
-                    _hover={{
-                      background: `${themeObj.deleteIcon}`,
-                    }}
-                    bg={themeObj.bgIcon}
+                    colorScheme="green"
                   >
                     Rename
                   </Button>
@@ -244,11 +266,7 @@ const MyLists = ({
                       setEditList(false);
                     }}
                     aria-label="cancel"
-                    color="white"
-                    _hover={{
-                      background: `${themeObj.deleteIcon}`,
-                    }}
-                    bg="red"
+                    colorScheme="red"
                   >
                     Cancel
                   </Button>

@@ -9,6 +9,7 @@ const Nav = ({
   setShowHow,
   setShowAbout,
   isLoading,
+  appTheme,
   setAppTheme,
   themeObj,
   currentList,
@@ -30,6 +31,7 @@ const Nav = ({
             setShowHow={setShowHow}
             setShowAbout={setShowAbout}
             themeObj={themeObj}
+            appTheme={appTheme}
             setAppTheme={setAppTheme}
           ></Menu>
           {!isLoading && (

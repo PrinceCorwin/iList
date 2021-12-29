@@ -28,7 +28,10 @@ const EditItem = ({
       await checkDoc
         .collection(currentList)
         .doc(`${editItem.id}`)
-        .update({ desc: newDesc });
+        .update({ desc: newDesc })
+        .then(() => {
+          console.log('Document successfully updated!');
+        });
 
       const editedList = items.map(item =>
         item.id === editItem.id ? { ...item, desc: newDesc } : item
@@ -87,11 +90,8 @@ const EditItem = ({
               mt={4}
               type="submit"
               aria-label="Rename List"
-              color={themeObj.colorIcon}
-              _hover={{
-                background: `${themeObj.deleteIcon}`,
-              }}
-              bg={themeObj.bgIcon}
+              // color="#F7FAFC"
+              colorScheme="green"
             >
               Update
             </Button>
@@ -104,11 +104,11 @@ const EditItem = ({
                 setNewDesc(`${editItem.desc}`);
               }}
               aria-label="cancel"
-              color={themeObj.colorIcon}
-              _hover={{
-                background: `${themeObj.deleteIcon}`,
-              }}
-              bg="red"
+              // color="#F7FAFC"
+              // _hover={{
+              //   background: `${themeObj.deleteIcon}`,
+              // }}
+              colorScheme="red"
             >
               Cancel
             </Button>

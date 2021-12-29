@@ -1,15 +1,27 @@
 import { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../auth/useAuth';
-import { Box, Icon, Center, VStack, Link as Jump } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import {
+  MenuButton,
+  Button,
+  MenuList,
+  MenuItem,
+  Menu as DropDown,
+  Box,
+  Icon,
+  Center,
+  VStack,
+  Link as Jump,
+} from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
-
+import ThemeListItem from './ThemeListItem';
 import { Link } from 'react-router-dom';
 
-const Menu = ({ user, setShowHow, setShowAbout, setAppTheme, themeObj }) => {
+const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
   const { logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-
+  // const burgerBarColor = themeObj.color;
   var styles = {
     bmBurgerButton: {
       position: 'relative',
@@ -17,10 +29,11 @@ const Menu = ({ user, setShowHow, setShowAbout, setAppTheme, themeObj }) => {
       height: '20px',
     },
     bmBurgerBars: {
-      background: '#373a47',
+      background: `${themeObj.color}`,
     },
     bmBurgerBarsHover: {
-      background: '#a90000',
+      // this doesn't work
+      background: 'red',
     },
     bmCrossButton: {
       marginRight: '10px',
@@ -59,6 +72,50 @@ const Menu = ({ user, setShowHow, setShowAbout, setAppTheme, themeObj }) => {
       background: 'rgba(0, 0, 0, 1.0)',
     },
   };
+
+  const themeList = [
+    {
+      name: 'Default',
+      color: '#F7FAFC',
+      bg: '#303F9F',
+    },
+    {
+      name: 'Woodlands',
+      color: '#F7FAFC',
+      bg: '#4CBB17',
+    },
+    {
+      name: 'CodeLife',
+      color: '#F7FAFC',
+      bg: 'teal',
+    },
+    {
+      name: 'Ocean',
+      color: '#FFFFFF',
+      bg: '#2196F3',
+    },
+    {
+      name: 'Purple',
+      color: '#F7FAFC',
+      bg: '#9C27B0',
+    },
+    {
+      name: 'Passion',
+      color: '#F7FAFC',
+      bg: '#FF69B4',
+    },
+    {
+      name: 'Harvest',
+      color: '#212121',
+      bg: '#FFC107',
+    },
+    {
+      name: 'Minimalist',
+      color: '#1A202C',
+      bg: 'white',
+    },
+  ];
+
   const checkDoc = db.collection('users').doc(user.uid);
 
   const handleOnOpen = () => {
@@ -101,136 +158,46 @@ const Menu = ({ user, setShowHow, setShowAbout, setAppTheme, themeObj }) => {
       <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
         <Link to="/mylists">My Lists</Link>
       </Box>
-
-      <VStack py={2} spacing={1}>
+      <DropDown>
+        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+          Themes
+        </MenuButton>
+        <MenuList>
+          {themeList.map((item, index) => (
+            <MenuItem>
+              <ThemeListItem
+                appTheme={appTheme}
+                applyTheme={applyTheme}
+                key={index}
+                chosenTheme={item}
+              />
+            </MenuItem>
+          ))}
+        </MenuList>
+      </DropDown>
+      {/* <VStack py={2} spacing={1}>
         <Center w="100%">Themes</Center>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('default');
-          }}
-        >
-          <Center w="100%" color="#F7FAFC" bg="#303F9F">
-            Default
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('woodlands');
-          }}
-        >
-          <Center w="100%" color="#F7FAFC" bg="#4CBB17">
-            Woodlands
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('codelife');
-          }}
-        >
-          <Center w="100%" color="#F7FAFC" bg="teal">
-            CodeLife
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('ocean');
-          }}
-        >
-          <Center w="100%" color="#FFFFFF" bg="#2196F3">
-            Ocean
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('purple');
-          }}
-        >
-          <Center w="100%" color="#F7FAFC" bg="#9C27B0">
-            Purple
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('passion');
-          }}
-        >
-          <Center w="100%" color="#F7FAFC" bg="#FF69B4">
-            Passion
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('harvest');
-          }}
-        >
-          <Center w="100%" color="#212121" bg="#FFC107">
-            Harvest
-          </Center>
-        </Box>
-        <Box
-          _hover={{ fontWeight: 'semibold' }}
-          as="button"
-          w="100%"
-          onClick={() => {
-            applyTheme('minimal');
-          }}
-        >
-          <Center
-            w="100%"
-            // border="1px solid #1A202C"
-            color="#1A202C"
-            bg="white"
-          >
-            Minimalist
-          </Center>
-        </Box>
-      </VStack>
+        {themeList.map((item, index) => (
+          <ThemeListItem
+            appTheme={appTheme}
+            applyTheme={applyTheme}
+            key={index}
+            chosenTheme={item}
+          />
+        ))}
+      </VStack> */}
       <Box
         py={2}
         _hover={{ fontWeight: 'semibold' }}
         as="button"
         onClick={() => {
           setShowAbout(true);
-          setShowHow(false);
           handleOnClose();
         }}
       >
-        <Link to="/">About</Link>
+        <Link to="/">About / Help</Link>
       </Box>
-      <Box
-        py={2}
-        _hover={{ fontWeight: 'semibold' }}
-        as="button"
-        onClick={() => {
-          setShowHow(true);
 
-          setShowAbout(false);
-          handleOnClose();
-        }}
-      >
-        <Link to="/">How It Works</Link>
-      </Box>
       <Box
         py={2}
         _hover={{ fontWeight: 'semibold' }}

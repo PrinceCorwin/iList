@@ -77,7 +77,8 @@ const About = ({ setShowAbout, themeObj }) => {
         </Text>
         <Text>
           🔐 User data and preferences (i.e selected theme) available across all
-          devices. Simply login on new device using the same email
+          devices. Simply login on new device using the same email. We will
+          NEVER share your data!
         </Text>
         <Text>
           🔥 Data/preference storage and Passwordless Login with Firebase (user
@@ -145,6 +146,67 @@ const About = ({ setShowAbout, themeObj }) => {
           />
         </Link>
       </HStack>
+      <VStack py={3}>
+        <Heading>How It Works...</Heading>
+        <Text>
+          After login, you will remain logged in on current device until
+          "Logout" is selected in menu. Each time you open the app, your lists
+          and preferences will be synced
+        </Text>
+        <Text>
+          The first time you login, a default list will be created named "My
+          List"
+        </Text>
+        <Text>
+          You may immediately start adding items to this list by typing the
+          description into the 'Add Item' input field at the top of the page
+        </Text>
+        <Text>
+          Added list items may be edited by clicking on the description text or
+          deleted by clicking the Trash Can icon to the right of the description
+        </Text>
+        <Text>
+          Check the list items as complete by clicking the checkbox to the left
+          of the description
+        </Text>
+        <Text>
+          List names can be changed by clicking "My Lists" in the menu
+          (hamburger menu - top, left) and clicking the Edit icon to the right
+          of the list name
+        </Text>
+        <Text>
+          Lists may also be deleted on the "My Lists" page by clicking the Trash
+          Can icon to the right of the Edit icon (list can not be deleted if it
+          is the only remaining list, but it's name can still be changed)
+        </Text>
+        <Text>
+          To change which list is currently being viewed on home page, click "My
+          Lists" and select the list you want to view or edit
+        </Text>
+        <Text>
+          Create a new list by clicking hamburger menu (top, left) and selecting
+          "New List". New list name may not be the same as another of your
+          existing lists. A warning will appear on screen if a duplicate list is
+          attempted
+        </Text>
+        <Text>
+          When a new list is created, it will become the current list. You will
+          be returned to the home page ready to add items to that list
+        </Text>
+        <Text>
+          Click "Themes" in menu to select one of the beautiful included themes.
+          Your selection will be saved to your account preferences until another
+          is selected
+        </Text>
+        <Text>
+          You may logout or delete your account in the menu. WARNING: Deleting
+          account can NOT be undone. All data will be lost
+        </Text>
+        <Text>
+          Thank you for choosing iList. Feel free to contact us with any issues
+          or suggestions by selecting "Contact Us" in the menu.
+        </Text>
+      </VStack>
     </Flex>
   );
 };

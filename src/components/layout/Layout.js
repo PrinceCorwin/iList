@@ -4,9 +4,9 @@ import Nav from './Nav';
 const Layout = ({
   user,
   setIsLoading,
-  setShowHow,
   setShowAbout,
   isLoading,
+  appTheme,
   setAppTheme,
   themeObj,
   children,
@@ -29,9 +29,9 @@ const Layout = ({
       <Nav
         user={user}
         setIsLoading={setIsLoading}
-        setShowHow={setShowHow}
         setShowAbout={setShowAbout}
         isLoading={isLoading}
+        appTheme={appTheme}
         setAppTheme={setAppTheme}
         themeObj={themeObj}
         currentList={currentList}
