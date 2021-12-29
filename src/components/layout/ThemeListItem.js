@@ -12,7 +12,7 @@ const ThemeListItem = ({ appTheme, applyTheme, chosenTheme }) => {
     >
       <Center
         position="relative"
-        w="100%"
+        // w="100%"
         color={chosenTheme.color}
         bg={chosenTheme.bg}
       >

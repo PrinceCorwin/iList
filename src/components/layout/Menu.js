@@ -149,17 +149,17 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
       width={'200px'}
       styles={styles}
     >
-      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
         <Link to="/">Home</Link>
       </Box>
-      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
         <Link to="/newlist">New List</Link>
       </Box>
-      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose}>
+      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
         <Link to="/mylists">My Lists</Link>
       </Box>
       <DropDown>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <MenuButton m={3} size="sm" as={Button} rightIcon={<ChevronDownIcon />}>
           Themes
         </MenuButton>
         <MenuList>
@@ -175,17 +175,6 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
           ))}
         </MenuList>
       </DropDown>
-      {/* <VStack py={2} spacing={1}>
-        <Center w="100%">Themes</Center>
-        {themeList.map((item, index) => (
-          <ThemeListItem
-            appTheme={appTheme}
-            applyTheme={applyTheme}
-            key={index}
-            chosenTheme={item}
-          />
-        ))}
-      </VStack> */}
       <Box
         py={2}
         _hover={{ fontWeight: 'semibold' }}
