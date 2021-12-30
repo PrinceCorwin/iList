@@ -4,7 +4,7 @@ const ThemeListItem = ({ appTheme, applyTheme, chosenTheme }) => {
   return (
     <Box
       _hover={{ fontWeight: 'semibold' }}
-      as="button"
+      // as="button"
       w="100%"
       onClick={() => {
         applyTheme(chosenTheme.name.toLowerCase());

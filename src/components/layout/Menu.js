@@ -164,7 +164,7 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
         </MenuButton>
         <MenuList>
           {themeList.map((item, index) => (
-            <MenuItem>
+            <MenuItem key={index}>
               <ThemeListItem
                 appTheme={appTheme}
                 applyTheme={applyTheme}
@@ -207,6 +207,14 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
         onClick={logout}
       >
         Logout
+      </Box>
+      <Box
+        _hover={{ fontWeight: 'semibold' }}
+        as="button"
+        py={2}
+        onClick={handleOnClose}
+      >
+        <Link to="/contact">Contact Us</Link>
       </Box>
       <Box
         py={2}

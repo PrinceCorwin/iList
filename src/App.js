@@ -7,6 +7,7 @@ import PrivateRoute from './components/layout/PrivateRoute';
 import Dashboard from './components/layout/Dashboard';
 import NewList from './pages/NewList';
 import MyLists from './pages/MyLists';
+import Contact from './pages/Contact';
 import DeleteAccount from './components/iList/DeleteAccount';
 import NotFound from './pages/NotFound';
 import { useColorModeValue } from '@chakra-ui/react';
@@ -168,7 +169,17 @@ function App() {
               setCurrentList={setCurrentList}
             />
           </PrivateRoute>
-
+          <PrivateRoute path="/contact">
+            <Contact
+              lists={lists}
+              setLists={setLists}
+              user={user}
+              setIsLoading={setIsLoading}
+              themeObj={themeObj}
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+            />
+          </PrivateRoute>
           <PrivateRoute path="/delete_account">
             <DeleteAccount
               lists={lists}

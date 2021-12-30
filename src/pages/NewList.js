@@ -115,27 +115,19 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
                 variant="solid"
                 type="submit"
                 aria-label="Add Item"
-                color={themeObj.colorIcon}
-                _hover={{
-                  background: `${themeObj.deleteIcon}`,
-                }}
-                bg={themeObj.bgIcon}
+                colorScheme="green"
               >
                 Add
               </Button>
               <Button
-                variant="outline"
+                variant="solid"
                 type="button"
                 onClick={() => {
                   setNewList('');
                   history.push('/');
                 }}
                 aria-label="cancel"
-                color={themeObj.colorIcon}
-                _hover={{
-                  background: `${themeObj.deleteIcon}`,
-                }}
-                bg="red"
+                colorScheme="red"
               >
                 Cancel
               </Button>
