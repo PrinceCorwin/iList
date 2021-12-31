@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     return firebase
       .auth()
       .sendSignInLinkToEmail(email, {
-        url: 'http://localhost:3000/confirm',
+        url: 'https://personallistapp.netlify.app/',
         handleCodeInApp: true,
       })
       .then(() => {
