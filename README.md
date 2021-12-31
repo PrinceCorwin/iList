@@ -1,6 +1,6 @@
 ![List on Desk](https://github.com/PrinceCorwin/iList/blob/main/src/images/list-on-desk.jpg?raw=true 'Banner Image')
 
-# 📝 **iList** - Personal List App<a name="TOP"></a>
+# 📝 **iLIST** - Personal List App<a name="TOP"></a>
 
 ## Make a list, check it once!
 
