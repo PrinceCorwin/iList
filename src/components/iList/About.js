@@ -1,5 +1,6 @@
 import {
   IconButton,
+  Button,
   Link,
   Text,
   VStack,
@@ -146,66 +147,90 @@ const About = ({ setShowAbout, themeObj }) => {
           />
         </Link>
       </HStack>
-      <VStack py={3}>
+      <VStack py={3} spacing={3}>
         <Heading>How It Works...</Heading>
-        <Text>
+        <Heading alignSelf="flex-start" size="sm">
+          After Login
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           After login, you will remain logged in on current device until
           "Logout" is selected in menu. Each time you open the app, your lists
           and preferences will be synced
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           The first time you login, a default list will be created named "My
           List"
         </Text>
-        <Text>
-          You may immediately start adding items to this list by typing the
+        <Heading alignSelf="flex-start" size="sm">
+          Add and Edit List Items
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+          You may immediately begin adding items to 'My List' by typing the
           description into the 'Add Item' input field at the top of the page
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Added list items may be edited by clicking on the description text or
           deleted by clicking the Trash Can icon to the right of the description
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Check the list items as complete by clicking the checkbox to the left
           of the description
         </Text>
-        <Text>
+        <Heading alignSelf="flex-start" size="sm">
+          Edit List Name
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           List names can be changed by clicking "My Lists" in the menu
           (hamburger menu - top, left) and clicking the Edit icon to the right
           of the list name
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Lists may also be deleted on the "My Lists" page by clicking the Trash
           Can icon to the right of the Edit icon (list can not be deleted if it
           is the only remaining list, but it's name can still be changed)
         </Text>
-        <Text>
+        <Heading alignSelf="flex-start" size="sm">
+          View or Create New List
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           To change which list is currently being viewed on home page, click "My
           Lists" and select the list you want to view or edit
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Create a new list by clicking hamburger menu (top, left) and selecting
           "New List". New list name may not be the same as another of your
           existing lists. A warning will appear on screen if a duplicate list is
           attempted
         </Text>
-        <Text>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           When a new list is created, it will become the current list. You will
           be returned to the home page ready to add items to that list
         </Text>
-        <Text>
+        <Heading alignSelf="flex-start" size="sm">
+          Change App Theme
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Click "Themes" in menu to select one of the beautiful included themes.
           Your selection will be saved to your account preferences until another
           is selected
         </Text>
-        <Text>
+        <Heading alignSelf="flex-start" size="sm">
+          Logout or Delete Account
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           You may logout or delete your account in the menu. WARNING: Deleting
           account can NOT be undone. All data will be lost
-        </Text>
-        <Text>
+        </Text>{' '}
+        <Heading alignSelf="flex-start" size="sm">
+          Contact Us
+        </Heading>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Thank you for choosing iList. Feel free to contact us with any issues
           or suggestions by selecting "Contact Us" in the menu.
         </Text>
+        <Button colorScheme="green" w="10rem">
+          Close
+        </Button>
       </VStack>
     </Flex>
   );

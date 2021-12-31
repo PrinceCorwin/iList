@@ -1,6 +1,9 @@
 import Menu from './Menu';
-import { Heading, Flex, Text } from '@chakra-ui/react';
+import { Heading, Flex, Text, Icon } from '@chakra-ui/react';
+import { GrAccessibility } from 'react-icons/gr';
+import { FaHome, FaClipboardList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { GrHome } from 'react-icons/gr';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const Nav = ({
@@ -17,10 +20,10 @@ const Nav = ({
   return (
     <Flex
       color={themeObj.color}
-      bg={themeObj.bg}
+      bg={user && !isLoading && themeObj.bg}
       w="100%"
       py={1}
-      px={6}
+      px={3}
       justifyContent="space-between"
       alignItems="center"
     >
@@ -40,12 +43,18 @@ const Nav = ({
             </Heading>
           )}
           <Flex justifyContent="flex-end" alignItems="center">
-            <Link to="/mylists">
-              <Text fontSize="md" w="75px">
-                My Lists
-              </Text>
+            <Link to="/">
+              <Icon as={FaHome} w={6} h={6} color={themeObj.color} />
             </Link>
-
+            <Link to="/mylists">
+              <Icon
+                ml={3}
+                as={FaClipboardList}
+                w={6}
+                h={6}
+                color={themeObj.color}
+              />
+            </Link>
             <ColorModeSwitcher />
           </Flex>
         </>

@@ -1,13 +1,5 @@
 import { FaTrashAlt } from 'react-icons/fa';
-import {
-  Text,
-  Checkbox,
-  Box,
-  Flex,
-  IconButton,
-  useColorModeValue,
-  color,
-} from '@chakra-ui/react';
+import { Text, Checkbox, Box, Flex, IconButton } from '@chakra-ui/react';
 const LineItem = ({
   themeObj,
   item,
@@ -28,7 +20,9 @@ const LineItem = ({
         defaultChecked={item.checked}
         onChange={() => handleCheck(item.id)}
       ></Checkbox>
-      <Box
+      <Flex
+        justify="space-between"
+        align="center"
         // borderLeft="1px solid #CBD5E0"
         // borderBottom="1px solid #CBD5E0"
         // boxShadow={shadow}
@@ -40,44 +34,59 @@ const LineItem = ({
         py={1}
         w="100%"
       >
-        <Box
-          cursor="pointer"
-          onClick={() => {
-            setEditItem(item);
-          }}
-          style={
-            item.checked
-              ? {
-                  textDecoration: `line-through  ${themeObj.strike}`,
-                  color: `${themeObj.strikeText}`,
-                }
-              : {
-                  color: `${themeObj.colorItem}`,
-                }
-          }
-        >
-          <Text
-            _hover={
+        <Flex direction="column">
+          <Box
+            cursor="pointer"
+            onClick={() => {
+              setEditItem(item);
+            }}
+            style={
               item.checked
-                ? { color: `${themeObj.colorItem}` }
-                : { color: 'red' }
+                ? {
+                    textDecoration: `line-through  ${themeObj.strike}`,
+                    color: `${themeObj.strikeText}`,
+                  }
+                : {
+                    color: `${themeObj.colorItem}`,
+                  }
             }
           >
-            {item.desc}
-          </Text>
-        </Box>
-        <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
-          Added {item.date}
-        </Box>
-      </Box>
-      <IconButton
+            <Text
+              _hover={{ textShadow: '1px 1px lightgrey' }}
+              // _hover={
+              //   item.checked
+              //     ? { color: `${themeObj.colorItem}` }
+              //     : { color: 'red' }
+              // }
+            >
+              {item.desc}
+            </Text>
+          </Box>
+          <Box color={themeObj.added} fontStyle="italic" fontSize="xs">
+            Added {item.date}
+          </Box>
+        </Flex>
+        <IconButton
+          alignSelf="flex-start"
+          mt={1}
+          ml={3}
+          size="xs"
+          aria-label={`Delete ${item.desc}`}
+          variant="outline"
+          borderColor={themeObj.deleteOutline}
+          color={themeObj.deleteIcon}
+          icon={<FaTrashAlt />}
+          onClick={() => handleDelete(item.id)}
+        />
+      </Flex>
+      {/* <IconButton
         aria-label={`Delete ${item.desc}`}
         variant="outline"
         borderColor={themeObj.deleteOutline}
         color={themeObj.deleteIcon}
         icon={<FaTrashAlt />}
         onClick={() => handleDelete(item.id)}
-      />
+      /> */}
     </Flex>
   );
 };

@@ -10,8 +10,6 @@ import {
   Menu as DropDown,
   Box,
   Icon,
-  Center,
-  VStack,
   Link as Jump,
 } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';

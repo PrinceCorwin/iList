@@ -27,6 +27,7 @@ function App() {
 
   const checkDoc = user ? db.collection('users').doc(user.uid) : null;
 
+  // get user current list pref
   useEffect(() => {
     const getMyLists = async () => {
       try {
@@ -41,6 +42,7 @@ function App() {
     user && getMyLists();
   }, [currentList]);
 
+  // get user theme pref
   useEffect(() => {
     const getUserPrefs = async () => {
       try {
@@ -63,60 +65,56 @@ function App() {
     // getMyLists();
   }, [user]);
 
-  // these variables give the actual color value instead of the color name. Required for certain instances like colorscheme when the name won't work
-  const checkSchemeDark = iListTheme.colors[appTheme].checkSchemeDark;
-  const checkSchemeLight = iListTheme.colors[appTheme].checkSchemeLight;
-  const strikeLineDark = iListTheme.colors[appTheme].strikeLineDark;
-  const strikeLineLight = iListTheme.colors[appTheme].strikeLineLight;
-  const strikeTextDark = iListTheme.colors[appTheme].strikeTextDark;
-  const strikeTextLight = iListTheme.colors[appTheme].strikeTextLight;
-  const colorItemDark = iListTheme.colors[appTheme].colorItemDark;
-  const colorItemLight = iListTheme.colors[appTheme].colorItemLight;
-  const bgDark = iListTheme.colors[appTheme].bgDark;
-  const bgLight = iListTheme.colors[appTheme].bgLight;
-  const bgItemDark = iListTheme.colors[appTheme].bgItemDark;
-  const bgItemLight = iListTheme.colors[appTheme].bgItemLight;
-  const themeColors = iListTheme.colors[appTheme];
   // create global theme object
+  const themeColors = iListTheme.colors[appTheme];
   const themeObj = {
     bg: useColorModeValue(themeColors.bgLight, themeColors.bgDark),
 
     color: useColorModeValue(themeColors.colorLight, themeColors.colorDark),
 
-    bgIcon: useColorModeValue(
-      `${appTheme}.bgIconLight`,
-      `${appTheme}.bgIconDark`
-    ),
+    bgIcon: useColorModeValue(themeColors.bgIconLight, themeColors.bgIconDark),
 
     colorIcon: useColorModeValue(
-      `${appTheme}.colorIconLight`,
-      `${appTheme}.colorIconDark`
+      themeColors.colorIconLight,
+      themeColors.colorIconDark
     ),
 
-    strike: useColorModeValue(strikeLineLight, strikeLineDark),
+    strike: useColorModeValue(
+      themeColors.strikeLineLight,
+      themeColors.strikeLineDark
+    ),
 
-    strikeText: useColorModeValue(strikeTextLight, strikeTextDark),
+    strikeText: useColorModeValue(
+      themeColors.strikeTextLight,
+      themeColors.strikeTextDark
+    ),
 
-    colorItem: useColorModeValue(colorItemLight, colorItemDark),
+    colorItem: useColorModeValue(
+      themeColors.colorItemLight,
+      themeColors.colorItemDark
+    ),
 
-    added: useColorModeValue(`${appTheme}.addedLight`, `${appTheme}.addedDark`),
+    added: useColorModeValue(themeColors.addedLight, themeColors.addedDark),
 
-    bgItem: useColorModeValue(bgItemLight, bgItemDark),
+    bgItem: useColorModeValue(themeColors.bgItemLight, themeColors.bgItemDark),
 
-    checkScheme: useColorModeValue(checkSchemeLight, checkSchemeDark),
+    checkScheme: useColorModeValue(
+      themeColors.checkSchemeLight,
+      themeColors.checkSchemeDark
+    ),
 
     deleteIcon: useColorModeValue(
-      `${appTheme}.deleteIconLight`,
-      `${appTheme}.deleteIconDark`
+      themeColors.deleteIconLight,
+      themeColors.deleteIconDark
     ),
 
     deleteOutline: useColorModeValue(
-      `${appTheme}.deleteOutlineLight`,
-      `${appTheme}.deleteOutlineDark`
+      themeColors.deleteOutlineLight,
+      themeColors.deleteOutlineDark
     ),
   };
-
   // end theme object
+
   return (
     <Router>
       <Layout

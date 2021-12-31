@@ -153,14 +153,12 @@ const Dashboard = ({
     );
     setItems(listItems);
     const myItem = items.filter(item => item.id === id);
-    console.log(myItem);
 
     const updatedDoc = db
       .collection('users')
       .doc(user.uid)
       .collection(currentList)
       .doc(`${id}`);
-    console.log('here');
 
     await updatedDoc
       .update({

@@ -1,4 +1,4 @@
-import { Box, Image, Center, VStack, Link as Jump } from '@chakra-ui/react';
+import { Box, Image, Center } from '@chakra-ui/react';
 import checkMark from '../../images/checkbox3.png';
 const ThemeListItem = ({ appTheme, applyTheme, chosenTheme }) => {
   return (

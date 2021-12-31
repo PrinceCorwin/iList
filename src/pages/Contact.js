@@ -2,21 +2,21 @@ import { useState } from 'react';
 import { db } from '../components/auth/useAuth';
 import { useHistory } from 'react-router-dom';
 import {
-  FormControl,
-  FormHelperText,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
   Textarea,
   Button,
   Text,
   Heading,
   Flex,
-  Input,
   Center,
-  useColorModeValue,
 } from '@chakra-ui/react';
 const Contact = ({ user, themeObj }) => {
   const [feedback, setFeedback] = useState('');
   const history = useHistory();
-
+  const [showAlert, setShowAlert] = useState(false);
   const handleSubmit = async e => {
     e.preventDefault();
     const newItemDate = new Date();
@@ -39,6 +39,7 @@ const Contact = ({ user, themeObj }) => {
     } catch (err) {
       console.log(err.message);
     } finally {
+      setShowAlert(true);
     }
   };
 
@@ -47,9 +48,17 @@ const Contact = ({ user, themeObj }) => {
     setFeedback(inputValue);
   };
   return (
-    <Center flexGrow={1}>
+    <Center flexDir="column" flexGrow={1}>
+      {showAlert && (
+        <Alert status="success" mb={3}>
+          <AlertIcon />
+          <AlertTitle mr={2}>Comment Sent!</AlertTitle>
+          <AlertDescription>Thank you for your feedback</AlertDescription>
+        </Alert>
+      )}
       <Flex
-        bg={themeObj.color}
+        // color="black"
+        // bg={themeObj.color}
         direction="column"
         justify="center"
         align="center"
@@ -66,7 +75,7 @@ const Contact = ({ user, themeObj }) => {
           <Flex direction="column" justify="center" align="center">
             <Textarea
               isRequired
-              bg="white"
+              //   bg="white"
               w="350px"
               value={feedback}
               onChange={handleInputChange}
@@ -87,6 +96,7 @@ const Contact = ({ user, themeObj }) => {
                 type="button"
                 onClick={() => {
                   setFeedback('');
+                  setShowAlert(false);
                   history.push('/');
                 }}
                 aria-label="cancel"
