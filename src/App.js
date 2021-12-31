@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginForm from './components/auth/LoginForm';
 import ConfirmForm from './components/auth/ConfirmForm';
