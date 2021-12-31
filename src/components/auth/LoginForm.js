@@ -32,18 +32,35 @@ const LoginForm = () => {
   };
 
   return (
-    <Flex grow="1" justify="center" direction="column">
-      <Flex mb={6} direction="column" justify="center" align="center">
-        <Flex justify="center" alignItems="flex-end" p={3}>
+    <Flex
+      w="100%"
+      // p={6}
+      grow="1"
+      // bg="blue"
+      justify="center"
+      align="center"
+      // maxWidth="350px"
+      direction="column"
+    >
+      <Flex
+        mb={6}
+        // bg="green"
+        direction="column"
+        // justify="center"
+        // align="center"
+      >
+        <Flex justify="flex-start" align="center" p={3}>
           <Image mr={3} htmlWidth="40px" src={iListLogo} alt="iList logo" />
           <Heading lineHeight="100%" as="h2" size="lg">
             iLIST - Personal List App
           </Heading>
         </Flex>
-        <Text p={2}>Make a List, Check it Once</Text>
-        <Text>
-          Login to create your custom lists available across all devices
+        <Text textAlign="center" p={2}>
+          Make a List, Check it Once
         </Text>
+        {/* <Text>
+          Login to create your custom lists available across all devices
+        </Text> */}
       </Flex>
       <Heading as="h1" mb={6}>
         Login
