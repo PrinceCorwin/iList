@@ -84,7 +84,7 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
   };
 
   return (
-    <Flex grow="1" justify="center" direction="column" width="400px">
+    <Flex grow="1" justify="center" direction="column">
       <Flex direction="column" h="250px">
         <Heading size="md" py={3}>
           Name Your New List
