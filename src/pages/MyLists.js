@@ -223,7 +223,7 @@ const MyLists = ({
         </Alert>
       )}
       {editList && (
-        <Flex grow="1" justify="center" direction="column">
+        <Flex grow="1" justify="center" direction="column" p={6}>
           <Flex direction="column" h="250px">
             <Heading size="md" py={3}>
               Rename Your List
