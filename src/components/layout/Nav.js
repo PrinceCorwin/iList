@@ -19,7 +19,7 @@ const Nav = ({
 }) => {
   return (
     <Flex
-      color={themeObj.color}
+      color={user ? themeObj.color : null}
       bg={user && !isLoading && themeObj.bg}
       w="100%"
       py={1}
