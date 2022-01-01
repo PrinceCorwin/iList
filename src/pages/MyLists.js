@@ -217,9 +217,9 @@ const MyLists = ({
           <Button
             alignSelf="center"
             w="50%"
-            colorScheme="teal"
-            // bg={themeObj.bg}
-            // color={themeObj.color}
+            bg={themeObj.bg}
+            color={themeObj.color}
+            _hover={{ bg: themeObj.color, color: themeObj.bg }}
             onClick={() => history.push('/newlist')}
           >
             Create New List
