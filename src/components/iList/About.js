@@ -15,7 +15,7 @@ import { CloseIcon } from '@chakra-ui/icons';
 const About = ({ setShowAbout, themeObj }) => {
   return (
     <Flex
-      position="relative"
+      // position="relative"
       w="100%"
       px={6}
       flexDirection="column"
@@ -26,7 +26,7 @@ const About = ({ setShowAbout, themeObj }) => {
     >
       <IconButton
         size="xs"
-        position="fixed"
+        position="absolute"
         top="4rem"
         right="2rem"
         colorScheme="red"
