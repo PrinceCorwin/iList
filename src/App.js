@@ -19,7 +19,7 @@ function App() {
   const [showAbout, setShowAbout] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [loaderLoading, setLoaderLoading] = useState(true);
+  // const [loaderLoading, setLoaderLoading] = useState(true);
   const [currentList, setCurrentList] = useState('My List');
   const [appTheme, setAppTheme] = useState('default');
   const [lists, setLists] = useState([]);
@@ -135,8 +135,8 @@ function App() {
               showAbout={showAbout}
               setAppTheme={setAppTheme}
               setIsLoading={setIsLoading}
-              loaderLoading={loaderLoading}
-              setLoaderLoading={setLoaderLoading}
+              // loaderLoading={loaderLoading}
+              // setLoaderLoading={setLoaderLoading}
               isLoading={isLoading}
               fetchError={fetchError}
               setFetchError={setFetchError}

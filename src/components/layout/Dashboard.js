@@ -16,8 +16,6 @@ const Dashboard = ({
   showAbout,
   setShowAbout,
   setAppTheme,
-  loaderLoading,
-  setLoaderLoading,
   setIsLoading,
   isLoading,
   fetchError,
@@ -54,7 +52,6 @@ const Dashboard = ({
 
         console.log(err.message);
       } finally {
-        setLoaderLoading(false);
         setIsLoading(false);
       }
     };
@@ -100,25 +97,25 @@ const Dashboard = ({
   useEffect(() => {
     const getItems = async () => {
       try {
-        const data = await itemsCollection.orderBy('id').get();
+        const data = await itemsCollection.orderBy('id', 'desc').get();
+
+        console.log(data.docs.length);
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
         }));
-
         setItems(listItems);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
       } finally {
-        setLoaderLoading(false);
       }
     };
     getItems();
   }, [currentList]);
 
   const addItem = async item => {
-    const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
+    const id = items.length ? Number(items[0].id) + 1 : 1;
     const newItemDate = new Date();
     const dateStr = `${
       newItemDate.getMonth() + 1
@@ -130,7 +127,7 @@ const Dashboard = ({
       desc: item,
       date: dateStr,
     };
-    const listItems = [...items, myNewItem];
+    const listItems = [myNewItem, ...items];
     setItems(listItems);
     const addedDoc = db
       .collection('users')
@@ -241,13 +238,13 @@ const Dashboard = ({
             align-items="center"
             overflowY="auto"
           >
-            {(isLoading || loaderLoading) && <Loader />}
+            {isLoading && <Loader />}
 
             {fetchError && (
               <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>
             )}
 
-            {!fetchError && !loaderLoading && !isLoading && (
+            {!fetchError && !isLoading && (
               <Content
                 setEditItem={setEditItem}
                 themeObj={themeObj}

@@ -187,35 +187,46 @@ const MyLists = ({
       overflowY="auto"
     >
       {!editList && (
-        <Center
-          mt={6}
-          w="100%"
-          bg={themeObj.bg}
-          color={themeObj.color}
-          py={3}
-          borderRadius="lg"
-        >
-          <VStack>
-            <Heading>Your Lists</Heading>
-            <Center>View, Rename, or Delete A List</Center>
+        <>
+          <Center
+            mt={6}
+            w="100%"
+            bg={themeObj.bg}
+            color={themeObj.color}
+            py={3}
+            borderRadius="lg"
+          >
+            <VStack>
+              <Heading>Your Lists</Heading>
+              <Center>View, Rename, or Delete A List</Center>
+            </VStack>
+          </Center>
+          <VStack spacing={2} w="100%" my={6}>
+            {lists.map(list => (
+              <EachList
+                setFinalListError={setFinalListError}
+                setEditList={setEditList}
+                updateCurrentList={updateCurrentList}
+                key={lists.indexOf(list)}
+                handleDelete={handleDelete}
+                themeObj={themeObj}
+                list={list}
+              />
+            ))}
           </VStack>
-        </Center>
+          <Button
+            alignSelf="center"
+            w="50%"
+            colorScheme="teal"
+            // bg={themeObj.bg}
+            // color={themeObj.color}
+            onClick={() => history.push('/newlist')}
+          >
+            Create New List
+          </Button>
+        </>
       )}
-      {!editList && (
-        <VStack spacing={2} w="100%" mt={6}>
-          {lists.map(list => (
-            <EachList
-              setFinalListError={setFinalListError}
-              setEditList={setEditList}
-              updateCurrentList={updateCurrentList}
-              key={lists.indexOf(list)}
-              handleDelete={handleDelete}
-              themeObj={themeObj}
-              list={list}
-            />
-          ))}
-        </VStack>
-      )}
+
       {finalListError && (
         <Alert status="error" variant="subtle" mt={6} mb={6}>
           <AlertIcon />
@@ -237,6 +248,7 @@ const MyLists = ({
                 <Input
                   variant="outline"
                   autoFocus
+                  autoComplete="off"
                   type="text"
                   id="newName"
                   placeholder={`Rename ${editList}`}
