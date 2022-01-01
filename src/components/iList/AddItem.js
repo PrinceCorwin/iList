@@ -10,6 +10,7 @@ const AddItem = ({ themeObj, newItem, setNewItem, handleSubmit }) => {
         <Input
           variant="outline"
           autoFocus
+          autoComplete="off"
           ref={inputRef}
           type="text"
           id="addItem"

@@ -29,8 +29,8 @@ const LineItem = ({
         borderRadius="lg"
         bg={themeObj.bgItem}
         ml={2}
-        mr={2}
-        px={3}
+        // mr={2}
+        pl={3}
         py={1}
         w="100%"
       >
@@ -70,23 +70,16 @@ const LineItem = ({
           alignSelf="flex-start"
           mt={1}
           ml={3}
-          size="xs"
+          size="md"
           aria-label={`Delete ${item.desc}`}
           variant="outline"
-          borderColor={themeObj.deleteOutline}
+          border="none"
+          // borderColor={themeObj.deleteOutline}
           color={themeObj.deleteIcon}
           icon={<FaTrashAlt />}
           onClick={() => handleDelete(item.id)}
         />
       </Flex>
-      {/* <IconButton
-        aria-label={`Delete ${item.desc}`}
-        variant="outline"
-        borderColor={themeObj.deleteOutline}
-        color={themeObj.deleteIcon}
-        icon={<FaTrashAlt />}
-        onClick={() => handleDelete(item.id)}
-      /> */}
     </Flex>
   );
 };

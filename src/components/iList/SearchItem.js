@@ -13,6 +13,7 @@ const SearchItem = ({ themeObj, search, setSearch }) => {
       <InputGroup size="sm">
         <Input
           type="text"
+          autoComplete="off"
           id="search"
           role="searchbox"
           placeholder="Search / Filter Items"

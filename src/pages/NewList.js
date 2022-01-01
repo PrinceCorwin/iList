@@ -100,6 +100,7 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
               color={themeObj.colorItem}
               variant="outline"
               autoFocus
+              autoComplete="off"
               type="text"
               id="newList"
               placeholder="New List Name"

@@ -75,6 +75,7 @@ const EditItem = ({
           <Input
             variant="outline"
             autoFocus
+            autoComplete="off"
             type="text"
             id="newDesc"
             color="{themeObj.colorItem}"
