@@ -228,7 +228,11 @@ const About = ({ setShowAbout, themeObj }) => {
           Thank you for choosing iList. Feel free to contact us with any issues
           or suggestions by selecting "Contact Us" in the menu.
         </Text>
-        <Button colorScheme="green" w="10rem">
+        <Button
+          colorScheme="green"
+          w="10rem"
+          onClick={() => setShowAbout(false)}
+        >
           Close
         </Button>
       </VStack>
