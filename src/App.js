@@ -17,6 +17,8 @@ import { db, useAuth } from './components/auth/useAuth';
 function App() {
   const [fetchError, setFetchError] = useState(null);
   const [showAbout, setShowAbout] = useState(false);
+  const [userColorMode, setUserColorMode] = useState('dark');
+  const [userInit, setUserInit] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
   // const [loaderLoading, setLoaderLoading] = useState(true);
@@ -27,43 +29,32 @@ function App() {
 
   const checkDoc = user ? db.collection('users').doc(user.uid) : null;
 
-  // get user current list pref
-  useEffect(() => {
-    const getMyLists = async () => {
-      try {
-        const userLists = await (await checkDoc.get()).data().mylists;
-        setLists(userLists);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    user && getMyLists();
-  }, [currentList]);
-
-  // get user theme pref
+  // get user prefs
   useEffect(() => {
     const getUserPrefs = async () => {
       try {
-        const userList = await checkDoc.get();
-        setAppTheme(userList.data().currenttheme);
-
-        // setFetchError(null);
+        // fetch user prefs and set pref states
+        const userPrefs = await checkDoc.get();
+        setAppTheme(userPrefs.data().currenttheme);
+        setLists(userPrefs.data().mylists);
+        setUserColorMode(userPrefs.data().colorMode);
+        setCurrentList(userPrefs.data().currentlist);
+        console.log('app useEffect');
+        setFetchError(null);
       } catch (err) {
-        // setFetchError(err.message);
+        setFetchError(err.message);
 
         console.log(err.message);
       } finally {
         // setLoaderLoading(false);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     };
     // setIsLoading(false);
-    user && getUserPrefs();
+    userInit && getUserPrefs();
 
     // getMyLists();
-  }, [user]);
+  }, [userInit]);
 
   // create global theme object
   const themeColors = iListTheme.colors[appTheme];
@@ -130,6 +121,8 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/">
             <Dashboard
+              setUserInit={setUserInit}
+              setUserColorMode={setUserColorMode}
               user={user}
               setShowAbout={setShowAbout}
               showAbout={showAbout}
@@ -148,6 +141,8 @@ function App() {
 
           <PrivateRoute path="/newlist">
             <NewList
+              lists={lists}
+              setLists={setLists}
               user={user}
               setAppTheme={setAppTheme}
               setIsLoading={setIsLoading}

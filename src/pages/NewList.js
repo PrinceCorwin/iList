@@ -13,7 +13,14 @@ import {
 import { useHistory } from 'react-router-dom';
 import { db } from '../components/auth/useAuth';
 
-const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
+const NewList = ({
+  lists,
+  setLists,
+  user,
+  setIsLoading,
+  setCurrentList,
+  themeObj,
+}) => {
   const history = useHistory();
   const [alertText, setAlertText] = useState('');
   const [newList, setNewList] = useState('');
@@ -32,6 +39,7 @@ const NewList = ({ user, setIsLoading, setCurrentList, themeObj }) => {
           setAlertText(newList);
           setIsUnique(false);
         } else {
+          setLists([...lists, newList]);
           updateCurrentList(newList);
           updateMyListsArray(newList);
           setIsUnique(true);
