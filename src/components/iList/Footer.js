@@ -1,6 +1,6 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
-const Footer = ({ bg, color, length }) => {
+const Footer = ({ user, bg, color, length }) => {
   return (
     <Flex
       bg={bg}
@@ -13,7 +13,9 @@ const Footer = ({ bg, color, length }) => {
       <p>
         {length} List {length === 1 ? 'item' : 'items'}
       </p>
-      <p>iLIST &copy; 2021 </p>
+      <Text align="end" w="250px" isTruncated>
+        {user.email}
+      </Text>
     </Flex>
   );
 };

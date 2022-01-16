@@ -5,6 +5,7 @@ import EditItem from '../iList/EditItem';
 import Loader from '../iList/Loader';
 import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
+import { ContentNav } from './ContentNav';
 import Content from '../iList/Content';
 import About from '../iList/About';
 import Footer from '../iList/Footer';
@@ -12,6 +13,8 @@ import { db } from '../auth/useAuth';
 import 'firebase/firestore';
 
 const Dashboard = ({
+  setUserInit,
+  setUserColorMode,
   user,
   showAbout,
   setShowAbout,
@@ -39,56 +42,57 @@ const Dashboard = ({
 
   // initialize new user
   useEffect(() => {
-    checkIfInitialized();
-    const getUserPrefs = async () => {
+    const checkIfInitialized = async () => {
       try {
-        const userList = await checkDoc.get();
-        setCurrentList(userList.data().currentlist);
-        setAppTheme(userList.data().currenttheme);
+        checkDoc.get().then(doc => {
+          if (doc.exists) {
+            setUserInit(true);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('Initializing new user!');
+            initializeUserDb();
+          }
+        });
 
-        setFetchError(null);
+        // setFetchError(null);
       } catch (err) {
-        setFetchError(err.message);
-
         console.log(err.message);
-      } finally {
-        setIsLoading(false);
       }
     };
-    getUserPrefs();
+    checkIfInitialized();
   }, []);
 
-  const checkIfInitialized = () => {
-    const docRef = db.collection('users').doc(user.uid);
-
-    docRef
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-          initializeUserDb();
-        }
-      })
-      .catch(error => {
-        console.log('Error getting document:', error);
-      });
-  };
+  // const checkIfInitialized = () => {
+  //   checkDoc
+  //     .get()
+  //     .then(doc => {
+  //       if (doc.exists) {
+  //         setUserInit(true);
+  //       } else {
+  //         // doc.data() will be undefined in this case
+  //         console.log('Initializing new user!');
+  //         initializeUserDb();
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('Error getting document:', error);
+  //     });
+  // };
 
   const initializeUserDb = async () => {
-    const firstEntry = db.collection('users').doc(user.uid);
-
-    await firstEntry
+    await checkDoc
       .set({
         currentlist: currentList,
         mylists: firebase.firestore.FieldValue.arrayUnion('My List'),
         currenttheme: 'default',
         email: user.email,
+        colormode: 'light',
+        createdate: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
-        console.log('currentlist successfully written!');
+        console.log('initialUser successfully written!');
       })
+      .then(setUserInit(true))
       .catch(error => {
         console.error('Error writing document: ', error);
       });
@@ -99,7 +103,7 @@ const Dashboard = ({
       try {
         const data = await itemsCollection.orderBy('id', 'desc').get();
 
-        console.log(data.docs.length);
+        // console.log(data.docs.length);
 
         const listItems = data.docs.map(doc => ({
           ...doc.data(),
@@ -109,6 +113,7 @@ const Dashboard = ({
       } catch (err) {
         setFetchError(err.message);
       } finally {
+        setIsLoading(false);
       }
     };
     getItems();
@@ -129,11 +134,7 @@ const Dashboard = ({
     };
     const listItems = [myNewItem, ...items];
     setItems(listItems);
-    const addedDoc = db
-      .collection('users')
-      .doc(user.uid)
-      .collection(currentList)
-      .doc(`${myNewItem.id}`);
+    const addedDoc = checkDoc.collection(currentList).doc(`${myNewItem.id}`);
     await addedDoc
       .set({ ...myNewItem })
       .then(() => {
@@ -151,11 +152,13 @@ const Dashboard = ({
     setItems(listItems);
     const myItem = items.filter(item => item.id === id);
 
-    const updatedDoc = db
-      .collection('users')
-      .doc(user.uid)
-      .collection(currentList)
-      .doc(`${id}`);
+    // const updatedDoc = db
+    //   .collection('users')
+    //   .doc(user.uid)
+    //   .collection(currentList)
+    //   .doc(`${id}`);
+
+    const updatedDoc = checkDoc.collection(currentList).doc(`${id}`);
 
     await updatedDoc
       .update({
@@ -173,11 +176,7 @@ const Dashboard = ({
   const handleDelete = async id => {
     const listItems = items.filter(item => item.id !== id);
     setItems(listItems);
-    const deletedDoc = db
-      .collection('users')
-      .doc(user.uid)
-      .collection(currentList)
-      .doc(`${id}`);
+    const deletedDoc = checkDoc.collection(currentList).doc(`${id}`);
     await deletedDoc
       .delete()
       .then(() => {
@@ -213,6 +212,7 @@ const Dashboard = ({
 
       {!editItem && !showAbout && (
         <>
+          <ContentNav setUserColorMode={setUserColorMode} themeObj={themeObj} />
           <Stack mb={3} w="100%" p={3}>
             <InputGroup>
               <AddItem
@@ -240,11 +240,11 @@ const Dashboard = ({
           >
             {isLoading && <Loader />}
 
-            {fetchError && (
+            {/* {fetchError && (
               <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>
-            )}
+            )} */}
 
-            {!fetchError && !isLoading && (
+            {!isLoading && (
               <Content
                 setEditItem={setEditItem}
                 themeObj={themeObj}
@@ -259,7 +259,12 @@ const Dashboard = ({
         </>
       )}
 
-      <Footer bg={themeObj.bg} color={themeObj.color} length={items.length} />
+      <Footer
+        user={user}
+        bg={themeObj.bg}
+        color={themeObj.color}
+        length={items.length}
+      />
     </>
   );
 };

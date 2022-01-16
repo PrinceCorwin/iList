@@ -1,9 +1,7 @@
 import Menu from './Menu';
 import { Heading, Flex, Text, Icon } from '@chakra-ui/react';
-import { GrAccessibility } from 'react-icons/gr';
 import { FaHome, FaClipboardList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { GrHome } from 'react-icons/gr';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const Nav = ({
