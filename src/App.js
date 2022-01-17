@@ -121,6 +121,7 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/">
             <Dashboard
+              appTheme={appTheme}
               setUserInit={setUserInit}
               setUserColorMode={setUserColorMode}
               user={user}

@@ -26,7 +26,7 @@ const Layout = ({
       borderColor="teal.600"
       m="auto"
     >
-      <Nav
+      {/* <Nav
         user={user}
         setIsLoading={setIsLoading}
         setShowAbout={setShowAbout}
@@ -35,7 +35,7 @@ const Layout = ({
         setAppTheme={setAppTheme}
         themeObj={themeObj}
         currentList={currentList}
-      />
+      /> */}
 
       {children}
     </Flex>

@@ -1,27 +1,47 @@
 import { Heading, Flex, Text, Icon } from '@chakra-ui/react';
+import Menu from './Menu';
+
 import { FaHome, FaClipboardList } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
-export const ContentNav = ({ setUserColorMode, themeObj }) => {
+export const ContentNav = ({
+  setShowAbout,
+  appTheme,
+  setAppTheme,
+  user,
+  setUserColorMode,
+  themeObj,
+}) => {
   return (
     <Flex
       color={themeObj.color}
-      //   bg={themeObj.bg}
-      bg="red"
+      bg={themeObj.bg}
+      //   bg="red"
       w="100%"
       py={1}
       px={3}
       justifyContent="space-between"
       alignItems="center"
     >
+      <Menu
+        user={user}
+        setShowAbout={setShowAbout}
+        themeObj={themeObj}
+        appTheme={appTheme}
+        setAppTheme={setAppTheme}
+      ></Menu>
       <Link to="/">
-        <Icon as={FaHome} w={6} h={6} color={themeObj.color} />
+        <Flex>
+          <Icon as={FaHome} w={5} h={5} color={themeObj.color} />
+        </Flex>
       </Link>
       <Link to="/mylists">
-        <Icon ml={3} as={FaClipboardList} w={6} h={6} color={themeObj.color} />
+        <Flex>
+          <Icon as={FaClipboardList} w={5} h={5} color={themeObj.color} />
+        </Flex>
       </Link>
-      <ColorModeSwitcher setUserColorMode={setUserColorMode} />
+      <ColorModeSwitcher setUserColorMode={setUserColorMode} user={user} />
     </Flex>
   );
 };
