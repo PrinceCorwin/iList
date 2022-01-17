@@ -23,8 +23,8 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
   var styles = {
     bmBurgerButton: {
       position: 'relative',
-      width: '25px',
-      height: '20px',
+      width: '20px',
+      height: '15px',
     },
     bmBurgerBars: {
       background: `${themeObj.color}`,

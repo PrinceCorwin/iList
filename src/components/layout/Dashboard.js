@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { InputGroup, Stack, Flex } from '@chakra-ui/react';
+import { InputGroup, Stack, Flex, Heading } from '@chakra-ui/react';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
 import Loader from '../iList/Loader';
@@ -18,6 +18,7 @@ const Dashboard = ({
   user,
   showAbout,
   setShowAbout,
+  appTheme,
   setAppTheme,
   setIsLoading,
   isLoading,
@@ -212,7 +213,15 @@ const Dashboard = ({
 
       {!editItem && !showAbout && (
         <>
-          <ContentNav setUserColorMode={setUserColorMode} themeObj={themeObj} />
+          <ContentNav
+            setShowAbout={setShowAbout}
+            appTheme={appTheme}
+            setAppTheme={setAppTheme}
+            user={user}
+            setUserColorMode={setUserColorMode}
+            themeObj={themeObj}
+          />
+
           <Stack mb={3} w="100%" p={3}>
             <InputGroup>
               <AddItem
@@ -222,6 +231,7 @@ const Dashboard = ({
                 handleSubmit={handleSubmit}
               />
             </InputGroup>
+
             <InputGroup>
               <SearchItem
                 themeObj={themeObj}
@@ -245,15 +255,20 @@ const Dashboard = ({
             )} */}
 
             {!isLoading && (
-              <Content
-                setEditItem={setEditItem}
-                themeObj={themeObj}
-                items={items.filter(item =>
-                  item.desc.toLowerCase().includes(search.toLowerCase())
-                )}
-                handleDelete={handleDelete}
-                handleCheck={handleCheck}
-              />
+              <>
+                <Heading px={3} as="h1" w="100%" align="center">
+                  {currentList}
+                </Heading>
+                <Content
+                  setEditItem={setEditItem}
+                  themeObj={themeObj}
+                  items={items.filter(item =>
+                    item.desc.toLowerCase().includes(search.toLowerCase())
+                  )}
+                  handleDelete={handleDelete}
+                  handleCheck={handleCheck}
+                />
+              </>
             )}
           </Flex>
         </>

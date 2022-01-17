@@ -22,7 +22,7 @@ const Nav = ({
       w="100%"
       py={1}
       px={3}
-      justifyContent="space-between"
+      justifyContent="start"
       alignItems="center"
     >
       {user && (
@@ -36,11 +36,11 @@ const Nav = ({
             setAppTheme={setAppTheme}
           ></Menu>
           {!isLoading && (
-            <Heading px={3} as="h1" mr={1} isTruncated>
+            <Heading px={3} as="h1" w="100%" align="center" isTruncated>
               {currentList}
             </Heading>
           )}
-          <Flex justifyContent="flex-end" alignItems="center">
+          {/* <Flex justifyContent="flex-end" alignItems="center">
             <Link to="/">
               <Icon as={FaHome} w={6} h={6} color={themeObj.color} />
             </Link>
@@ -54,7 +54,7 @@ const Nav = ({
               />
             </Link>
             <ColorModeSwitcher />
-          </Flex>
+          </Flex> */}
         </>
       )}
       {!user && (
