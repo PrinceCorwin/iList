@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
-import { InputGroup, Stack, Flex, Heading } from '@chakra-ui/react';
+import {
+  InputGroup,
+  Stack,
+  Flex,
+  Heading,
+  IconButton,
+  Box,
+} from '@chakra-ui/react';
+import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
 import Loader from '../iList/Loader';
@@ -13,6 +21,12 @@ import { db } from '../auth/useAuth';
 import 'firebase/firestore';
 
 const Dashboard = ({
+  showSearch,
+  setShowSearch,
+  showAdd,
+  setShowAdd,
+  editItem,
+  setEditItem,
   setUserInit,
   setUserColorMode,
   user,
@@ -30,7 +44,7 @@ const Dashboard = ({
 }) => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
-  const [editItem, setEditItem] = useState(null);
+  // const [editItem, setEditItem] = useState(null);
 
   const [newItem, setNewItem] = useState('');
 
@@ -193,6 +207,8 @@ const Dashboard = ({
     if (!newItem) return;
     addItem(newItem);
     setNewItem('');
+    showAdd && setShowAdd(false);
+    showSearch && setShowSearch(false);
   };
 
   return (
@@ -213,33 +229,35 @@ const Dashboard = ({
 
       {!editItem && !showAbout && (
         <>
-          <ContentNav
-            setShowAbout={setShowAbout}
-            appTheme={appTheme}
-            setAppTheme={setAppTheme}
-            user={user}
-            setUserColorMode={setUserColorMode}
-            themeObj={themeObj}
-          />
-
-          <Stack mb={3} w="100%" p={3}>
-            <InputGroup>
+          {showAdd && (
+            <>
+              <Box
+                w="100%"
+                h="100%"
+                bg="black"
+                opacity=".5"
+                position="absolute"
+                zIndex="1000"
+              ></Box>
               <AddItem
+                setShowAdd={setShowAdd}
                 themeObj={themeObj}
                 newItem={newItem}
                 setNewItem={setNewItem}
                 handleSubmit={handleSubmit}
               />
-            </InputGroup>
+            </>
+          )}
 
-            <InputGroup>
-              <SearchItem
-                themeObj={themeObj}
-                search={search}
-                setSearch={setSearch}
-              />
-            </InputGroup>
-          </Stack>
+          {showSearch && (
+            <SearchItem
+              showSearch={showSearch}
+              setShowSearch={setShowSearch}
+              themeObj={themeObj}
+              search={search}
+              setSearch={setSearch}
+            />
+          )}
           <Flex
             w="100%"
             flexDirection="column"
@@ -250,15 +268,42 @@ const Dashboard = ({
           >
             {isLoading && <Loader />}
 
-            {/* {fetchError && (
-              <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>
-            )} */}
-
             {!isLoading && (
               <>
-                <Heading px={3} as="h1" w="100%" align="center">
-                  {currentList}
-                </Heading>
+                <Flex
+                  bg={themeObj.bgApp}
+                  position="sticky"
+                  top="0"
+                  justifyContent="space-between"
+                  py={3}
+                  zIndex={988}
+                >
+                  <Heading px={3} as="h1" w="100%">
+                    {currentList}
+                  </Heading>
+                  <Flex>
+                    <IconButton
+                      size="sm"
+                      m={1}
+                      variant="ghost"
+                      aria-label="Add Item"
+                      icon={<AddIcon />}
+                      onClick={() => {
+                        setShowAdd(!showAdd);
+                      }}
+                    />
+                    <IconButton
+                      size="sm"
+                      m={1}
+                      variant="ghost"
+                      aria-label="Search Items"
+                      icon={<SearchIcon />}
+                      onClick={() => {
+                        setShowSearch(!showSearch);
+                      }}
+                    />
+                  </Flex>
+                </Flex>
                 <Content
                   setEditItem={setEditItem}
                   themeObj={themeObj}

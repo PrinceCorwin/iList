@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 export const ContentNav = ({
+  editItem,
+  setEditItem,
+  showAbout,
   setShowAbout,
   appTheme,
   setAppTheme,
@@ -26,18 +29,29 @@ export const ContentNav = ({
     >
       <Menu
         user={user}
+        showAbout={showAbout}
         setShowAbout={setShowAbout}
         themeObj={themeObj}
         appTheme={appTheme}
         setAppTheme={setAppTheme}
       ></Menu>
       <Link to="/">
-        <Flex>
+        <Flex
+          onClick={() => {
+            showAbout && setShowAbout(false);
+            editItem && setEditItem(false);
+          }}
+        >
           <Icon as={FaHome} w={5} h={5} color={themeObj.color} />
         </Flex>
       </Link>
       <Link to="/mylists">
-        <Flex>
+        <Flex
+          onClick={() => {
+            showAbout && setShowAbout(false);
+            editItem && setEditItem(false);
+          }}
+        >
           <Icon as={FaClipboardList} w={5} h={5} color={themeObj.color} />
         </Flex>
       </Link>

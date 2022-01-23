@@ -1,4 +1,7 @@
 import {
+  Box,
+  OrderedList,
+  ListItem,
   IconButton,
   Button,
   Link,
@@ -37,7 +40,7 @@ const About = ({ setShowAbout, themeObj }) => {
       <Flex justifyContent="space-around" mb={6}>
         <VStack spacing={3} alignItems="flex-start">
           <Heading size="lg" py={3}>
-            About iList...
+            About iList 2.0
           </Heading>
           <Heading size="md">We all make lists.</Heading>
           <VStack spacing={1} alignItems="flex-start">
@@ -159,15 +162,16 @@ const About = ({ setShowAbout, themeObj }) => {
         </Text>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           The first time you login, a default list will be created named "My
-          List"
+          List". You may change the name of this list or create new lists (see
+          below)
         </Text>
-        <Heading alignSelf="flex-start" size="sm">
-          Add and Edit List Items
-        </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           You may immediately begin adding items to 'My List' by typing the
           description into the 'Add Item' input field at the top of the page
         </Text>
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
+          Add and Edit List Items
+        </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           Added list items may be edited by clicking on the description text or
           deleted by clicking the Trash Can icon to the right of the description
@@ -176,20 +180,32 @@ const About = ({ setShowAbout, themeObj }) => {
           Check the list items as complete by clicking the checkbox to the left
           of the description
         </Text>
-        <Heading alignSelf="flex-start" size="sm">
-          Edit List Name
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
+          Edit List Name Or Delete List
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
-          List names can be changed by clicking "My Lists" in the menu
-          (hamburger menu - top, left) and clicking the Edit icon to the right
-          of the list name
-        </Text>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
-          Lists may also be deleted on the "My Lists" page by clicking the Trash
-          Can icon to the right of the Edit icon (list can not be deleted if it
-          is the only remaining list, but it's name can still be changed)
-        </Text>
-        <Heading alignSelf="flex-start" size="sm">
+        <Box p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+          <Heading size="sm" mb={3}>
+            To Edit A List Name:
+          </Heading>
+          <OrderedList>
+            <ListItem>
+              Click the Lists icon (looks like a clipboard) in the top tool bar,
+              or select "My Lists" from the menu.
+            </ListItem>
+            <ListItem>
+              Click the Edit icon to the right of the list name{' '}
+            </ListItem>
+          </OrderedList>
+          <Heading size="sm" my={3}>
+            To Delete a List:
+          </Heading>
+          <Text>
+            While on the "My Lists" page (see step 1 above), click the Trash Can
+            icon to the right of the Edit icon (list can not be deleted if it is
+            the only remaining list, but it's name can still be changed)
+          </Text>
+        </Box>
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
           View or Create New List
         </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
@@ -206,7 +222,7 @@ const About = ({ setShowAbout, themeObj }) => {
           When a new list is created, it will become the current list. You will
           be returned to the home page ready to add items to that list
         </Text>
-        <Heading alignSelf="flex-start" size="sm">
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
           Change App Theme
         </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
@@ -214,14 +230,14 @@ const About = ({ setShowAbout, themeObj }) => {
           Your selection will be saved to your account preferences until another
           is selected
         </Text>
-        <Heading alignSelf="flex-start" size="sm">
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
           Logout or Delete Account
         </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
           You may logout or delete your account in the menu. WARNING: Deleting
           account can NOT be undone. All data will be lost
         </Text>{' '}
-        <Heading alignSelf="flex-start" size="sm">
+        <Heading alignSelf="flex-start" size="sm" pt={3}>
           Contact Us
         </Heading>
         <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>

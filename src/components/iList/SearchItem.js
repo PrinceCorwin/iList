@@ -1,16 +1,25 @@
 import { FaSearch } from 'react-icons/fa';
+import { CloseIcon } from '@chakra-ui/icons';
+
 import {
   InputGroup,
+  IconButton,
   Icon,
   Input,
   FormControl,
   InputRightAddon,
 } from '@chakra-ui/react';
 
-const SearchItem = ({ themeObj, search, setSearch }) => {
+const SearchItem = ({
+  showSearch,
+  setShowSearch,
+  themeObj,
+  search,
+  setSearch,
+}) => {
   return (
     <FormControl label="Search" onSubmit={e => e.preventDefault()}>
-      <InputGroup size="sm">
+      <InputGroup size="sm" p={3}>
         <Input
           type="text"
           autoComplete="off"
@@ -20,11 +29,16 @@ const SearchItem = ({ themeObj, search, setSearch }) => {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-
-        <InputRightAddon
-          bg={themeObj.bgIcon}
+        <IconButton
           size="sm"
-          children={<Icon color={themeObj.colorIcon} as={FaSearch} />}
+          // m={1}
+          variant="outline"
+          aria-label="Search List"
+          icon={<CloseIcon />}
+          color={themeObj.deleteIcon}
+          onClick={() => {
+            setShowSearch(!showSearch);
+          }}
         />
       </InputGroup>
     </FormControl>

@@ -3,6 +3,8 @@ import { extendTheme } from '@chakra-ui/react';
 export const iListTheme = extendTheme({
   colors: {
     default: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#3F51B5',
       bgLight: '#303F9F',
       colorDark: '#F7FAFC',
@@ -29,6 +31,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: '#6082B6',
     },
     minimalist: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#F7FAFC',
       bgLight: '#F7FAFC',
       colorDark: '#1A202C',
@@ -55,6 +59,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: '#A0AEC0',
     },
     codelife: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#4FD1C5',
       bgLight: 'teal',
       colorDark: '#F7FAFC',
@@ -81,6 +87,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: 'red',
     },
     passion: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#FF69B4',
       bgLight: '#FF69B4',
       colorDark: '#F7FAFC',
@@ -107,6 +115,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: 'red',
     },
     woodlands: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#795548',
       bgLight: '#8BC34A',
       colorDark: '#DCEDC8',
@@ -133,6 +143,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: '#689F38',
     },
     ocean: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#1976D2',
       bgLight: '#2196F3',
       colorDark: '#FFFFFF',
@@ -159,6 +171,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: '#1976D2',
     },
     harvest: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#FFA000',
       bgLight: '#FFC107',
       colorDark: '#F7FAFC',
@@ -185,6 +199,8 @@ export const iListTheme = extendTheme({
       deleteOutlineLight: '#8BC34A',
     },
     purple: {
+      bgAppDark: '#1A202C',
+      bgAppLight: '#FFFFFF',
       bgDark: '#7B1FA2',
       bgLight: '#9C27B0',
       colorDark: '#F7FAFC',

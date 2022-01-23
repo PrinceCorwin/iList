@@ -81,6 +81,10 @@ const LoginForm = () => {
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input autoFocus name="email" placeholder="Email" ref={register()} />
+          <Alert status="info" my={3} py={1} px={3}>
+            <AlertIcon />
+            We will never share or sell your info
+          </Alert>
           <Button
             mt={4}
             colorScheme="teal"

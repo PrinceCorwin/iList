@@ -19,7 +19,9 @@ function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [userColorMode, setUserColorMode] = useState('dark');
   const [userInit, setUserInit] = useState(false);
-
+  const [editItem, setEditItem] = useState(null);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   // const [loaderLoading, setLoaderLoading] = useState(true);
   const [currentList, setCurrentList] = useState('My List');
@@ -59,6 +61,8 @@ function App() {
   // create global theme object
   const themeColors = iListTheme.colors[appTheme];
   const themeObj = {
+    bgApp: useColorModeValue(themeColors.bgAppLight, themeColors.bgAppDark),
+
     bg: useColorModeValue(themeColors.bgLight, themeColors.bgDark),
 
     color: useColorModeValue(themeColors.colorLight, themeColors.colorDark),
@@ -109,8 +113,12 @@ function App() {
   return (
     <Router>
       <Layout
+        editItem={editItem}
+        setEditItem={setEditItem}
+        setUserColorMode={setUserColorMode}
         user={user}
         setIsLoading={setIsLoading}
+        showAbout={showAbout}
         setShowAbout={setShowAbout}
         isLoading={isLoading}
         appTheme={appTheme}
@@ -121,6 +129,12 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/">
             <Dashboard
+              showSearch={showSearch}
+              setShowSearch={setShowSearch}
+              showAdd={showAdd}
+              setShowAdd={setShowAdd}
+              editItem={editItem}
+              setEditItem={setEditItem}
               appTheme={appTheme}
               setUserInit={setUserInit}
               setUserColorMode={setUserColorMode}
