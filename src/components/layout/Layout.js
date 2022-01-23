@@ -18,6 +18,7 @@ const Layout = ({
 }) => {
   return (
     <Flex
+      bg={themeObj.bgApp}
       overflow="hidden"
       position="relative"
       flexDirection="column"

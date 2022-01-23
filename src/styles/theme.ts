@@ -4,7 +4,7 @@ export const iListTheme = extendTheme({
   colors: {
     default: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#3F51B5',
       bgLight: '#303F9F',
       colorDark: '#F7FAFC',
@@ -32,7 +32,7 @@ export const iListTheme = extendTheme({
     },
     minimalist: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#F7FAFC',
       bgLight: '#F7FAFC',
       colorDark: '#1A202C',
@@ -60,7 +60,7 @@ export const iListTheme = extendTheme({
     },
     codelife: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#4FD1C5',
       bgLight: 'teal',
       colorDark: '#F7FAFC',
@@ -88,7 +88,7 @@ export const iListTheme = extendTheme({
     },
     passion: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#FF69B4',
       bgLight: '#FF69B4',
       colorDark: '#F7FAFC',
@@ -116,7 +116,7 @@ export const iListTheme = extendTheme({
     },
     woodlands: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#795548',
       bgLight: '#8BC34A',
       colorDark: '#DCEDC8',
@@ -144,7 +144,7 @@ export const iListTheme = extendTheme({
     },
     ocean: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#1976D2',
       bgLight: '#2196F3',
       colorDark: '#FFFFFF',
@@ -172,7 +172,7 @@ export const iListTheme = extendTheme({
     },
     harvest: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#FFA000',
       bgLight: '#FFC107',
       colorDark: '#F7FAFC',
@@ -200,7 +200,7 @@ export const iListTheme = extendTheme({
     },
     purple: {
       bgAppDark: '#1A202C',
-      bgAppLight: '#FFFFFF',
+      bgAppLight: '#F7FAFC',
       bgDark: '#7B1FA2',
       bgLight: '#9C27B0',
       colorDark: '#F7FAFC',
