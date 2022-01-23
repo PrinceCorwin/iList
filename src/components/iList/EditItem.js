@@ -4,6 +4,7 @@ import { db } from '../auth/useAuth';
 import {
   Button,
   Input,
+  Text,
   Center,
   FormControl,
   Flex,
@@ -48,74 +49,89 @@ const EditItem = ({
 
   return (
     <Flex w="100%" grow="1" direction="column" p={6}>
-      <Center
+      {/* <Center
         mb="1rem"
         borderRadius="lg"
         p={3}
         bg={themeObj.bg}
         color={themeObj.color}
-      >
-        <Heading size="md">Edit Item Description</Heading>
-      </Center>
-      <Center
-        mb="1rem"
+      > */}
+      <Flex
+        w="100%"
+        bg={themeObj.bg}
+        direction="column"
+        p={6}
         borderRadius="lg"
-        p={3}
-        bg={themeObj.bgItem}
-        color={themeObj.colorItem}
+        alignItems="flex-start"
       >
-        {newDesc.length ? newDesc : editItem.desc}
-      </Center>
-      <form
-        label="New Item Description"
-        onSubmit={handleSubmit}
-        style={{ width: '100%' }}
-      >
-        <FormControl>
-          <Input
-            variant="outline"
-            autoFocus
-            autoComplete="off"
-            type="text"
-            id="newDesc"
-            color="{themeObj.colorItem}"
-            bg={themeObj.bgItem}
-            placeholder="New Item Description"
-            required
-            value={newDesc}
-            onChange={e => setNewDesc(e.target.value)}
-          />
-          <Flex mt={4} w="50%" justify="space-between">
-            <Button
-              variant="solid"
-              mt={4}
-              type="submit"
-              aria-label="Rename List"
-              // color="#F7FAFC"
-              colorScheme="green"
-            >
-              Update
-            </Button>
-            <Button
-              variant="solid"
-              mt={4}
-              type="button"
-              onClick={() => {
-                setEditItem(null);
-                setNewDesc(`${editItem.desc}`);
-              }}
-              aria-label="cancel"
-              // color="#F7FAFC"
-              // _hover={{
-              //   background: `${themeObj.deleteIcon}`,
-              // }}
-              colorScheme="red"
-            >
-              Cancel
-            </Button>
-          </Flex>
-        </FormControl>
-      </form>
+        <Heading size="lg" color={themeObj.color}>
+          Edit Item Description
+        </Heading>
+        {/* </Center> */}
+        <Text
+          mb="1rem"
+          borderRadius="lg"
+          py={3}
+          // bg={themeObj.bgItem}
+          // color={themeObj.colorItem}
+          bg={themeObj.bg}
+          color={themeObj.color}
+        >
+          Item Desc: {newDesc.length ? newDesc : editItem.desc}
+        </Text>
+        <form
+          label="New Item Description"
+          onSubmit={handleSubmit}
+          style={{ width: '100%' }}
+        >
+          <FormControl>
+            <Input
+              variant="outline"
+              autoFocus
+              autoComplete="off"
+              type="text"
+              id="newDesc"
+              color="{themeObj.colorItem}"
+              bg={themeObj.bgItem}
+              placeholder="New Item Description"
+              required
+              value={newDesc}
+              onChange={e => setNewDesc(e.target.value)}
+            />
+            <Flex justifyContent="flex-start">
+              <Button
+                variant="solid"
+                mt={8}
+                mr={8}
+                type="submit"
+                aria-label="Rename List"
+                // color="#F7FAFC"
+                colorScheme="green"
+              >
+                Update
+              </Button>
+              <Button
+                variant="solid"
+                mt={8}
+                // mr={3}
+                type="button"
+                onClick={() => {
+                  setEditItem(null);
+                  setNewDesc(`${editItem.desc}`);
+                }}
+                aria-label="cancel"
+                // color="#F7FAFC"
+                // _hover={{
+                //   background: `${themeObj.deleteIcon}`,
+                // }}
+                colorScheme="red"
+              >
+                Cancel
+              </Button>
+            </Flex>
+          </FormControl>
+        </form>
+      </Flex>
     </Flex>
   );
 };

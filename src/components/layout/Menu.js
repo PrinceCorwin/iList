@@ -16,7 +16,14 @@ import { FaGithub } from 'react-icons/fa';
 import ThemeListItem from './ThemeListItem';
 import { Link } from 'react-router-dom';
 
-const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
+const Menu = ({
+  user,
+  showAbout,
+  setShowAbout,
+  appTheme,
+  setAppTheme,
+  themeObj,
+}) => {
   const { logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   // const burgerBarColor = themeObj.color;
@@ -147,14 +154,35 @@ const Menu = ({ user, setShowAbout, appTheme, setAppTheme, themeObj }) => {
       width={'200px'}
       styles={styles}
     >
-      <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
+      <Box
+        _hover={{ fontWeight: 'semibold' }}
+        onClick={() => {
+          showAbout && setShowAbout(false);
+          handleOnClose();
+        }}
+        py={2}
+      >
         <Link to="/">Home</Link>
       </Box>
       <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
-        <Link to="/newlist">New List</Link>
+        <Link
+          to="/newlist"
+          onClick={() => {
+            showAbout && setShowAbout(false);
+          }}
+        >
+          New List
+        </Link>
       </Box>
       <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
-        <Link to="/mylists">My Lists</Link>
+        <Link
+          to="/mylists"
+          onClick={() => {
+            showAbout && setShowAbout(false);
+          }}
+        >
+          My Lists
+        </Link>
       </Box>
       <DropDown>
         <MenuButton m={3} size="sm" as={Button} rightIcon={<ChevronDownIcon />}>
