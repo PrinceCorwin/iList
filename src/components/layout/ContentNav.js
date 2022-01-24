@@ -27,35 +27,46 @@ export const ContentNav = ({
       justifyContent="space-between"
       alignItems="center"
     >
-      <Menu
-        user={user}
-        showAbout={showAbout}
-        setShowAbout={setShowAbout}
-        themeObj={themeObj}
-        appTheme={appTheme}
-        setAppTheme={setAppTheme}
-      ></Menu>
-      <Link to="/">
-        <Flex
-          onClick={() => {
-            showAbout && setShowAbout(false);
-            editItem && setEditItem(false);
-          }}
-        >
-          <Icon as={FaHome} w={5} h={5} color={themeObj.color} />
-        </Flex>
-      </Link>
-      <Link to="/mylists">
-        <Flex
-          onClick={() => {
-            showAbout && setShowAbout(false);
-            editItem && setEditItem(false);
-          }}
-        >
-          <Icon as={FaClipboardList} w={5} h={5} color={themeObj.color} />
-        </Flex>
-      </Link>
-      <ColorModeSwitcher setUserColorMode={setUserColorMode} user={user} />
+      {user && (
+        <>
+          <Menu
+            user={user}
+            showAbout={showAbout}
+            setShowAbout={setShowAbout}
+            themeObj={themeObj}
+            appTheme={appTheme}
+            setAppTheme={setAppTheme}
+          ></Menu>
+          <Link to="/">
+            <Flex
+              onClick={() => {
+                showAbout && setShowAbout(false);
+                editItem && setEditItem(false);
+              }}
+            >
+              <Icon as={FaHome} w={5} h={5} color={themeObj.color} />
+            </Flex>
+          </Link>
+          <Link to="/mylists">
+            <Flex
+              onClick={() => {
+                showAbout && setShowAbout(false);
+                editItem && setEditItem(false);
+              }}
+            >
+              <Icon as={FaClipboardList} w={5} h={5} color={themeObj.color} />
+            </Flex>
+          </Link>
+          <ColorModeSwitcher setUserColorMode={setUserColorMode} user={user} />
+        </>
+      )}
+      {!user && (
+        <Link to="/login">
+          <Text py={2} fontSize="md" mr={8}>
+            Login
+          </Text>
+        </Link>
+      )}
     </Flex>
   );
 };
