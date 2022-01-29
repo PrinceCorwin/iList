@@ -29,6 +29,20 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
+  const signInAnonymously = () => {
+    console.log('signing in');
+    firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        console.log('signed in');
+      })
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+  };
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const sendSignInLinkToEmail = email => {
@@ -77,6 +91,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const values = {
+    signInAnonymously,
     user,
     isAuthenticating,
     sendSignInLinkToEmail,

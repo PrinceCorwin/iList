@@ -109,7 +109,6 @@ function App() {
     ),
   };
   // end theme object
-
   return (
     <Router>
       <Layout
