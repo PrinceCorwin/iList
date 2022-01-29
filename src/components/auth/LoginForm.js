@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import iListLogo from '../../images/checkbox2.png';
+import { useHistory } from 'react-router-dom';
 import {
   Text,
   Image,
@@ -17,8 +18,9 @@ import { useAuth } from './useAuth';
 
 const LoginForm = () => {
   const { handleSubmit, register, errors, setError, formState } = useForm();
+  const history = useHistory();
 
-  const { sendSignInLinkToEmail } = useAuth();
+  const { sendSignInLinkToEmail, signInAnonymously } = useAuth();
 
   const onSubmit = async data => {
     try {
@@ -92,6 +94,14 @@ const LoginForm = () => {
             type="submit"
           >
             Submit
+          </Button>
+          <Button
+            onClick={() => {
+              signInAnonymously();
+              history.push('/');
+            }}
+          >
+            test
           </Button>
         </FormControl>
       </form>
