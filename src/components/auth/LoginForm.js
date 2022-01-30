@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import iListLogo from '../../images/checkbox2.png';
 import { useHistory } from 'react-router-dom';
 import {
+  Center,
   Text,
   Image,
   Heading,
@@ -25,6 +26,19 @@ const LoginForm = () => {
   const onSubmit = async data => {
     try {
       await sendSignInLinkToEmail(data.email);
+    } catch (error) {
+      setError('email', {
+        type: 'manual',
+        message: error.message,
+      });
+    }
+  };
+
+  const onDemo = async () => {
+    try {
+      await signInAnonymously();
+
+      history.push('/');
     } catch (error) {
       setError('email', {
         type: 'manual',
@@ -95,16 +109,32 @@ const LoginForm = () => {
           >
             Submit
           </Button>
-          <Button
-            onClick={() => {
-              signInAnonymously();
-              history.push('/');
-            }}
-          >
-            test
-          </Button>
         </FormControl>
       </form>
+      <Text fontStyle="italic" mt={6}>
+        Or, give iLIST a test run...
+      </Text>
+      <Flex mt={3} align="center" p={3} bg="lightgray" borderRadius="lg">
+        <Button
+          colorScheme="red"
+          onClick={() => {
+            onDemo();
+            // signInAnonymously();
+          }}
+        >
+          Demo
+        </Button>
+        <Flex
+          direction="column"
+          justify="center"
+          align="center"
+          p={3}
+          color="black"
+        >
+          <Text>User data will not be saved.</Text>
+          <Text> Account deleted after 2 hours.</Text>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };
