@@ -14,7 +14,7 @@ const Footer = ({ user, bg, color, length }) => {
         {length} List {length === 1 ? 'item' : 'items'}
       </p>
       <Text align="end" w="250px" isTruncated>
-        {user.email}
+        {user.email ? user.email : 'Demo Mode'}
       </Text>
     </Flex>
   );

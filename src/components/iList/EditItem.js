@@ -10,6 +10,8 @@ import {
   Flex,
   Heading,
 } from '@chakra-ui/react';
+import Backdrop from './Backdrop';
+import AddEditModal from './AddEditModal';
 
 const EditItem = ({
   user,
@@ -22,7 +24,7 @@ const EditItem = ({
 }) => {
   const checkDoc = db.collection('users').doc(user.uid);
 
-  const [newDesc, setNewDesc] = useState('');
+  const [newDesc, setNewDesc] = useState(editItem.desc);
   const handleSubmit = async e => {
     e.preventDefault();
     try {
@@ -48,91 +50,18 @@ const EditItem = ({
   };
 
   return (
-    <Flex w="100%" grow="1" direction="column" p={6}>
-      {/* <Center
-        mb="1rem"
-        borderRadius="lg"
-        p={3}
-        bg={themeObj.bg}
-        color={themeObj.color}
-      > */}
-      <Flex
-        w="100%"
-        bg={themeObj.bg}
-        direction="column"
-        p={6}
-        borderRadius="lg"
-        alignItems="flex-start"
-      >
-        <Heading size="lg" color={themeObj.color}>
-          Edit Item Description
-        </Heading>
-        {/* </Center> */}
-        <Text
-          mb="1rem"
-          borderRadius="lg"
-          py={3}
-          // bg={themeObj.bgItem}
-          // color={themeObj.colorItem}
-          bg={themeObj.bg}
-          color={themeObj.color}
-        >
-          Item Desc: {newDesc.length ? newDesc : editItem.desc}
-        </Text>
-        <form
-          label="New Item Description"
-          onSubmit={handleSubmit}
-          style={{ width: '100%' }}
-        >
-          <FormControl>
-            <Input
-              variant="outline"
-              autoFocus
-              autoComplete="off"
-              type="text"
-              id="newDesc"
-              color="{themeObj.colorItem}"
-              bg={themeObj.bgItem}
-              placeholder="New Item Description"
-              required
-              value={newDesc}
-              onChange={e => setNewDesc(e.target.value)}
-            />
-            <Flex justifyContent="flex-start">
-              <Button
-                variant="solid"
-                mt={8}
-                mr={8}
-                type="submit"
-                aria-label="Rename List"
-                // color="#F7FAFC"
-                colorScheme="green"
-              >
-                Update
-              </Button>
-              <Button
-                variant="solid"
-                mt={8}
-                // mr={3}
-                type="button"
-                onClick={() => {
-                  setEditItem(null);
-                  setNewDesc(`${editItem.desc}`);
-                }}
-                aria-label="cancel"
-                // color="#F7FAFC"
-                // _hover={{
-                //   background: `${themeObj.deleteIcon}`,
-                // }}
-                colorScheme="red"
-              >
-                Cancel
-              </Button>
-            </Flex>
-          </FormControl>
-        </form>
-      </Flex>
-    </Flex>
+    <>
+      <Backdrop />
+      <AddEditModal
+        heading="Edit Item"
+        show="edit"
+        themeObj={themeObj}
+        newItem={newDesc}
+        setterItem={setNewDesc}
+        handleSubmit={handleSubmit}
+        setterShow={setEditItem}
+      />
+    </>
   );
 };
 
