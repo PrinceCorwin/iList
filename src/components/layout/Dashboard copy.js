@@ -20,7 +20,7 @@ import Footer from '../iList/Footer';
 import { db } from '../auth/useAuth';
 import 'firebase/firestore';
 import Backdrop from '../iList/Backdrop';
-import AddEditModal from '../iList/AddEditModal';
+
 const Dashboard = ({
   showSearch,
   setShowSearch,
@@ -231,27 +231,39 @@ const Dashboard = ({
       {!showAbout && (
         <>
           {editItem && (
-            <EditItem
-              items={items}
-              setItems={setItems}
-              currentList={currentList}
-              user={user}
-              editItem={editItem}
-              setEditItem={setEditItem}
-              themeObj={themeObj}
-            />
+            <>
+              <Backdrop />
+              <EditItem
+                items={items}
+                setItems={setItems}
+                currentList={currentList}
+                user={user}
+                editItem={editItem}
+                setEditItem={setEditItem}
+                themeObj={themeObj}
+              />
+            </>
           )}
 
           {showAdd && (
-            <AddEditModal
-              heading="Add Item"
-              show="add"
-              themeObj={themeObj}
-              newItem={newItem}
-              setterItem={setNewItem}
-              handleSubmit={handleSubmit}
-              setterShow={setShowAdd}
-            />
+            <>
+              <Backdrop />
+              {/* <Box
+                w="100%"
+                h="100%"
+                bg="black"
+                opacity=".5"
+                position="absolute"
+                zIndex="1000"
+              ></Box> */}
+              <AddItem
+                setShowAdd={setShowAdd}
+                themeObj={themeObj}
+                newItem={newItem}
+                setNewItem={setNewItem}
+                handleSubmit={handleSubmit}
+              />
+            </>
           )}
 
           {showSearch && (

@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import Nav from './Nav';
 import { ContentNav } from './ContentNav';
 const Layout = ({
   editItem,
@@ -31,16 +30,6 @@ const Layout = ({
       borderColor="teal.600"
       m="auto"
     >
-      {/* <Nav
-        user={user}
-        setIsLoading={setIsLoading}
-        setShowAbout={setShowAbout}
-        isLoading={isLoading}
-        appTheme={appTheme}
-        setAppTheme={setAppTheme}
-        themeObj={themeObj}
-        currentList={currentList}
-      /> */}
       <ContentNav
         editItem={editItem}
         setEditItem={setEditItem}

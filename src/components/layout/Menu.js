@@ -34,7 +34,7 @@ const Menu = ({
       height: '15px',
     },
     bmBurgerBars: {
-      background: `${themeObj.color}`,
+      background: `${themeObj.colorIcon}`,
     },
     bmBurgerBarsHover: {
       // this doesn't work
@@ -115,7 +115,7 @@ const Menu = ({
       bg: '#FFC107',
     },
     {
-      name: 'Minimalist',
+      name: 'Headlines',
       color: '#1A202C',
       bg: 'white',
     },

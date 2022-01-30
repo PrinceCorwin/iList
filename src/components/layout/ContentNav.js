@@ -16,6 +16,11 @@ export const ContentNav = ({
   setUserColorMode,
   themeObj,
 }) => {
+  const clearShow = () => {
+    showAbout && setShowAbout(false);
+    editItem && setEditItem(false);
+  };
+
   return (
     <Flex
       color={themeObj.color}
@@ -38,23 +43,18 @@ export const ContentNav = ({
             setAppTheme={setAppTheme}
           ></Menu>
           <Link to="/">
-            <Flex
-              onClick={() => {
-                showAbout && setShowAbout(false);
-                editItem && setEditItem(false);
-              }}
-            >
-              <Icon as={FaHome} w={5} h={5} color={themeObj.color} />
+            <Flex onClick={clearShow}>
+              <Icon as={FaHome} w={5} h={5} color={themeObj.colorIcon} />
             </Flex>
           </Link>
           <Link to="/mylists">
-            <Flex
-              onClick={() => {
-                showAbout && setShowAbout(false);
-                editItem && setEditItem(false);
-              }}
-            >
-              <Icon as={FaClipboardList} w={5} h={5} color={themeObj.color} />
+            <Flex onClick={clearShow}>
+              <Icon
+                as={FaClipboardList}
+                w={5}
+                h={5}
+                color={themeObj.colorIcon}
+              />
             </Flex>
           </Link>
           <ColorModeSwitcher setUserColorMode={setUserColorMode} user={user} />
