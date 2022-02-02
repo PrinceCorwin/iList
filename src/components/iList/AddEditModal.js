@@ -15,9 +15,9 @@ const AddEditModal = ({
       <Backdrop />
 
       <motion.div
-        key="modal"
-        initial={{ x: 400, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        // key="modal"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}
         exit={{ x: '100vw' }}
         style={{
@@ -25,7 +25,7 @@ const AddEditModal = ({
           borderRadius: '5px',
           backgroundColor: themeObj.bgItem,
           flexDirection: 'column',
-          width: '400px',
+          width: '90%',
           position: 'absolute',
           zIndex: 2000,
           padding: '20px 20px',
@@ -47,11 +47,16 @@ const AddEditModal = ({
         // left="20px"
       >
         {/* <InputGroup> */}
-        <Heading size="md" color={themeObj.colorItem} mb={3} key="heading">
+        <Heading
+          size="md"
+          color={themeObj.colorItem}
+          mb={3}
+          //  key="heading"
+        >
           {heading}
         </Heading>
         <Textarea
-          key="texarea"
+          // key="texarea"
           bg={themeObj.bgItem}
           color={themeObj.colorItem}
           autoFocus
@@ -62,9 +67,14 @@ const AddEditModal = ({
           value={newItem}
           onChange={e => setterItem(e.target.value)}
         />
-        <Flex w="60%" justifyContent="space-between" mt={3} key="flex">
+        <Flex
+          w="60%"
+          justifyContent="space-between"
+          mt={3}
+          // key="flex"
+        >
           <Button
-            key="button1"
+            // key="button1"
             size="sm"
             variant="solid"
             aria-label="Rename List"
@@ -74,7 +84,7 @@ const AddEditModal = ({
             {heading}
           </Button>
           <Button
-            key="button2"
+            // key="button2"
             size="sm"
             variant="solid"
             onClick={() => {
