@@ -1,14 +1,6 @@
-import React from 'react';
-import {
-  Button,
-  Heading,
-  IconButton,
-  InputGroup,
-  Input,
-  Textarea,
-  Flex,
-} from '@chakra-ui/react';
+import { Button, Heading, Textarea, Flex } from '@chakra-ui/react';
 import Backdrop from './Backdrop';
+import { motion } from 'framer-motion';
 
 const AddEditModal = ({
   heading,
@@ -16,76 +8,85 @@ const AddEditModal = ({
   newItem,
   setterItem,
   handleSubmit,
-  show,
   setterShow,
 }) => {
   return (
     <>
       <Backdrop />
-      <Flex
-        borderRadius={5}
-        direction="column"
-        // label="Add Item"
-        // onSubmit={handleSubmit}
-        bg={themeObj.bgItem}
-        // mx={3}
-        w="90%"
-        py={3}
-        px={4}
-        position="absolute"
-        zIndex="1000"
-        top="50px"
-        left="20px"
+
+      <motion.div
+        key="modal"
+        initial={{ x: 400, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        exit={{ x: '100vw' }}
+        style={{
+          display: 'flex',
+          borderRadius: '5px',
+          backgroundColor: themeObj.bgItem,
+          flexDirection: 'column',
+          width: '400px',
+          position: 'absolute',
+          zIndex: 2000,
+          padding: '20px 20px',
+          top: '100px',
+          left: '20px',
+        }}
+        // borderRadius={5}
+        // direction="column"
+        // // label="Add Item"
+        // // onSubmit={handleSubmit}
+        // bg={themeObj.bgItem}
+        // // mx={3}
+        // w="400px"
+        // py={3}
+        // px={4}
+        // position="absolute"
+        // zIndex="2000"
+        // top="100px"
+        // left="20px"
       >
         {/* <InputGroup> */}
-        <Heading size="md" color={themeObj.colorItem} mb={3}>
+        <Heading size="md" color={themeObj.colorItem} mb={3} key="heading">
           {heading}
         </Heading>
         <Textarea
+          key="texarea"
           bg={themeObj.bgItem}
           color={themeObj.colorItem}
-          // variant="outline"
           autoFocus
           autoComplete="off"
-          // ref={inputRef}
-          // type="text"
           id="addItem"
           placeholder="Item Description"
           isRequired
           value={newItem}
           onChange={e => setterItem(e.target.value)}
         />
-
-        <Flex w="60%" justifyContent="space-between" mt={3}>
+        <Flex w="60%" justifyContent="space-between" mt={3} key="flex">
           <Button
+            key="button1"
             size="sm"
             variant="solid"
             aria-label="Rename List"
-            // color="#F7FAFC"
             colorScheme="green"
             onClick={handleSubmit}
           >
             {heading}
           </Button>
           <Button
+            key="button2"
             size="sm"
             variant="solid"
-            // mr={3}
-
             onClick={() => {
-              setterShow(false);
+              setterShow(null);
             }}
             aria-label="cancel"
-            // color="#F7FAFC"
-            // _hover={{
-            //   background: `${themeObj.deleteIcon}`,
-            // }}
             colorScheme="red"
           >
             Cancel
           </Button>
         </Flex>
-      </Flex>
+      </motion.div>
     </>
   );
 };
