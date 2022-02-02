@@ -18,7 +18,7 @@ const Layout = ({
   return (
     <Flex
       bg={themeObj.bgApp}
-      overflow="visible"
+      overflow="hidden"
       position="relative"
       top="0"
       left="0"
