@@ -18,13 +18,15 @@ const Layout = ({
   return (
     <Flex
       bg={themeObj.bgApp}
-      overflow="hidden"
+      overflow="visible"
       position="relative"
+      top="0"
+      left="0"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
       h="100vh"
-      w="100%"
+      w="100vw"
       maxW="500px"
       border="1px"
       borderColor="teal.600"

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import {
   InputGroup,
   Stack,
@@ -230,30 +232,31 @@ const Dashboard = ({
 
       {!showAbout && (
         <>
-          {editItem && (
-            <EditItem
-              items={items}
-              setItems={setItems}
-              currentList={currentList}
-              user={user}
-              editItem={editItem}
-              setEditItem={setEditItem}
-              themeObj={themeObj}
-            />
-          )}
-
-          {showAdd && (
-            <AddEditModal
-              heading="Add Item"
-              show="add"
-              themeObj={themeObj}
-              newItem={newItem}
-              setterItem={setNewItem}
-              handleSubmit={handleSubmit}
-              setterShow={setShowAdd}
-            />
-          )}
-
+          <AnimatePresence>
+            {editItem && (
+              <EditItem
+                items={items}
+                setItems={setItems}
+                currentList={currentList}
+                user={user}
+                editItem={editItem}
+                setEditItem={setEditItem}
+                themeObj={themeObj}
+              />
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {showAdd && (
+              <AddEditModal
+                heading="Add Item"
+                themeObj={themeObj}
+                newItem={newItem}
+                setterItem={setNewItem}
+                handleSubmit={handleSubmit}
+                setterShow={setShowAdd}
+              />
+            )}
+          </AnimatePresence>
           {showSearch && (
             <SearchItem
               showSearch={showSearch}

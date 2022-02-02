@@ -51,10 +51,8 @@ const EditItem = ({
 
   return (
     <>
-      <Backdrop />
       <AddEditModal
         heading="Edit Item"
-        show="edit"
         themeObj={themeObj}
         newItem={newDesc}
         setterItem={setNewDesc}
