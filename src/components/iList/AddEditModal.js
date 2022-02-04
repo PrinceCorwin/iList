@@ -83,6 +83,7 @@ const AddEditModal = ({
               size="sm"
               variant="solid"
               onClick={() => {
+                // setShowAlert(false);
                 setterShow(null);
               }}
               aria-label="cancel"
@@ -108,21 +109,13 @@ const AddEditModal = ({
           </Flex>
         </Flex>
         {showAlert && (
-          <Alert
-            mt={3}
-            status="error"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            textAlign="center"
-            height="150px"
-          >
-            <AlertIcon boxSize="30px" mr={0} />
-            <AlertTitle>Delete Item</AlertTitle>
-            <AlertDescription>This Can Not Be Undone!</AlertDescription>
+          <Alert status="error" justifyContent="space-between" mt={3}>
+            <AlertIcon />
+            <AlertTitle>Confirm Delete</AlertTitle>
+            {/* <AlertDescription>This Can Not Be Undone!</AlertDescription> */}
             <Button
               // key="button1"
-              mt={3}
+              // justifySelf="end"
               size="sm"
               variant="solid"
               aria-label="Delete Item"
