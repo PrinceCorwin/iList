@@ -116,14 +116,11 @@ function App() {
         setEditItem={setEditItem}
         setUserColorMode={setUserColorMode}
         user={user}
-        setIsLoading={setIsLoading}
         showAbout={showAbout}
         setShowAbout={setShowAbout}
-        isLoading={isLoading}
         appTheme={appTheme}
         setAppTheme={setAppTheme}
         themeObj={themeObj}
-        currentList={currentList}
       >
         <Switch>
           <PrivateRoute exact path="/">

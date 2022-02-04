@@ -4,16 +4,13 @@ const Layout = ({
   editItem,
   setEditItem,
   user,
-  setIsLoading,
   setUserColorMode,
   showAbout,
   setShowAbout,
-  isLoading,
   appTheme,
   setAppTheme,
   themeObj,
   children,
-  currentList,
 }) => {
   return (
     <Flex

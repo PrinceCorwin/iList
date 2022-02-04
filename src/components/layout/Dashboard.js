@@ -1,27 +1,17 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
-import {
-  InputGroup,
-  Stack,
-  Flex,
-  Heading,
-  IconButton,
-  Box,
-} from '@chakra-ui/react';
+import { Flex, Heading, IconButton } from '@chakra-ui/react';
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
 import Loader from '../iList/Loader';
-import AddItem from '../iList/AddItem';
 import SearchItem from '../iList/SearchItem';
-import { ContentNav } from './ContentNav';
 import Content from '../iList/Content';
 import About from '../iList/About';
 import Footer from '../iList/Footer';
 import { db } from '../auth/useAuth';
 import 'firebase/firestore';
-import Backdrop from '../iList/Backdrop';
 import AddEditModal from '../iList/AddEditModal';
 const Dashboard = ({
   showSearch,
@@ -31,19 +21,14 @@ const Dashboard = ({
   editItem,
   setEditItem,
   setUserInit,
-  setUserColorMode,
   user,
   showAbout,
   setShowAbout,
-  appTheme,
-  setAppTheme,
   setIsLoading,
   isLoading,
-  fetchError,
   setFetchError,
   themeObj,
   currentList,
-  setCurrentList,
 }) => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState('');
@@ -216,18 +201,6 @@ const Dashboard = ({
 
   return (
     <>
-      {/* {editItem && (
-        <EditItem
-          items={items}
-          setItems={setItems}
-          currentList={currentList}
-          user={user}
-          editItem={editItem}
-          setEditItem={setEditItem}
-          themeObj={themeObj}
-        />
-      )} */}
-
       {showAbout && <About setShowAbout={setShowAbout} themeObj={themeObj} />}
 
       {!showAbout && (
@@ -235,6 +208,7 @@ const Dashboard = ({
           <AnimatePresence>
             {editItem && (
               <EditItem
+                handleDelete={handleDelete}
                 items={items}
                 setItems={setItems}
                 currentList={currentList}

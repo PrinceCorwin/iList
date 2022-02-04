@@ -1,8 +1,23 @@
-import { Button, Heading, Textarea, Flex } from '@chakra-ui/react';
+import {
+  Button,
+  Heading,
+  Textarea,
+  Flex,
+  Alert,
+  AlertIcon,
+  IconButton,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
+
 import Backdrop from './Backdrop';
 import { motion } from 'framer-motion';
 
 const AddEditModal = ({
+  id,
+  handleDelete,
   heading,
   themeObj,
   newItem,
@@ -10,43 +25,22 @@ const AddEditModal = ({
   handleSubmit,
   setterShow,
 }) => {
+  const [showAlert, setShowAlert] = useState(false);
   return (
     <>
       <Backdrop />
 
       <motion.div
         // key="modal"
+        className="modal"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}
         exit={{ x: '100vw' }}
         style={{
-          display: 'flex',
-          borderRadius: '5px',
           backgroundColor: themeObj.bgItem,
-          flexDirection: 'column',
-          width: '90%',
-          position: 'absolute',
-          zIndex: 2000,
-          padding: '20px 20px',
-          top: '100px',
-          left: '20px',
         }}
-        // borderRadius={5}
-        // direction="column"
-        // // label="Add Item"
-        // // onSubmit={handleSubmit}
-        // bg={themeObj.bgItem}
-        // // mx={3}
-        // w="400px"
-        // py={3}
-        // px={4}
-        // position="absolute"
-        // zIndex="2000"
-        // top="100px"
-        // left="20px"
       >
-        {/* <InputGroup> */}
         <Heading
           size="md"
           color={themeObj.colorItem}
@@ -67,35 +61,81 @@ const AddEditModal = ({
           value={newItem}
           onChange={e => setterItem(e.target.value)}
         />
-        <Flex
-          w="60%"
-          justifyContent="space-between"
-          mt={3}
-          // key="flex"
-        >
-          <Button
-            // key="button1"
-            size="sm"
-            variant="solid"
-            aria-label="Rename List"
-            colorScheme="green"
-            onClick={handleSubmit}
+        <Flex mt={3}>
+          <Flex
+            w="60%"
+            justifyContent="space-between"
+            align="center"
+            // key="flex"
           >
-            {heading}
-          </Button>
-          <Button
-            // key="button2"
-            size="sm"
-            variant="solid"
-            onClick={() => {
-              setterShow(null);
-            }}
-            aria-label="cancel"
-            colorScheme="red"
-          >
-            Cancel
-          </Button>
+            <Button
+              // key="button1"
+              size="sm"
+              variant="solid"
+              aria-label={heading}
+              colorScheme="green"
+              onClick={handleSubmit}
+            >
+              {heading}
+            </Button>
+            <Button
+              // key="button2"
+              size="sm"
+              variant="solid"
+              onClick={() => {
+                setterShow(null);
+              }}
+              aria-label="cancel"
+              colorScheme="red"
+            >
+              Cancel
+            </Button>
+          </Flex>
+          <Flex w="40%" justify="end" align="center">
+            {heading === 'Edit Item' && (
+              <IconButton
+                size="lg"
+                aria-label={`Delete ${newItem}`}
+                variant="outline"
+                border="none"
+                colorScheme={themeObj.bg}
+                icon={<FaTrashAlt />}
+                onClick={() => {
+                  setShowAlert(true);
+                }}
+              />
+            )}
+          </Flex>
         </Flex>
+        {showAlert && (
+          <Alert
+            mt={3}
+            status="error"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            height="150px"
+          >
+            <AlertIcon boxSize="30px" mr={0} />
+            <AlertTitle>Delete Item</AlertTitle>
+            <AlertDescription>This Can Not Be Undone!</AlertDescription>
+            <Button
+              // key="button1"
+              mt={3}
+              size="sm"
+              variant="solid"
+              aria-label="Delete Item"
+              colorScheme="red"
+              onClick={() => {
+                handleDelete(id);
+                setterShow(null);
+              }}
+            >
+              Delete
+            </Button>
+          </Alert>
+        )}
       </motion.div>
     </>
   );
