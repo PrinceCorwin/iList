@@ -1,19 +1,9 @@
 import { useState } from 'react';
 import { db } from '../auth/useAuth';
-
-import {
-  Button,
-  Input,
-  Text,
-  Center,
-  FormControl,
-  Flex,
-  Heading,
-} from '@chakra-ui/react';
-import Backdrop from './Backdrop';
 import AddEditModal from './AddEditModal';
 
 const EditItem = ({
+  handleDelete,
   user,
   items,
   setItems,
@@ -25,7 +15,7 @@ const EditItem = ({
   const checkDoc = db.collection('users').doc(user.uid);
 
   const [newDesc, setNewDesc] = useState(editItem.desc);
-  const handleSubmit = async e => {
+  const handleUpdate = async e => {
     e.preventDefault();
     try {
       await checkDoc
@@ -52,11 +42,13 @@ const EditItem = ({
   return (
     <>
       <AddEditModal
+        id={editItem.id}
+        handleDelete={handleDelete}
         heading="Edit Item"
         themeObj={themeObj}
         newItem={newDesc}
         setterItem={setNewDesc}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleUpdate}
         setterShow={setEditItem}
       />
     </>

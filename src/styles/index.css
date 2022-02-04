@@ -1,3 +1,22 @@
+.backdrop {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  z-index: 1000;
+}
+.modal {
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  width: 90%;
+  position: absolute;
+  z-index: 2000;
+  padding: 20px 20px;
+  top: 100px;
+  left: 20px;
+}
+
 /* loading animation style */
 .loadingParent {
   display: flex;
