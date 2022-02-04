@@ -92,7 +92,7 @@ const AddEditModal = ({
               Cancel
             </Button>
           </Flex>
-          <Flex w="40%" justify="end" align="center">
+          <Flex w="40%" justifyContent="end" align="center">
             {heading === 'Edit Item' && (
               <IconButton
                 size="lg"
