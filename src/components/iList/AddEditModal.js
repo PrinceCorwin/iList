@@ -61,52 +61,44 @@ const AddEditModal = ({
           value={newItem}
           onChange={e => setterItem(e.target.value)}
         />
-        <Flex mt={3}>
-          <Flex
-            w="60%"
-            justifyContent="space-between"
-            align="center"
-            // key="flex"
+        <Flex mt={3} alignItems="center" justifyContent="space-around">
+          <Button
+            // key="button1"
+            size="sm"
+            variant="solid"
+            aria-label={heading}
+            colorScheme="green"
+            onClick={handleSubmit}
           >
-            <Button
-              // key="button1"
-              size="sm"
-              variant="solid"
-              aria-label={heading}
-              colorScheme="green"
-              onClick={handleSubmit}
-            >
-              {heading}
-            </Button>
-            <Button
-              // key="button2"
-              size="sm"
-              variant="solid"
+            {heading}
+          </Button>
+          <Button
+            // key="button2"
+            size="sm"
+            variant="solid"
+            onClick={() => {
+              // setShowAlert(false);
+              setterShow(null);
+            }}
+            aria-label="cancel"
+            colorScheme="red"
+          >
+            Cancel
+          </Button>
+
+          {heading === 'Edit Item' && (
+            <IconButton
+              size="lg"
+              aria-label={`Delete ${newItem}`}
+              variant="outline"
+              border="none"
+              colorScheme={themeObj.bg}
+              icon={<FaTrashAlt />}
               onClick={() => {
-                // setShowAlert(false);
-                setterShow(null);
+                setShowAlert(true);
               }}
-              aria-label="cancel"
-              colorScheme="red"
-            >
-              Cancel
-            </Button>
-          </Flex>
-          <Flex w="40%" justifyContent="end" align="center">
-            {heading === 'Edit Item' && (
-              <IconButton
-                size="lg"
-                aria-label={`Delete ${newItem}`}
-                variant="outline"
-                border="none"
-                colorScheme={themeObj.bg}
-                icon={<FaTrashAlt />}
-                onClick={() => {
-                  setShowAlert(true);
-                }}
-              />
-            )}
-          </Flex>
+            />
+          )}
         </Flex>
         {showAlert && (
           <Alert status="error" justifyContent="space-between" mt={3}>
