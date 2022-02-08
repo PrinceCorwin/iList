@@ -2,6 +2,7 @@ import {
   Box,
   OrderedList,
   ListItem,
+  Icon,
   IconButton,
   Button,
   Link,
@@ -15,6 +16,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
+import { FaClipboardList } from 'react-icons/fa';
+import { AiOutlineEdit } from 'react-icons/ai';
 const About = ({ setShowAbout, themeObj }) => {
   return (
     <Flex
@@ -69,6 +72,16 @@ const About = ({ setShowAbout, themeObj }) => {
             isExternal
           >
             View code
+          </Link>
+        </Text>
+        <Text>
+          🎞️ Custom motion effects with.{' '}
+          <Link
+            color={useColorModeValue('blue', 'cyan')}
+            href="https://www.framer.com/motion/"
+            isExternal
+          >
+            Framer Motion
           </Link>
         </Text>
         <Text>
@@ -149,54 +162,100 @@ const About = ({ setShowAbout, themeObj }) => {
             src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/git-logo-minimal.png?raw=true"
           />
         </Link>
+        <Link href="https://www.framer.com/motion/" isExternal>
+          <Image
+            alt="Framer Motion"
+            width="26px"
+            src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/framer-motion.png?raw=true"
+          />
+        </Link>
       </HStack>
-      <VStack py={3} spacing={3}>
-        <Heading>How It Works...</Heading>
-        <Heading alignSelf="flex-start" size="sm">
+      <Flex direction="column">
+        <Heading alignSelf="center" mb={3}>
+          How It Works...
+        </Heading>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           After Login
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           After login, you will remain logged in on current device until
           "Logout" is selected in menu. Each time you open the app, your lists
           and preferences will be synced
         </Text>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           The first time you login, a default list will be created named "My
           List". You may change the name of this list or create new lists (see
           below)
         </Text>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
-          You may immediately begin adding items to 'My List' by typing the
-          description into the 'Add Item' input field at the top of the page
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
+          You may immediately begin adding items to 'My List' by clicking the ➕
+          to open the Add Item modal and type description into the input area
         </Text>
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           Add and Edit List Items
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
-          Added list items may be edited by clicking on the description text or
-          deleted by clicking the Trash Can icon to the right of the description
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
+          Added list items may be edited or deleted by clicking on the
+          description text. The Edit Item modal will appear.
         </Text>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           Check the list items as complete by clicking the checkbox to the left
           of the description
         </Text>
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           Edit List Name Or Delete List
         </Heading>
-        <Box p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Box p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           <Heading size="sm" mb={3}>
             To Edit A List Name:
           </Heading>
           <OrderedList>
             <ListItem>
-              Click the Lists icon (looks like a clipboard) in the top tool bar,
-              or select "My Lists" from the menu.
+              Click the Lists icon
+              <span>
+                {' '}
+                <Icon
+                  as={FaClipboardList}
+                  w={4}
+                  h={4}
+                  color={themeObj.bg}
+                />{' '}
+              </span>
+              in the top tool bar, or select "My Lists" from the menu.
             </ListItem>
             <ListItem>
-              Click the Edit icon to the right of the list name{' '}
+              Click the Edit icon
+              <span>
+                {' '}
+                <Icon as={AiOutlineEdit} w={4} h={4} color={themeObj.bg} />{' '}
+              </span>{' '}
+              to the right of the list name
             </ListItem>
           </OrderedList>
-          <Heading size="sm" my={3}>
+        </Box>
+        <Box p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
+          <Heading size="sm" mb={3}>
             To Delete a List:
           </Heading>
           <Text>
@@ -205,14 +264,21 @@ const About = ({ setShowAbout, themeObj }) => {
             the only remaining list, but it's name can still be changed)
           </Text>
         </Box>
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           View or Create New List
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           To change which list is currently being viewed on home page, click "My
           Lists" and select the list you want to view or edit
         </Text>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           Create a new list by clicking hamburger menu (top, left) and selecting
           "New List". New list name may not be the same as another of your
           existing lists. A warning will appear on screen if a duplicate list is
@@ -222,37 +288,59 @@ const About = ({ setShowAbout, themeObj }) => {
           When a new list is created, it will become the current list. You will
           be returned to the home page ready to add items to that list
         </Text>
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           Change App Theme
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           Click "Themes" in menu to select one of the beautiful included themes.
           Your selection will be saved to your account preferences until another
           is selected
         </Text>
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           Logout or Delete Account
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           You may logout or delete your account in the menu. WARNING: Deleting
           account can NOT be undone. All data will be lost
         </Text>{' '}
-        <Heading alignSelf="flex-start" size="sm" pt={3}>
+        <Heading
+          alignSelf="flex-start"
+          size="sm"
+          bg={themeObj.bg}
+          color={themeObj.colorIcon}
+          w="100%"
+          p={1}
+        >
           Contact Us
         </Heading>
-        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem}>
+        <Text p={3} bg={themeObj.bgItem} color={themeObj.colorItem} mb={3}>
           Thank you for choosing iList. Feel free to contact us with any issues
           or suggestions by selecting "Contact Us" in the menu.
         </Text>
-        <p>iLIST &copy; 2021 </p>
         <Button
+          alignSelf="center"
           colorScheme="green"
           w="10rem"
           onClick={() => setShowAbout(false)}
         >
           Close
         </Button>
-      </VStack>
+        <Text alignSelf="center">iLIST &copy; 2021 </Text>
+      </Flex>
     </Flex>
   );
 };

@@ -10,9 +10,9 @@ const Content = ({
 }) => {
   console.log(items);
   const variants = {
-    initial: {
-      opacity: 1,
-    },
+    // initial: {
+    //   opacity: 1,
+    // },
     animate: {
       transition: { when: 'beforeChildren', staggerChildren: 0.07 },
     },

@@ -16,6 +16,20 @@
   top: 100px;
   left: 20px;
 }
+.listItem {
+  width: 400px;
+  height: 2.5rem;
+  border-radius: 7px;
+}
+.editModal {
+  width: 155px;
+  display: flex;
+  /* margin-right: 10px; */
+  justify-content: space-around;
+  align-items: center;
+  height: 2.5rem;
+  border-radius: 7px;
+}
 
 /* loading animation style */
 .loadingParent {

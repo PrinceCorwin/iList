@@ -82,7 +82,6 @@ const MyLists = ({
   };
 
   const updateCurrentList = async newList => {
-    console.log(newList);
     try {
       await checkDoc.update({ currentlist: newList }).then(() => {
         console.log('Current list successfully updated on database!');
@@ -198,12 +197,13 @@ const MyLists = ({
           >
             <VStack>
               <Heading>Your Lists</Heading>
-              <Center>View, Rename, or Delete A List</Center>
+              <Center>Click List Name to View, Edit, or Delete</Center>
             </VStack>
           </Center>
           <VStack spacing={2} w="100%" my={6}>
             {lists.map(list => (
               <EachList
+                finalListError={finalListError}
                 setFinalListError={setFinalListError}
                 setEditList={setEditList}
                 updateCurrentList={updateCurrentList}
