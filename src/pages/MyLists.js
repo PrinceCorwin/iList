@@ -180,16 +180,17 @@ const MyLists = ({
   return (
     <Flex
       grow="1"
-      w="400px"
+      w="100%"
       justify="start"
       direction="column"
+      align="center"
       overflowY="auto"
     >
       {!editList && (
         <>
           <Center
             mt={6}
-            w="100%"
+            w="90%"
             bg={themeObj.bg}
             color={themeObj.color}
             py={3}
@@ -200,7 +201,7 @@ const MyLists = ({
               <Center>Click List Name to View, Edit, or Delete</Center>
             </VStack>
           </Center>
-          <VStack spacing={2} w="100%" my={6}>
+          <VStack spacing={2} w="90%" my={6}>
             {lists.map(list => (
               <EachList
                 finalListError={finalListError}
