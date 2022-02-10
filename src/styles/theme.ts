@@ -6,7 +6,7 @@ export const iListTheme = extendTheme({
       bgAppDark: '#1A202C',
       bgAppLight: '#F7FAFC',
       bgDark: '#3F51B5',
-      bgLight: '#303F9F',
+      bgLight: 'green',
       colorDark: '#F7FAFC',
       colorLight: '#F7FAFC',
       bgIconDark: '#6082B6',
