@@ -28,6 +28,8 @@
 
 [<img align="left" target="_blank" alt="CSS" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/css.png?raw=true" />](https://developer.mozilla.org/en-US/docs/Web/CSS 'CSS')
 
+[<img align="left" style="margin-right:10px" target="_blank" alt="Sass" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/sass.png?raw=true" />](https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/sass.png 'Sass')
+
 [<img align="left" style="border-radius:50%" target="_blank" alt="Chakra UI" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/Chakra.png?raw=true" />](https://chakra-ui.com/ 'Chakra UI')
 
 [<img align="left" target="_blank" alt="JavaScript" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/javascript.png?raw=true" />](https://developer.mozilla.org/en-US/docs/Web/JavaScript 'Javascript')
@@ -37,6 +39,8 @@
 [<img align="left" target="_blank" alt="git" height="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/firebase-logo.png?raw=true" />](https://firebase.google.com/ 'Firebase')
 
 [<img align="left" target="_blank" alt="git" height="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/git-logo-minimal.png?raw=true" />](https://git-scm.com/doc 'git')
+
+[<img align="left" target="\_blank" alt="React" width="26px" src="https://github.com/PrinceCorwin/Useful-tech-icons/blob/main/images/framer-motion.png?raw=true"/>](https://www.framer.com/motion/ 'Framer-Motion')
 
 <br />
 <br />

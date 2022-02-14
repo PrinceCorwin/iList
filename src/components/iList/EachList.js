@@ -165,6 +165,7 @@ const EachList = ({
         whileHover={{ backgroundColor: themeObj.color, color: themeObj.bg }}
         // transition={transition}
         style={{
+          padding: '5px 10px 5px 10px',
           backgroundColor: themeObj.bgItem,
           color: themeObj.colorItem,
           border: `1px solid ${themeObj.bg}`,
