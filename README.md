@@ -5,7 +5,7 @@
 ## Make a list, check it once!
 
 <p> We all make lists. Groceries, To-Do, Workout Routine, and a slew of others.</p>
-<p>CheckBox allows users to create their own personal lists in an elegant, modern UI without the bloat commonly found in other note-taking apps.</p>
+<p>iList allows users to create their own personal lists in an elegant, modern UI without the bloat commonly found in other note-taking apps.</p>
 <p>Safe, Simple, Secure</p>
 
 ---
