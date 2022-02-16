@@ -1,0 +1,63 @@
+@each $key, $val in $colors {
+  .color-#{$key} {
+    transition: color 0.2s ease-in-out;
+    color: $val !important;
+  }
+  .color-hover-#{$key} {
+    &:hover {
+      color: $val !important;
+    }
+  }
+  .bg-#{$key} {
+    transition: background-color 0.2s ease-in-out;
+    background-color: $val !important;
+  }
+  .bg-hover-#{$key} {
+    &:hover {
+      background-color: $val !important;
+    }
+  }
+  @if ($val != black and $val != white) {
+    // light variations
+    @for $i from 1 through 9 {
+      .color-#{$key}-light-#{$i} {
+        color: mix(white, $val, $i * 10) !important;
+      }
+      .color-hover-#{$key}-light-#{$i} {
+        &:hover {
+          color: mix(white, $val, $i * 10) !important;
+        }
+      }
+      .bg-#{$key}-light-#{$i} {
+        background-color: mix(white, $val, $i * 10) !important;
+      }
+      .bg-hover-#{$key}-light-#{$i} {
+        &:hover {
+          background-color: mix(white, $val, $i * 10) !important;
+        }
+      }
+    }
+
+    // dark variations
+    @for $i from 1 through 9 {
+      .color-#{$key}-dark-#{$i} {
+        color: mix(black, $val, $i * 10) !important;
+      }
+      .color-hover-#{$key}-dark-#{$i} {
+        &:hover {
+          color: mix(black, $val, $i * 10) !important;
+        }
+      }
+      .bg-#{$key}-dark-#{$i} {
+        background-color: mix(black, $val, $i * 10) !important;
+      }
+      .bg-hover-#{$key}-dark-#{$i} {
+        &:hover {
+          background-color: mix(black, $val, $i * 10) !important;
+        }
+      }
+    }
+  }
+}
+
+// &:nth-child, &:active, &:visited, &:last-child etc

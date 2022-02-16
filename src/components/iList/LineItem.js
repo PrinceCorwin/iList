@@ -3,7 +3,7 @@ const LineItem = ({ themeObj, item, handleCheck, setEditItem }) => {
   // may use this in the future
   // const shadow = `-4px 6px 6px ${useColorModeValue('gray', '#A0AEC0')}`;
   return (
-    <Flex align="center">
+    <Flex align="center" w="100%">
       <Checkbox
         variant="solid"
         size="lg"

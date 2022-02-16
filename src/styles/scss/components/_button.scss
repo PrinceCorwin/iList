@@ -1,0 +1,39 @@
+@mixin btn {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: $base-padding * 2 $base-padding * 4;
+  border-radius: $base-border-radius;
+}
+
+.btn {
+  @include btn;
+}
+
+@each $key, $val in $colors {
+  @each $key2, $val2 in $colors {
+    .btn-#{$key}-#{$key2} {
+      @extend .btn;
+      transition: background-color 0.2s ease-in-out;
+      background-color: $val;
+      color: $val2;
+      &:hover {
+        background-color: lighten($val, 10);
+      }
+    }
+  }
+  @each $key2, $val2 in $colors {
+    .btn-outline-#{$key}-#{$key2} {
+      @extend .btn;
+      transition: background-color 0.2s ease-in-out;
+      transition-timing-function: ease-in-out;
+      border: $base-border-thickness solid $val;
+      background-color: $appBg;
+      color: $val2;
+      &:hover {
+        background-color: $val;
+      }
+    }
+  }
+}

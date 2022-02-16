@@ -1,0 +1,23 @@
+@each $key, $val in $flex {
+  @each $key2, $val2 in $flexJust {
+    @each $key3, $val3 in $flexAlign {
+      .flex#{$key}-#{$key2}-#{$key3} {
+        display: flex;
+        flex-direction: $val;
+        justify-content: $val2;
+        align-items: $val3;
+      }
+    }
+  }
+}
+@each $key, $val in $alignContent {
+  .ac-#{$key} {
+    align-content: $val;
+  }
+}
+.grow-1 {
+  flex-grow: 1;
+}
+.grow-0 {
+  flex-grow: 0;
+}
