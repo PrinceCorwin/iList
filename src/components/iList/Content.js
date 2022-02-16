@@ -29,7 +29,12 @@ const Content = ({
   return (
     <>
       {items.length ? (
-        <motion.ul variants={variants} initial="initial" animate="animate">
+        <motion.ul
+          className="w-100"
+          variants={variants}
+          initial="initial"
+          animate="animate"
+        >
           <List spacing="3" mb={3} p={3}>
             {items.map(item => (
               <motion.li key={item.id} variants={childVariants}>

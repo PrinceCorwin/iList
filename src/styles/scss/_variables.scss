@@ -1,0 +1,94 @@
+// theme colors
+$primary: #326dee !default;
+$secondary: #1ac886 !default;
+$error: #d32752 !default;
+$info: #f6c31c !default;
+$accentLight: lightblue !default;
+$accentDark: darkblue !default;
+$appBg: white !default;
+$appBgDark: black !default;
+// color palette
+$colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'accentLight': $accentLight,
+  'accentDark': $accentDark,
+  'appBg': $appBg,
+  'appBgDark': $appBgDark,
+  'error': $error,
+  'info': $info,
+  'blue': #1919e6,
+  'teal': teal,
+  'cyan': cyan,
+  'red': #e61919,
+  'pink': pink,
+  'yellow': #e6e619,
+  'green': #19e635,
+  'orange': #ffa600,
+  'purple': #9900ff,
+  'gray': #808080,
+  'black': black,
+  'white': white,
+) !default;
+
+// flex
+$flex: (
+  'row': row,
+  'col': column,
+) !default;
+$flexJust: (
+  'center': center,
+  'end': flex-end,
+  'start': flex-start,
+  'between': space-between,
+  'around': space-around,
+  'even': space-evenly,
+  'init': initial,
+  'inherit': inherit,
+) !default;
+$flexAlign: (
+  'center': center,
+  'end': flex-end,
+  'start': flex-start,
+  'base': baseline,
+  'stretch': stretch,
+  'init': initial,
+  'inherit': inherit,
+) !default;
+$alignContent: (
+  'center': center,
+  'end': flex-end,
+  'start': flex-start,
+  'between': space-between,
+  'around': space-around,
+  'even': space-evenly,
+  'init': initial,
+  'inherit': inherit,
+  'stretch': stretch,
+) !default;
+// spacing
+$base-padding: 0.25rem !default;
+$base-margin: 0.5rem !default;
+
+// borders
+$base-border-thickness: 1px !default;
+$base-border-radius: 20px !default;
+$border-radius-xs: $base-border-radius * 0.25 !default;
+$border-radius-sm: $base-border-radius * 0.5 !default;
+$border-radius-md: $base-border-radius * 1 !default;
+$border-radius-lg: $base-border-radius * 1.5 !default;
+$border-radius-xl: $base-border-radius * 1.75 !default;
+$border-radius-xxl: $base-border-radius * 2 !default;
+$border-radius-full: 50% !default;
+// box-shadow
+$base-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4) !default;
+$box-shadow-strong: 5px 5px 10px rgba(0, 0, 0, 0.5) !default;
+
+// font sizes
+$base-font-size: 1rem !default;
+$font-size-xs: $base-font-size * 0.5 !default;
+$font-size-sm: $base-font-size * 0.75 !default;
+$font-size-md: $base-font-size * 1 !default;
+$font-size-lg: $base-font-size * 1.25 !default;
+$font-size-xl: $base-font-size * 1.5 !default;
+$font-size-xxl: $base-font-size * 2 !default;

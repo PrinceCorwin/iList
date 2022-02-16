@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { Flex, Heading, IconButton } from '@chakra-ui/react';
+import { Flex, Heading, IconButton, Box } from '@chakra-ui/react';
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
@@ -64,23 +64,6 @@ const Dashboard = ({
     };
     checkIfInitialized();
   }, []);
-
-  // const checkIfInitialized = () => {
-  //   checkDoc
-  //     .get()
-  //     .then(doc => {
-  //       if (doc.exists) {
-  //         setUserInit(true);
-  //       } else {
-  //         // doc.data() will be undefined in this case
-  //         console.log('Initializing new user!');
-  //         initializeUserDb();
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log('Error getting document:', error);
-  //     });
-  // };
 
   const initializeUserDb = async () => {
     await checkDoc
@@ -240,13 +223,14 @@ const Dashboard = ({
               setSearch={setSearch}
             />
           )}
-          <Flex
-            w="100%"
-            flexDirection="column"
-            flexGrow="1"
-            justifyContent="flex-start"
-            align-items="center"
-            overflowY="auto"
+          <div
+            className="flexcol-start-center w-100  grow-1 overflowy-auto"
+            // w="100%"
+            // flexDirection="column"
+            // flexGrow="1"
+            // justifyContent="flex-start"
+            // align-items="center"
+            // overflowY="auto"
           >
             {isLoading && <Loader />}
 
@@ -259,6 +243,7 @@ const Dashboard = ({
                   justifyContent="space-between"
                   py={3}
                   zIndex={988}
+                  w="100%"
                 >
                   <Heading px={3} as="h1" w="100%">
                     {currentList}
@@ -297,7 +282,7 @@ const Dashboard = ({
                 />
               </>
             )}
-          </Flex>
+          </div>
         </>
       )}
 
