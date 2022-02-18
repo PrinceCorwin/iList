@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
-import { Flex, Heading, IconButton, Box } from '@chakra-ui/react';
+import { Flex, Heading, IconButton } from '@chakra-ui/react';
 import { SearchIcon, AddIcon } from '@chakra-ui/icons';
 import firebase from 'firebase/app';
 import EditItem from '../iList/EditItem';
@@ -137,12 +137,6 @@ const Dashboard = ({
     );
     setItems(listItems);
     const myItem = items.filter(item => item.id === id);
-
-    // const updatedDoc = db
-    //   .collection('users')
-    //   .doc(user.uid)
-    //   .collection(currentList)
-    //   .doc(`${id}`);
 
     const updatedDoc = checkDoc.collection(currentList).doc(`${id}`);
 
