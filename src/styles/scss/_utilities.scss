@@ -288,7 +288,7 @@ $utilities: (
     }
   }
 }
-@for $i from 1 through 100 {
+@for $i from 0 through 100 {
   .o-#{$i} {
     opacity: math.div($i, 100);
   }
