@@ -73,8 +73,8 @@ const Menu = ({
       display: 'block',
     },
     bmOverlay: {
-      maxWidth: '400px',
-      background: 'rgba(0, 0, 0, 1.0)',
+      maxWidth: '500px',
+      background: 'rgba(0, 0, 0, 0.3)',
     },
   };
 
@@ -150,7 +150,7 @@ const Menu = ({
       onClose={handleOnClose}
       isOpen={menuOpen}
       onOpen={handleOnOpen}
-      noOverlay
+      // noOverlay
       width={'200px'}
       styles={styles}
     >
