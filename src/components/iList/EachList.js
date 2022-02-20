@@ -47,7 +47,7 @@ const EachList = ({
     ease: 'easeInOut',
   };
   return (
-    <Flex align="center" w="100%" justify="end">
+    <Flex align="center" w="100%" justify="flex-end">
       <AnimatePresence>
         {/* Edit List menu  */}
         {showEditListModal && (
