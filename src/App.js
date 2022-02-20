@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { theme, themeObj } from './components/iList/Theme';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginForm from './components/auth/LoginForm';
@@ -11,7 +12,6 @@ import Contact from './pages/Contact';
 import DeleteAccount from './components/iList/DeleteAccount';
 import NotFound from './pages/NotFound';
 import { useColorModeValue } from '@chakra-ui/react';
-import { iListTheme } from './styles/theme';
 import { db, useAuth } from './components/auth/useAuth';
 
 function App() {
@@ -29,37 +29,8 @@ function App() {
   const [lists, setLists] = useState([]);
   const { user } = useAuth();
 
-  const checkDoc = user ? db.collection('users').doc(user.uid) : null;
-
-  // get user prefs
-  useEffect(() => {
-    const getUserPrefs = async () => {
-      try {
-        // fetch user prefs and set pref states
-        const userPrefs = await checkDoc.get();
-        setAppTheme(userPrefs.data().currenttheme);
-        setLists(userPrefs.data().mylists);
-        setUserColorMode(userPrefs.data().colorMode);
-        setCurrentList(userPrefs.data().currentlist);
-        console.log('app useEffect');
-        setFetchError(null);
-      } catch (err) {
-        setFetchError(err.message);
-
-        console.log(err.message);
-      } finally {
-        // setLoaderLoading(false);
-        // setIsLoading(false);
-      }
-    };
-    // setIsLoading(false);
-    userInit && getUserPrefs();
-
-    // getMyLists();
-  }, [userInit]);
-
   // create global theme object
-  const themeColors = iListTheme.colors[appTheme];
+  const themeColors = theme[appTheme];
   const themeObj = {
     bgApp: useColorModeValue(themeColors.bgAppLight, themeColors.bgAppDark),
 
@@ -109,6 +80,36 @@ function App() {
     ),
   };
   // end theme object
+
+  const checkDoc = user ? db.collection('users').doc(user.uid) : null;
+
+  // get user prefs
+  useEffect(() => {
+    const getUserPrefs = async () => {
+      try {
+        // fetch user prefs and set pref states
+        const userPrefs = await checkDoc.get();
+        setAppTheme(userPrefs.data().currenttheme);
+        setLists(userPrefs.data().mylists);
+        setUserColorMode(userPrefs.data().colorMode);
+        setCurrentList(userPrefs.data().currentlist);
+        console.log('app useEffect');
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+
+        console.log(err.message);
+      } finally {
+        // setLoaderLoading(false);
+        // setIsLoading(false);
+      }
+    };
+    // setIsLoading(false);
+    userInit && getUserPrefs();
+
+    // getMyLists();
+  }, [userInit]);
+
   return (
     <Router>
       <Layout
