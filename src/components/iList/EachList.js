@@ -19,9 +19,14 @@ const EachList = ({
   list,
   themeObj,
 }) => {
+  const [modalWidth, setModalWidth] = useState({
+    modal: '0',
+    list: '100%',
+    confirm: '0',
+  });
   const [showEditListModal, setShowEditListModal] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  // const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false);
   const variants = {
     initial: { width: '100%' },
     mainFull: {
@@ -43,125 +48,132 @@ const EachList = ({
     modalStart: { x: '-155px', opacity: 0 },
   };
   const transition = {
-    duration: 0.25,
+    duration: 0.05,
     ease: 'easeInOut',
   };
+  const handleClick = () => {
+    showEditListModal || showConfirmDelete
+      ? setModalWidth({ modal: '0', list: '100%', confirm: '0' })
+      : setModalWidth({ modal: '60%', list: '40%', confirm: '0' });
+    setShowEditListModal(!showEditListModal);
+    showConfirmDelete && setShowConfirmDelete(false);
+  };
   return (
-    <Flex align="center" w="100%" justify="end">
-      <AnimatePresence>
-        {/* Edit List menu  */}
-        {showEditListModal && (
-          <motion.div
-            className="editModal"
-            variants={variants}
-            initial="modalStart"
-            animate="modalFull"
-            transition={transition}
-            exit={{ x: -155, opacity: 0 }}
-            style={{
-              width: '35%',
-              color: themeObj.colorItem,
-              backgroundColor: themeObj.bgItem,
+    <Flex align="center" w="100%" justify="flex-end" overflow="hidden">
+      {/* <AnimatePresence> */}
+      {/* Edit List menu  */}
+      {/* {showEditListModal && ( */}
+      <motion.div
+        className="editModal"
+        style={{
+          width: modalWidth.modal,
+          color: themeObj.colorItem,
+          backgroundColor: themeObj.bgItem,
+        }}
+      >
+        <Tooltip label="View" fontSize="sm">
+          <IconButton
+            size="sm"
+            mr={3}
+            aria-label={`View ${list}`}
+            variant="ghost"
+            color={themeObj.colorItem}
+            icon={<AiFillEye style={{ height: '20px', width: '20px' }} />}
+            onClick={() => {
+              setShowEditListModal(false);
+              finalListError && setFinalListError(false);
+              updateCurrentList(list);
             }}
-          >
-            <Tooltip label="View" fontSize="sm">
-              <IconButton
-                size="sm"
-                mr={3}
-                aria-label={`View ${list}`}
-                variant="ghost"
-                color={themeObj.colorItem}
-                icon={<AiFillEye style={{ height: '20px', width: '20px' }} />}
-                onClick={() => {
-                  setShowEditListModal(false);
-                  finalListError && setFinalListError(false);
-                  updateCurrentList(list);
-                }}
-              />
-            </Tooltip>
-            <Tooltip label="Rename" fontSize="sm">
-              <IconButton
-                mr={3}
-                size="sm"
-                aria-label={`Rename ${list}`}
-                variant="ghost"
-                color={themeObj.colorItem}
-                icon={
-                  <AiOutlineEdit style={{ height: '20px', width: '20px' }} />
-                }
-                onClick={() => {
-                  setShowEditListModal(false);
-                  finalListError && setFinalListError(false);
-                  setEditList(list);
-                }}
-              />
-            </Tooltip>
-            <Tooltip label="Delete" fontSize="sm">
-              <IconButton
-                size="sm"
-                aria-label={`Delete ${list}`}
-                variant="ghost"
-                color={themeObj.colorItem}
-                icon={
-                  <FaRegTrashAlt style={{ height: '20px', width: '20px' }} />
-                }
-                onClick={() => {
-                  setShowEditListModal(false);
-                  setShowConfirmDelete(true);
-                }}
-              />
-            </Tooltip>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Confirm Delete menu */}
-      {showConfirmDelete && (
-        <Flex
-          mr={1}
-          alignItems="center"
-          justifyContent="space-between"
-          h="100%"
-          px={3}
-          color={themeObj.colorItem}
-          bg={themeObj.bgItem}
-          borderRadius="md"
-        >
-          <Text mr={3}>CONFIRM</Text>
-          <Button
-            as="button"
+          />
+        </Tooltip>
+        <Tooltip label="Rename" fontSize="sm">
+          <IconButton
             mr={3}
             size="sm"
-            variant="outline"
-            colorScheme="red"
-            align="center"
-            px={3}
+            aria-label={`Rename ${list}`}
+            variant="ghost"
+            color={themeObj.colorItem}
+            icon={<AiOutlineEdit style={{ height: '20px', width: '20px' }} />}
             onClick={() => {
-              handleDelete(list);
+              setShowEditListModal(false);
+              finalListError && setFinalListError(false);
+              setEditList(list);
             }}
-          >
-            Delete
-          </Button>
-          <Button
-            as="button"
+          />
+        </Tooltip>
+        <Tooltip label="Delete" fontSize="sm">
+          <IconButton
             size="sm"
-            px={3}
-            variant="outline"
-            borderColor={themeObj.bg}
-            colorScheme="green"
-            align="center"
+            aria-label={`Delete ${list}`}
+            variant="ghost"
+            color={themeObj.colorItem}
+            icon={<FaRegTrashAlt style={{ height: '20px', width: '20px' }} />}
             onClick={() => {
-              setShowConfirmDelete(false);
+              console.log('here');
+              setShowConfirmDelete(true);
+              // setShowEditListModal(false);
+              setModalWidth({ modal: '0', list: '30%', confirm: '70%' });
             }}
-          >
-            Cancel
-          </Button>
-        </Flex>
-      )}
+          />
+        </Tooltip>
+      </motion.div>
+      {/* )} */}
+      {/* </AnimatePresence> */}
+
+      {/* Confirm Delete menu */}
+      {/* {showConfirmDelete && ( */}
+      <div
+        className="confirmDelete overflow-hidden flexrow-around-center h-100 br-md"
+        style={{
+          transition: 'all .25s ease-in-out',
+          width: modalWidth.confirm,
+          color: themeObj.colorItem,
+          backgroundColor: themeObj.bgItem,
+        }}
+        // transition="all .25s ease-in-out"
+        // overflow="hidden"
+        // w={modalWidth.confirm}
+        // mr={1}
+        // alignItems="center"
+        // justifyContent="space-around"
+        // h="100%"
+        // px={3}
+        // color={themeObj.colorItem}
+        // bg={themeObj.bgItem}
+        // borderRadius="md"
+      >
+        <Text>CONFIRM</Text>
+        <Button
+          as="button"
+          size="sm"
+          variant="outline"
+          colorScheme="red"
+          align="center"
+          px={3}
+          onClick={() => {
+            handleDelete(list);
+          }}
+        >
+          Delete
+        </Button>
+        <Button
+          as="button"
+          size="sm"
+          px={3}
+          variant="outline"
+          borderColor={themeObj.bg}
+          colorScheme="green"
+          align="center"
+          onClick={handleClick}
+        >
+          Cancel
+        </Button>
+      </div>
+      {/* )} */}
       <motion.button
-        variants={variants}
-        initial="initial"
-        animate={showEditListModal ? 'mainPartial' : 'mainFull'}
+        // variants={variants}
+        // initial="initial"
+        // animate={showEditListModal ? 'mainPartial' : 'mainFull'}
         whileHover={{ backgroundColor: themeObj.color, color: themeObj.bg }}
         // transition={transition}
         style={{
@@ -169,14 +181,13 @@ const EachList = ({
           backgroundColor: themeObj.bgItem,
           color: themeObj.colorItem,
           border: `1px solid ${themeObj.bg}`,
-          width: '100%',
+          width: modalWidth.list,
+          // transition: 'all .25s ease-in-out',
         }}
         className="listItem"
         // w="100%"
         // px={3}
-        onClick={() => {
-          setShowEditListModal(!showEditListModal);
-        }}
+        onClick={handleClick}
       >
         <Heading size="md" isTruncated>
           {list}
