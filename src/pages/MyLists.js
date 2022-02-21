@@ -261,7 +261,7 @@ const MyLists = ({
                 <FormHelperText>
                   New name can not match another existing list
                 </FormHelperText>
-                <Flex mt={4} w="50%" justify="space-between">
+                <Flex mt={4} w="70%" justify="space-between">
                   <Button
                     variant="solid"
                     type="submit"
