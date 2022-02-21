@@ -16,13 +16,14 @@
   top: 100px;
   left: 20px;
 }
+/* .confirmDelete {
+  transition: all 0.25s ease-in-out;
+} */
+.editModal,
 .listItem {
-  width: 400px;
-  height: 2.5rem;
-  border-radius: 7px;
-}
-.editModal {
-  width: 155px;
+  overflow: hidden;
+  transition: width 0.25s ease-in-out;
+  transition: background-color 0.05 ease-in-out;
   display: flex;
   /* margin-right: 10px; */
   justify-content: space-around;

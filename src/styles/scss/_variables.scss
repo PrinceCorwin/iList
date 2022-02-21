@@ -38,8 +38,8 @@ $flex: (
 ) !default;
 $flexJust: (
   "center": center,
-  "end": end,
-  "start": start,
+  "end": flex-end,
+  "start": flex-start,
   "between": space-between,
   "around": space-around,
   "even": space-evenly,
@@ -48,8 +48,8 @@ $flexJust: (
 ) !default;
 $flexAlign: (
   "center": center,
-  "end": end,
-  "start": start,
+  "end": flex-end,
+  "start": flex-start,
   "base": baseline,
   "stretch": stretch,
   "init": initial,
@@ -57,8 +57,8 @@ $flexAlign: (
 ) !default;
 $alignContent: (
   "center": center,
-  "end": end,
-  "start": start,
+  "end": flex-end,
+  "start": flex-start,
   "between": space-between,
   "around": space-around,
   "even": space-evenly,
