@@ -11,6 +11,7 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { AiOutlineEdit, AiFillEye } from 'react-icons/ai';
 import { motion, AnimatePresence, useSpring } from 'framer-motion';
 const EachList = ({
+  setNewName2,
   updateCurrentList,
   handleDelete,
   finalListError,
@@ -60,8 +61,6 @@ const EachList = ({
   };
   return (
     <Flex align="center" w="100%" justify="flex-end" overflow="hidden">
-      {/* <AnimatePresence> */}
-      {/* Edit List menu  */}
       {/* {showEditListModal && ( */}
       <motion.div
         className="editModal"
@@ -95,9 +94,10 @@ const EachList = ({
             color={themeObj.colorItem}
             icon={<AiOutlineEdit style={{ height: '20px', width: '20px' }} />}
             onClick={() => {
-              setShowEditListModal(false);
+              // setShowEditListModal(false);
               finalListError && setFinalListError(false);
               setEditList(list);
+              setNewName2(list);
             }}
           />
         </Tooltip>

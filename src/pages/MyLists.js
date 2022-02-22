@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import AddEditModal from '../components/iList/AddEditModal';
 import firebase from 'firebase/app';
 import EachList from '../components/iList/EachList';
-
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Button,
   VStack,
@@ -16,6 +17,8 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../components/auth/useAuth';
+import Backdrop from '../components/iList/Backdrop';
+import { EditListModal } from '../components/iList/EditListModal';
 const MyLists = ({
   lists,
   setLists,
@@ -186,47 +189,48 @@ const MyLists = ({
       align="center"
       overflowY="auto"
     >
-      {!editList && (
-        <>
-          <Center
-            mt={6}
-            w="90%"
-            bg={themeObj.bg}
-            color={themeObj.color}
-            py={3}
-            borderRadius="lg"
-          >
-            <VStack>
-              <Heading>Your Lists</Heading>
-              <Center>Click List Name to View, Edit, or Delete</Center>
-            </VStack>
-          </Center>
-          <VStack spacing={2} w="90%" my={6}>
-            {lists.map(list => (
-              <EachList
-                finalListError={finalListError}
-                setFinalListError={setFinalListError}
-                setEditList={setEditList}
-                updateCurrentList={updateCurrentList}
-                key={lists.indexOf(list)}
-                handleDelete={handleDelete}
-                themeObj={themeObj}
-                list={list}
-              />
-            ))}
+      {/* {!editList && ( */}
+      <>
+        <Center
+          mt={6}
+          w="90%"
+          bg={themeObj.bg}
+          color={themeObj.color}
+          py={3}
+          borderRadius="lg"
+        >
+          <VStack>
+            <Heading>Your Lists</Heading>
+            <Center>Click List Name to View, Edit, or Delete</Center>
           </VStack>
-          <Button
-            alignSelf="center"
-            w="50%"
-            bg={themeObj.bg}
-            color={themeObj.color}
-            _hover={{ bg: themeObj.color, color: themeObj.bg }}
-            onClick={() => history.push('/newlist')}
-          >
-            Create New List
-          </Button>
-        </>
-      )}
+        </Center>
+        <VStack spacing={2} w="90%" my={6}>
+          {lists.map(list => (
+            <EachList
+              setNewName2={setNewName2}
+              finalListError={finalListError}
+              setFinalListError={setFinalListError}
+              setEditList={setEditList}
+              updateCurrentList={updateCurrentList}
+              key={lists.indexOf(list)}
+              handleDelete={handleDelete}
+              themeObj={themeObj}
+              list={list}
+            />
+          ))}
+        </VStack>
+        <Button
+          alignSelf="center"
+          w="50%"
+          bg={themeObj.bg}
+          color={themeObj.color}
+          _hover={{ bg: themeObj.color, color: themeObj.bg }}
+          onClick={() => history.push('/newlist')}
+        >
+          Create New List
+        </Button>
+      </>
+      {/* )} */}
 
       {finalListError && (
         <Alert status="error" variant="subtle" mt={6} mb={6}>
@@ -234,67 +238,20 @@ const MyLists = ({
           Final List May Only Be Edited, Not Deleted
         </Alert>
       )}
-      {editList && (
-        <Flex grow="1" justify="center" direction="column" p={6}>
-          <Flex direction="column" h="250px">
-            <Heading size="md" py={3}>
-              Rename Your List
-            </Heading>
-            <form
-              label="Rename List"
-              onSubmit={handleSubmit}
-              style={{ width: '100%' }}
-            >
-              <FormControl>
-                <Input
-                  variant="outline"
-                  autoFocus
-                  autoComplete="off"
-                  type="text"
-                  id="newName"
-                  placeholder={`Rename ${editList}`}
-                  required
-                  value={newName2}
-                  onChange={e => setNewName2(e.target.value)}
-                  bg={themeObj.bgItem}
-                />
-                <FormHelperText>
-                  New name can not match another existing list
-                </FormHelperText>
-                <Flex mt={4} w="70%" justify="space-between">
-                  <Button
-                    variant="solid"
-                    type="submit"
-                    aria-label="Rename List"
-                    colorScheme="green"
-                  >
-                    Rename
-                  </Button>
-                  <Button
-                    variant="solid"
-                    type="button"
-                    onClick={() => {
-                      setAlertText2(null);
-                      setNewName2('');
-                      setEditList(false);
-                    }}
-                    aria-label="cancel"
-                    colorScheme="red"
-                  >
-                    Cancel
-                  </Button>
-                </Flex>
-              </FormControl>
-              {alertText2 && (
-                <Alert status="error" variant="subtle" mt={6} mb={6}>
-                  <AlertIcon />
-                  {alertText2}
-                </Alert>
-              )}
-            </form>
-          </Flex>
-        </Flex>
-      )}
+      <AnimatePresence>
+        {editList && (
+          <EditListModal
+            themeObj={themeObj}
+            handleSubmit={handleSubmit}
+            editList={editList}
+            newName2={newName2}
+            setNewName2={setNewName2}
+            setAlertText2={setAlertText2}
+            setEditList={setEditList}
+            alertText2={alertText2}
+          />
+        )}
+      </AnimatePresence>
     </Flex>
   );
 };
