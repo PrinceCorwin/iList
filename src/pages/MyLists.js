@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import AddEditModal from '../components/iList/AddEditModal';
 import firebase from 'firebase/app';
 import EachList from '../components/iList/EachList';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   Button,
   VStack,
   Center,
-  Input,
-  FormControl,
-  FormHelperText,
   Heading,
   Flex,
   Alert,
@@ -17,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../components/auth/useAuth';
-import Backdrop from '../components/iList/Backdrop';
 import { EditListModal } from '../components/iList/EditListModal';
 const MyLists = ({
   lists,
@@ -230,14 +225,7 @@ const MyLists = ({
           Create New List
         </Button>
       </>
-      {/* )} */}
 
-      {finalListError && (
-        <Alert status="error" variant="subtle" mt={6} mb={6}>
-          <AlertIcon />
-          Final List May Only Be Edited, Not Deleted
-        </Alert>
-      )}
       <AnimatePresence>
         {editList && (
           <EditListModal
@@ -250,6 +238,12 @@ const MyLists = ({
             setEditList={setEditList}
             alertText2={alertText2}
           />
+        )}
+        {finalListError && (
+          <Alert status="error" variant="subtle" mt={6} mb={6}>
+            <AlertIcon />
+            Final List May Only Be Edited, Not Deleted
+          </Alert>
         )}
       </AnimatePresence>
     </Flex>

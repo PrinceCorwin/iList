@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { AiOutlineEdit, AiFillEye } from 'react-icons/ai';
-import { motion, AnimatePresence, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 const EachList = ({
   setNewName2,
   updateCurrentList,
@@ -27,31 +27,7 @@ const EachList = ({
   });
   const [showEditListModal, setShowEditListModal] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [hover, setHover] = useState(false);
-  const variants = {
-    initial: { width: '100%' },
-    mainFull: {
-      width: '100%',
-      transition: {
-        delay: 0.25,
-        duration: 0.25,
-        ease: 'easeInOut',
-      },
-    },
-    mainPartial: {
-      width: '60%',
-      transition: {
-        duration: 0.25,
-        ease: 'easeInOut',
-      },
-    },
-    modalFull: { x: -20, opacity: 1 },
-    modalStart: { x: '-155px', opacity: 0 },
-  };
-  const transition = {
-    duration: 0.05,
-    ease: 'easeInOut',
-  };
+
   const handleClick = () => {
     showEditListModal || showConfirmDelete
       ? setModalWidth({ modal: '0', list: '100%', confirm: '0' })
@@ -61,7 +37,7 @@ const EachList = ({
   };
   return (
     <Flex align="center" w="100%" justify="flex-end" overflow="hidden">
-      {/* {showEditListModal && ( */}
+      {/* edit modal slide in */}
       <motion.div
         className="editModal"
         style={{
@@ -94,9 +70,9 @@ const EachList = ({
             color={themeObj.colorItem}
             icon={<AiOutlineEdit style={{ height: '20px', width: '20px' }} />}
             onClick={() => {
-              // setShowEditListModal(false);
               finalListError && setFinalListError(false);
               setEditList(list);
+              handleClick();
               setNewName2(list);
             }}
           />
@@ -111,17 +87,14 @@ const EachList = ({
             onClick={() => {
               console.log('here');
               setShowConfirmDelete(true);
-              // setShowEditListModal(false);
+
               setModalWidth({ modal: '0', list: '30%', confirm: '70%' });
             }}
           />
         </Tooltip>
       </motion.div>
-      {/* )} */}
-      {/* </AnimatePresence> */}
 
-      {/* Confirm Delete menu */}
-      {/* {showConfirmDelete && ( */}
+      {/* confirm delete slide in */}
       <div
         className="confirmDelete overflow-hidden flexrow-around-center h-100 br-md"
         style={{
@@ -130,17 +103,6 @@ const EachList = ({
           color: themeObj.colorItem,
           backgroundColor: themeObj.bgItem,
         }}
-        // transition="all .25s ease-in-out"
-        // overflow="hidden"
-        // w={modalWidth.confirm}
-        // mr={1}
-        // alignItems="center"
-        // justifyContent="space-around"
-        // h="100%"
-        // px={3}
-        // color={themeObj.colorItem}
-        // bg={themeObj.bgItem}
-        // borderRadius="md"
       >
         <Text>CONFIRM</Text>
         <Button
@@ -171,22 +133,15 @@ const EachList = ({
       </div>
       {/* )} */}
       <motion.button
-        // variants={variants}
-        // initial="initial"
-        // animate={showEditListModal ? 'mainPartial' : 'mainFull'}
         whileHover={{ backgroundColor: themeObj.color, color: themeObj.bg }}
-        // transition={transition}
         style={{
           padding: '5px 10px 5px 10px',
           backgroundColor: themeObj.bgItem,
           color: themeObj.colorItem,
           border: `1px solid ${themeObj.bg}`,
           width: modalWidth.list,
-          // transition: 'all .25s ease-in-out',
         }}
         className="listItem"
-        // w="100%"
-        // px={3}
         onClick={handleClick}
       >
         <Heading size="md" isTruncated>

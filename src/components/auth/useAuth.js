@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, createContext } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // Initialize Firebase
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FB_API,
@@ -28,7 +28,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const history = useHistory();
+  // Investigae if useHistory can stop issue with manual refresh breaking private route pages
+  // const history = useHistory();
 
   const signInAnonymously = async () => {
     console.log('signing in');

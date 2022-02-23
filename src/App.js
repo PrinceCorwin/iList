@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { theme, themeObj } from './components/iList/Theme';
+import { theme } from './components/iList/Theme';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginForm from './components/auth/LoginForm';
@@ -93,7 +93,7 @@ function App() {
         setLists(userPrefs.data().mylists);
         setUserColorMode(userPrefs.data().colorMode);
         setCurrentList(userPrefs.data().currentlist);
-        console.log('app useEffect');
+        // console.log('app useEffect');
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);

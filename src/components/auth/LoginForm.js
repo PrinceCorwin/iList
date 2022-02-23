@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import iListLogo from '../../images/checkbox2.png';
 import { useHistory } from 'react-router-dom';
 import {
-  Center,
   Text,
   Image,
   Heading,

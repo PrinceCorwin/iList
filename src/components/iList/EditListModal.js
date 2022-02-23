@@ -9,6 +9,7 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 export const EditListModal = ({
   themeObj,
   handleSubmit,
@@ -22,15 +23,15 @@ export const EditListModal = ({
   return (
     <>
       <Backdrop />
-      <Flex
-        zIndex="2000"
-        grow="1"
-        justify="center"
-        direction="column"
-        p={6}
-        position="absolute"
-        bg={themeObj.bgItem}
-        borderRadius="md"
+      <motion.div
+        className="modal"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        exit={{ x: '100vw' }}
+        style={{
+          backgroundColor: themeObj.bgItem,
+        }}
       >
         <Heading size="md" py={3}>
           Rename Your List
@@ -87,7 +88,7 @@ export const EditListModal = ({
             </Alert>
           )}
         </form>
-      </Flex>
+      </motion.div>
     </>
   );
 };
