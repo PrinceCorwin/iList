@@ -1,14 +1,6 @@
-import { FaSearch } from 'react-icons/fa';
 import { CloseIcon } from '@chakra-ui/icons';
 
-import {
-  InputGroup,
-  IconButton,
-  Icon,
-  Input,
-  FormControl,
-  InputRightAddon,
-} from '@chakra-ui/react';
+import { InputGroup, IconButton, Input, FormControl } from '@chakra-ui/react';
 
 const SearchItem = ({
   showSearch,

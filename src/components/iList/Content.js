@@ -8,7 +8,7 @@ const Content = ({
   handleDelete,
   setEditItem,
 }) => {
-  console.log(items);
+  // console.log(items);
   const variants = {
     // initial: {
     //   opacity: 1,

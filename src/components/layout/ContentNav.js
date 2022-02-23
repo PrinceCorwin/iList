@@ -1,4 +1,4 @@
-import { Heading, Flex, Text, Icon } from '@chakra-ui/react';
+import { Flex, Text, Icon } from '@chakra-ui/react';
 import Menu from './Menu';
 
 import { FaHome, FaClipboardList } from 'react-icons/fa';

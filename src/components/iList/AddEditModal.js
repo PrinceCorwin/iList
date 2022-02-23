@@ -7,7 +7,6 @@ import {
   AlertIcon,
   IconButton,
   AlertTitle,
-  AlertDescription,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -31,7 +30,6 @@ const AddEditModal = ({
       <Backdrop />
 
       <motion.div
-        // key="modal"
         className="modal"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -41,16 +39,10 @@ const AddEditModal = ({
           backgroundColor: themeObj.bgItem,
         }}
       >
-        <Heading
-          size="md"
-          color={themeObj.colorItem}
-          mb={3}
-          //  key="heading"
-        >
+        <Heading size="md" color={themeObj.colorItem} mb={3}>
           {heading}
         </Heading>
         <Textarea
-          // key="texarea"
           bg={themeObj.bgItem}
           color={themeObj.colorItem}
           autoFocus
@@ -63,7 +55,6 @@ const AddEditModal = ({
         />
         <Flex mt={3} alignItems="center" justifyContent="space-around">
           <Button
-            // key="button1"
             size="sm"
             variant="solid"
             aria-label={heading}
@@ -73,11 +64,9 @@ const AddEditModal = ({
             {heading}
           </Button>
           <Button
-            // key="button2"
             size="sm"
             variant="solid"
             onClick={() => {
-              // setShowAlert(false);
               setterShow(null);
             }}
             aria-label="cancel"
@@ -104,10 +93,8 @@ const AddEditModal = ({
           <Alert status="error" justifyContent="space-between" mt={3}>
             <AlertIcon />
             <AlertTitle>Confirm Delete</AlertTitle>
-            {/* <AlertDescription>This Can Not Be Undone!</AlertDescription> */}
+
             <Button
-              // key="button1"
-              // justifySelf="end"
               size="sm"
               variant="solid"
               aria-label="Delete Item"
