@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import './styles/css/index.css';
-import './styles/css/app.css';
 
 import App from './App';
 import { AuthProvider } from './components/auth/useAuth';
