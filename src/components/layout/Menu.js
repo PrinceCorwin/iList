@@ -162,10 +162,12 @@ const Menu = ({
         }}
         py={2}
       >
-        <Jump href="https://github.com/PrinceCorwin/iList" isExternal>
-          Home {` `}
-        </Jump>
-        <img src={AMIlogo} />
+        <div className="flexrow-start-center">
+          <Jump href="https://amalfimakesit.com" isExternal>
+            Home
+          </Jump>
+          <img className="ml-1 w-25px" src={AMIlogo} />
+        </div>
       </Box>
       <Box
         _hover={{ fontWeight: 'semibold' }}
