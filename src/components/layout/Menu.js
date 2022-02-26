@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { slide as MenuType } from 'react-burger-menu';
 import { useAuth, db } from '../auth/useAuth';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import AMIlogo from './../../images/ami.svg';
 import {
   MenuButton,
   Button,
@@ -144,7 +145,6 @@ const Menu = ({
     } finally {
     }
   };
-
   return (
     <MenuType
       onClose={handleOnClose}
@@ -162,7 +162,20 @@ const Menu = ({
         }}
         py={2}
       >
-        <Link to="/">Home</Link>
+        <Jump href="https://github.com/PrinceCorwin/iList" isExternal>
+          Home {` `}
+        </Jump>
+        <img src={AMIlogo} />
+      </Box>
+      <Box
+        _hover={{ fontWeight: 'semibold' }}
+        onClick={() => {
+          showAbout && setShowAbout(false);
+          handleOnClose();
+        }}
+        py={2}
+      >
+        <Link to="/">Current List</Link>
       </Box>
       <Box _hover={{ fontWeight: 'semibold' }} onClick={handleOnClose} py={2}>
         <Link
