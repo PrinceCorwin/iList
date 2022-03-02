@@ -4,7 +4,6 @@
   display: inline-block;
   border: 0;
   padding: $base-padding * 2 $base-padding * 4;
-  border-radius: $base-border-radius;
 }
 
 .btn {
@@ -27,9 +26,8 @@
     .btn-outline-#{$key}-#{$key2} {
       @extend .btn;
       transition: background-color 0.2s ease-in-out;
-      transition-timing-function: ease-in-out;
       border: $base-border-thickness solid $val;
-      background-color: $appBg;
+      background-color: transparent;
       color: $val2;
       &:hover {
         background-color: $val;

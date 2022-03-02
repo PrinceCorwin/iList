@@ -1,21 +1,21 @@
-@import "functions";
-@import "variables";
+@import 'functions';
+@import 'variables';
 // since base is below variables, I can use variables in the base file without importing it there first
-@import "base";
-@import "breakpoints";
-@import "grid";
+@import 'base';
+@import 'breakpoints';
+@import 'grid';
 
 // // colors
-@import "colors";
+@import 'colors';
 
 // // components
-@import "components/card";
-@import "components/button";
-@import "components/badge";
-@import "app";
+@import 'components/card';
+@import 'components/button';
+@import 'components/badge';
+@import '../app';
 
 // // utilities (margin, padding, opacity)
-@import "utilities";
+@import 'utilities';
 
 // flex
-@import "flex";
+@import 'flex';

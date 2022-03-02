@@ -15,9 +15,7 @@ $grid-gaps: (
   margin: 0 auto;
   padding: 0 20px;
 }
-.wrap {
-  flex-wrap: wrap;
-}
+
 // grid gaps
 @each $key, $val in $grid-gaps {
   .gap-#{$key} > * {
