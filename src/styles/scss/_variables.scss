@@ -3,6 +3,7 @@ $primary: #326dee !default;
 $secondary: #1ac886 !default;
 $error: #d32752 !default;
 $info: #f6c31c !default;
+$success: green !default;
 $accentLight: lightblue !default;
 $accentDark: darkblue !default;
 $appBg: white !default;
@@ -17,6 +18,7 @@ $colors: (
   "appBgDark": $appBgDark,
   "error": $error,
   "info": $info,
+  "success": $success,
   "blue": #1919e6,
   "teal": teal,
   "cyan": cyan,
@@ -90,8 +92,10 @@ $border-radius-xl: $base-border-radius * 1.75 !default;
 $border-radius-xxl: $base-border-radius * 2 !default;
 $border-radius-full: 50% !default;
 // box-shadow
-$base-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4) !default;
-$box-shadow-strong: 5px 5px 10px rgba(0, 0, 0, 0.5) !default;
+$base-box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.6) !default;
+$box-shadow-strong: 2px 4px 15px rgba(0, 0, 0, 0.7) !default;
+$base-box-shadow-light: 1px 2px 10px rgba(255, 255, 255, 0.6) !default;
+$box-shadow-light-strong: 2px 4px 15px rgba(255, 255, 255, 0.7) !default;
 
 // font sizes
 $base-font-size: 1rem !default;

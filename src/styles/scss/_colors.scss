@@ -21,6 +21,8 @@
     // light variations
     @for $i from 1 through 9 {
       .color-#{$key}-light-#{$i} {
+        transition: color 0.2s ease-in-out;
+
         color: mix(white, $val, $i * 10) !important;
       }
       .color-hover-#{$key}-light-#{$i} {
@@ -29,6 +31,8 @@
         }
       }
       .bg-#{$key}-light-#{$i} {
+        transition: background-color 0.2s ease-in-out;
+
         background-color: mix(white, $val, $i * 10) !important;
       }
       .bg-hover-#{$key}-light-#{$i} {
@@ -41,6 +45,8 @@
     // dark variations
     @for $i from 1 through 9 {
       .color-#{$key}-dark-#{$i} {
+        transition: color 0.2s ease-in-out;
+
         color: mix(black, $val, $i * 10) !important;
       }
       .color-hover-#{$key}-dark-#{$i} {
@@ -49,6 +55,8 @@
         }
       }
       .bg-#{$key}-dark-#{$i} {
+        transition: background-color 0.2s ease-in-out;
+
         background-color: mix(black, $val, $i * 10) !important;
       }
       .bg-hover-#{$key}-dark-#{$i} {

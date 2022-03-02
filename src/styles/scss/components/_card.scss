@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
   .cards-title {
     font-size: $font-size-xl;
     margin-bottom: $base-margin * 2;
@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  box-shadow: $base-box-shadow;
+
   border-radius: $border-radius-xs;
   .card-title {
     font-size: $font-size-lg;
