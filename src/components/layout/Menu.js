@@ -166,7 +166,7 @@ const Menu = ({
           <Jump href="https://amalfimakesit.com" isExternal>
             Home
           </Jump>
-          <img className="ml-1 w-25px" src={AMIlogo} />
+          <img className="ml-1 w-25px" src={AMIlogo} alt="AMI logo" />
         </div>
       </Box>
       <Box
