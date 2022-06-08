@@ -1,6 +1,9 @@
 import { Flex, Text } from '@chakra-ui/react';
 import checkbox3 from '../../images/checkbox3.png';
 const Footer = ({ user, bg, color, length }) => {
+  const str = user.email;
+  const nameParts = str.split('@');
+  const emailName = nameParts.length == 2 ? nameParts[0] : null;
   return (
     // <Flex
     //   bg={bg}
@@ -19,11 +22,11 @@ const Footer = ({ user, bg, color, length }) => {
         <p className="d-i"> iLIST</p>
       </div>
       <p>
-        {length} list {length === 1 ? 'item' : 'items'}
+        {length} {length === 1 ? 'item' : 'items'}
       </p>
 
       <Text align="end" w="250px" isTruncated>
-        {user.email ? user.email : 'Demo Mode'}
+        {user.email ? emailName : 'Demo Mode'}
       </Text>
     </div>
     // </Flex>
